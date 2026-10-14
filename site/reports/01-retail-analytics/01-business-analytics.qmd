@@ -88,7 +88,7 @@ total, because two of the twenty-five months are not what they look like.
 | 2018-09 | 16 | 14 | 4,439.54 | 277.47 |
 | 2018-10 | 4 | 4 | 589.67 | 147.42 |
 
-![Monthly revenue. The four near-empty edge months are left out rather than drawn as invisible slivers.](figures/revenue-monthly.png){#fig-revenue fig-align="center"}
+![Monthly revenue. The four near-empty edge months are left out rather than drawn as invisible slivers.](figures/revenue-monthly.png){#fig-revenue fig-alt="Column chart of monthly revenue for every month the marketplace was trading, from late 2016 to mid 2018. Revenue climbs to a peak in November 2017 and then flattens at a slightly lower level through 2018." fig-align="center"}
 
 **Two months are artefacts, and reading them as a trend would be a mistake.**
 
@@ -127,7 +127,7 @@ top line suggests.
 | auto | 3,897 | 4,235 | 592,720.11 | 139.96 |
 | garden_tools | 3,518 | 4,347 | 485,256.46 | 111.63 |
 
-![Top 12 categories by item revenue.](figures/top-categories.png){#fig-categories fig-align="center"}
+![Top 12 categories by item revenue.](figures/top-categories.png){#fig-categories fig-alt="Horizontal bar chart of the twelve categories with the most item revenue, ordered best first, each bar labelled with its average item price. Health and beauty leads, followed by watches and gifts and by bed, bath and table." fig-align="center"}
 
 There are 74 categories, and the top ten account for **62.4%** of item revenue.
 
@@ -149,7 +149,7 @@ Payments are not the same as completed sales. A payment is recorded for orders
 that were later cancelled or marked unavailable, so those orders sit inside the
 R$ 16.0M above.
 
-![Revenue by order status. The two amber bars are cancelled and unavailable orders.](figures/order-status.png){#fig-status fig-align="center"}
+![Revenue by order status. The two amber bars are cancelled and unavailable orders.](figures/order-status.png){#fig-status fig-alt="Horizontal bar chart of revenue by order status on a logarithmic scale. Delivered orders account for almost all of it; the bars for cancelled and unavailable orders are drawn in amber." fig-align="center"}
 
 Together they are R$ 269,735.11, about 1.7% of the total, and they are counted
 deliberately: the payment was collected. Excluding them would be a different and
@@ -171,7 +171,7 @@ who disagrees can disagree knowingly rather than silently.
 | 5–9 | 18 | 0.02% |
 | 17 | 1 | 0.001% |
 
-![How often a customer comes back. The log scale is what makes the tail visible.](figures/repeat-purchase.png){#fig-repeat fig-align="center"}
+![How often a customer comes back. The log scale is what makes the tail visible.](figures/repeat-purchase.png){#fig-repeat fig-alt="Bar chart on a logarithmic scale of how many orders each customer placed. Almost every customer placed exactly one order, and that bar dwarfs every other bar." fig-align="center"}
 
 ```{=html}
 <!-- Source: mart_rfm -->
@@ -222,7 +222,7 @@ Repeat customers account for 6,342 of 99,441 orders, or **6.4%**.
 | 12 | 22,317 | 40 | 0.18% |
 | 18 | 5,473 | 12 | 0.22% |
 
-![Cohort retention. Month zero is omitted because it is 100% by construction.](figures/cohort-retention.png){#fig-cohort fig-align="center"}
+![Cohort retention. Month zero is omitted because it is 100% by construction.](figures/cohort-retention.png){#fig-cohort fig-alt="Column chart of the share of each monthly cohort that ordered again, by months since the first order. Every column is below half a percent, so the series is flat rather than falling." fig-align="center"}
 
 Month zero is 100% by construction, because it is the month the customer was
 acquired. A test asserts it: an offset zero that is *not* 100% means the cohort
@@ -265,7 +265,7 @@ This is the strongest relationship in the dataset.
 | Late: more than 14 days | 1,384 | 1.39% | 1.723 | 78.35% | 54.62 |
 | Never delivered | 2,965 | 2.98% | 1.747 | 78.05% | — |
 
-![Average review score by delivery outcome, with the share scoring 1 or 2.](figures/delivery-review.png){#fig-delivery fig-align="center"}
+![Average review score by delivery outcome, with the share scoring 1 or 2.](figures/delivery-review.png){#fig-delivery fig-alt="Bar chart of the mean review score by delivery outcome, from the on-time group down to orders that arrived more than two weeks late and orders that never arrived. The share of each group scoring one or two is printed inside its bar and is several times higher for every late group." fig-align="center"}
 
 Aggregated, a late order averages **2.27** against **4.29** for an on-time one.
 That gap is the difference between a broadly satisfied customer and one who is
@@ -299,7 +299,7 @@ it as an observation rather than a finding.
 | BA | 3,256 | 396 | **12.16%** | 19.34 | 3.861 |
 | CE | 1,279 | 176 | **13.76%** | 21.27 | 3.857 |
 
-![Late delivery by state. Each bar is labelled with its number of deliveries, because a rate without a denominator is a headline, not a finding.](figures/late-by-state.png){#fig-late fig-align="center"}
+![Late delivery by state. Each bar is labelled with its number of deliveries, because a rate without a denominator is a headline, not a finding.](figures/late-by-state.png){#fig-late fig-alt="Horizontal bar chart of the late-delivery percentage by customer state, worst first, for the states with at least a thousand deliveries. Ceará, Bahia and Rio de Janeiro are the worst; São Paulo is highlighted and sits near the bottom. Each bar is labelled with its number of deliveries." fig-align="center"}
 
 Lateness is not random across the country. São Paulo, which is 42% of all
 deliveries, is late 4.49% of the time and delivers in 8.76 days. Ceará is late
@@ -345,7 +345,7 @@ Paulo (**4.63%**). Rio is not a hard place to deliver to. A São Paulo seller
 sending the same kind of parcel to Rio is late **14.07%** of the time.
 
 ![Late delivery by lane. Blue bars are lanes where the seller and the customer
-are in the same state.](figures/lane-late.png){#fig-lane fig-align="center"}
+are in the same state.](figures/lane-late.png){#fig-lane fig-alt="Horizontal bar chart of the late-delivery percentage for the busiest lanes between a seller state and a customer state, worst first. São Paulo to Rio de Janeiro is the worst by a clear margin, and the three lanes where seller and customer are in the same state are highlighted and sit at the bottom." fig-align="center"}
 
 Two thirds of Rio's deliveries, 8,129 of 12,353, ship from São Paulo sellers,
 and that lane is the worst in the table at **14.17%**. Every lane that stays
