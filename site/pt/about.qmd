@@ -1,0 +1,38 @@
+---
+title: "Sobre"
+toc: false
+---
+
+> Este documento também está disponível em [inglês](../about.qmd).
+
+## Anderson Tavares
+
+Analista de dados focado em transformar dados reais e desorganizados em decisões
+que alguém realmente consegue colocar em prática. Trabalho com SQL como primeira
+língua, modelo dados com dbt e escrevo a análise de modo que um leitor não técnico
+consiga acompanhá-la.
+
+> **Em busca de:** posições de analista de dados / cientista de dados.
+
+## Com o que eu trabalho
+
+| Área | Ferramentas |
+|---|---|
+| Consulta e modelagem | PostgreSQL, dbt, SQL avançado (funções de janela, CTEs) |
+| Análise | Python (pandas, matplotlib, seaborn), raciocínio estatístico |
+| Engenharia | Git, Docker, pytest, GitHub Actions, `uv` |
+| Comunicação | Quarto, redação técnica, memorandos de decisão |
+
+## Como eu trabalho
+
+- **Comece por uma decisão.** Toda análise existe para responder a uma pergunta
+  que alguém pagaria para ver respondida.
+- **Teste os dados, não só o código.** Se uma premissa quebra, o build deve
+  falhar ruidosamente.
+- **Escreva as limitações.** Uma conclusão sem suas ressalvas é um passivo.
+
+## Contato
+
+- GitHub: [AndersonTavares0](https://github.com/AndersonTavares0)
+- LinkedIn: [andersonlimatavares](https://www.linkedin.com/in/andersonlimatavares)
+- Email: `anderson.g.tavares@gmail.com`

@@ -1,0 +1,98 @@
+---
+title: "Memorando de decisão — Desempenho de entregas"
+subtitle: "Uma página. O que os dados dizem, quanto custa, o que fazer."
+date: today
+date-format: "MMMM YYYY"
+format:
+  html:
+    toc: false
+---
+
+> Este documento também está disponível em [inglês](../../../reports/01-retail-analytics/00-executive-memo.qmd).
+
+**Preparado para:** Diretor de Operações<br>
+**Preparado por:** Anderson Tavares
+
+> Raciocínio completo, método e limitações: o
+> [relatório 01 · Análise de Varejo](01-business-analytics.qmd).
+
+## Conclusão principal
+
+A entrega atrasada é rara (6.8% das entregas) e é o sinal mais forte de
+insatisfação do cliente neste conjunto de dados. Ela se concentra em alguns
+estados em vez de se distribuir de forma uniforme, o que a torna corrigível em
+princípio. **O Rio de Janeiro é a maior e mais barata oportunidade.**
+
+## A descoberta
+
+- **6,535 de 96,476 entregas chegaram depois da data prometida — 6.77%.**
+- Um pedido atrasado tem nota média de avaliação de **2.27**; um pedido no prazo
+  tem média de **4.29**.
+- Depois de uma semana de atraso, **~80% dos clientes dão uma ou duas estrelas**,
+  contra 9.27% dos clientes com entrega no prazo.
+- O atraso é geográfico. São Paulo: **4.49%**. Rio de Janeiro: **12.10%**.
+  Bahia: **12.16%**. Ceará: **13.76%**.
+
+![Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.](../../../reports/01-retail-analytics/figures/delivery-review.png){#fig-delivery fig-align="center"}
+
+## Quanto custa
+
+O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados. À taxa de
+atraso de São Paulo, de 4.49%, cerca de **940 desses não teriam chegado
+atrasados**.
+
+Esperava-se que esses 940 pedidos produzissem cerca de **370 avaliações de uma e
+duas estrelas a menos** — aplicando o comportamento observado de avaliação dos
+pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo
+(9.27%).
+
+Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a
+entrega no prazo *causa* a avaliação melhor, apenas que as duas coisas ocorrem
+juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto
+específico — e, como o conjunto de dados não traz nenhum dado de custo ou margem,
+nada disso pode ser convertido em lucro.
+
+## Recomendação
+
+**Investigue o corredor de entregas do Rio de Janeiro antes de comprar qualquer
+coisa.** Especificamente: compare pedidos do Rio atendidos por vendedores ou
+transportadoras diferentes no mesmo período. Se o atraso no Rio acompanha
+determinados vendedores em vez do próprio estado, a solução é uma conversa com o
+vendedor; se acompanha transportadoras, é uma conversa de contrato. O conjunto de
+dados consegue responder a essa pergunta, e a resposta determina qual conversa
+ter.
+
+```{mermaid}
+flowchart TB
+  A["Rio de Janeiro<br/>12.10% atrasado, contra 4.49% de São Paulo"] --> B{"O atraso se<br/>concentra em poucos vendedores?"}
+  B -- "sim" --> C["Conversa com o vendedor<br/>tempo de manuseio e estoque"]
+  B -- "não" --> D{"Ele se concentra em<br/>transportadoras específicas?"}
+  D -- "sim" --> E["Conversa de contrato<br/>níveis de serviço da transportadora no corredor"]
+  D -- "não" --> F["Estrutural — distância, roteirização,<br/>ou qual armazém faz o envio"]
+```
+
+*A pergunta que o conjunto de dados consegue responder, e a conversa que cada
+resposta implica.*
+
+**Segundo, reveja a promessa de entrega.** A entrega média chega **11.18 dias
+antes** da estimativa. Uma promessa superada quase sempre não é gratuita: ela
+pode estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa
+de atraso medida enquanto melhoraria a experiência real do cliente, e essa troca
+deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém
+escolheu.
+
+## O que mudaria minha opinião
+
+- **Se o atraso do Rio se concentrasse em poucos vendedores**, a descoberta
+  deixaria de ser regional e passaria a ser um problema de qualidade de
+  vendedores — uma solução diferente e mais barata.
+- **Se os clientes com entrega atrasada diferissem sistematicamente** (produtos
+  diferentes, tamanhos de cesta diferentes, expectativas diferentes), a diferença
+  nas avaliações poderia refletir em parte quem eles são, e não o que aconteceu
+  com o pacote. Comparar notas de avaliação dentro da mesma categoria de produto
+  e faixa de valor de pedido testaria isso.
+- **Se o grupo "nunca entregue" tivesse nota melhor do que o grupo "8–14 dias
+  de atraso" por um motivo específico** — reembolsos, comunicação, expectativas —
+  então o mecanismo que vale a pena melhorar é a gestão de expectativas, e não
+  apenas a velocidade. Os dados mostram esse padrão (1.747 contra 1.672); eu não
+  estabeleci por quê.
