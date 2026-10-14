@@ -55,10 +55,25 @@ jobs:
 
       # Reports are pre-executed and `freeze: true` is set, so rendering does
       # not need the database or the dataset.
-      - name: Render and publish
+      #
+      # The site is TWO Quarto builds shipped as one. `tasks.py render` renders
+      # the English profile into `_site/` and the Portuguese profile into
+      # `.build-pt/`, then copies the latter into `_site/pt/`.
+      #
+      # This must run here rather than being left to the publish action. The
+      # action renders with the project's DEFAULT profile, which is `en`, so
+      # nothing ever produced `pt/index.html` or `pt/about.html`: the published
+      # site was missing the Portuguese home page and about page, and shipped
+      # `pt/index.qmd` verbatim instead. The action is therefore told not to
+      # render, and publishes the tree this step built.
+      - name: Render the bilingual site
+        run: uv run python tasks.py render
+
+      - name: Publish to gh-pages
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
           path: site
+          render: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
