@@ -27,7 +27,13 @@ credibility, not for volume of code.
 | `projects/01-retail-analytics/scripts/` | Thin CLIs over `retail.*` |
 | `projects/01-retail-analytics/dbt_project/` | Staging models, marts, macros, tests |
 | `projects/01-retail-analytics/reports/` | Quarto reports and the decision memo |
+| `docs/` | Architecture, metric definitions, data dictionary, decision log |
+| `CONTRIBUTING.md` | The workflow, and what a complete change looks like |
 | `data/` | Downloaded CSVs. Git-ignored. Never committed |
+
+The reasoning behind the code lives in `docs/`. Read the decision log before
+changing how something is measured — a choice that looks surprising is usually
+there because the data disagreed with the obvious approach.
 
 ## Commands
 
@@ -66,6 +72,11 @@ uv run python tasks.py pipeline     # load -> dbt-build -> test -> render
    on the machine owns 5432 and silently shadows the container's mapping.
 8. **Do not silently drop a documented limitation** from a README or a report
    because it makes a result look worse.
+9. **Never commit to `main` directly.** Every change arrives by pull request;
+   `main` moves only by merging one. A branch is where CI runs before a change
+   becomes permanent. The workflow is in `CONTRIBUTING.md`.
+10. **A metric definition lives in `docs/metrics.md`, not in your head.** If a
+    change alters what a number means, that document is part of the change.
 
 ## Python conventions
 
@@ -83,6 +94,9 @@ uv run python tasks.py pipeline     # load -> dbt-build -> test -> render
 - `uv run pytest` → all passing
 - Any new model has a description and tested keys
 - Any new number in a report is reproducible from the committed SQL
+- The change arrived by pull request, and CI passed before it was merged
+- A changed metric definition was updated in `docs/metrics.md`
+- A change that was a *decision* rather than a fix has a record in `docs/decisions/`
 
 Report a failure instead of routing around it. A silently wrong number is worse
 than a red build.

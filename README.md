@@ -57,6 +57,26 @@ Three projects, one argument — not three disconnected notebooks.
 
 ---
 
+## Documentation
+
+The reasoning lives in [`docs/`](./docs/) rather than buried in code comments:
+
+| | |
+|---|---|
+| [Architecture](./docs/architecture.md) | How the pieces fit, and why they are separated this way |
+| [Metrics](./docs/metrics.md) | What every number means — and, more usefully, what it does not mean |
+| [Data dictionary](./docs/data-dictionary.md) | Every table and column, with its grain and its caveats |
+| [Decisions](./docs/decisions/README.md) | Why the code looks the way it does, including the times the data changed the design |
+| [Contributing](./CONTRIBUTING.md) | The workflow — every change arrives by pull request |
+
+The decision log is the one worth reading first. It records what was measured, what
+the obvious approach was, and why the obvious approach was wrong. The clearest
+example: lateness was being measured to the second against a deadline that only
+ever had a date, which misclassified 1,292 orders — and `dbt run` would have
+shipped it silently.
+
+---
+
 ## Reproducing it
 
 **Prerequisites:** [uv](https://docs.astral.sh/uv/getting-started/installation/),
@@ -99,8 +119,11 @@ ds-portfolio/
 │       ├── src/retail/       # reusable Python
 │       ├── tests/            # pytest
 │       └── reports/          # narrative report + decision memo
+├── docs/                     # architecture, metrics, dictionary, decision log
 ├── data/                     # git-ignored dataset
-└── .github/workflows/        # CI + publishing
+├── .github/                  # workflows + issue and pull-request templates
+├── AGENTS.md                 # the rules this repository is worked to
+└── CONTRIBUTING.md           # how to make a change
 ```
 
 ---

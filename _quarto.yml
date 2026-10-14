@@ -2,6 +2,18 @@ project:
   type: website
   output-dir: _site
 
+  # Only these files become pages on the published site.
+  #
+  # Without an explicit list, Quarto renders every .md and .qmd it can reach —
+  # which would turn AGENTS.md, CONTRIBUTING.md, the whole docs/ folder and every
+  # README into unstyled pages with no place in the navigation. Governance
+  # documentation is for people reading the repository; the website is for people
+  # reading the analysis.
+  render:
+    - index.qmd
+    - about.qmd
+    - projects/01-retail-analytics/reports/*.qmd
+
 website:
   title: "Retail Analytics Portfolio"
   description: "End-to-end data science on the Olist Brazilian e-commerce dataset: measurement, prediction, and the voice of the customer."

@@ -1,0 +1,76 @@
+name: Data quality issue
+description: The data disagrees with what a model assumes — a missing test, a wrong definition, or a suspicious number.
+title: "[data] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the most valuable kind of report this project can receive. A
+        number that is wrong and looks reasonable is worse than a build that
+        fails, because nobody investigates a green build.
+
+        The project has already found several this way — including a lateness
+        definition that was measuring against a precision the source data never
+        had.
+
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What kind of problem is it?
+      options:
+        - A model assumes something the data does not guarantee
+        - A metric definition is ambiguous or wrong
+        - A number in the report cannot be reproduced from the models
+        - Something that should have a test does not have one
+        - A source quirk (duplicates, placeholder values, encoding) is unhandled
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What you found
+      description: Describe the discrepancy plainly. Which number, and why is it suspect?
+    validations:
+      required: true
+
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: |
+        A query, a row count, or the rows that break the assumption. Reproducible
+        evidence is what turns a suspicion into a fix.
+      render: sql
+      placeholder: |
+        select count(*) from analytics_marts.fct_orders where ...
+    validations:
+      required: true
+
+  - type: input
+    id: model
+    attributes:
+      label: Which model or document
+      placeholder: docs/metrics.md#late-delivery
+    validations:
+      required: false
+
+  - type: textarea
+    id: fix
+    attributes:
+      label: What you think should change
+      description: |
+        A new test, a corrected definition, or a documented limitation. An
+        unhandled quirk that is written down is still an improvement over one
+        that is not.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: confirm
+    attributes:
+      label: Confirmation
+      options:
+        - label: I checked this against the database rather than the code alone.
+          required: true

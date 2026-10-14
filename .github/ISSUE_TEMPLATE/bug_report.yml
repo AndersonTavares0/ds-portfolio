@@ -1,0 +1,80 @@
+name: Bug report
+description: Something is broken — a command fails, a model errors, or a number is wrong.
+title: "[bug] "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        A bug in this repository usually means one of three things: a command
+        fails, a dbt model or test errors, or a number in the report is wrong.
+        The third is the most serious and the easiest to miss, so it gets asked
+        about explicitly below.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened
+      description: What you saw, in one or two sentences.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What should have happened
+      description: What would have counted as success.
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How to reproduce it
+      description: |
+        The exact command. Anything below is a real command that exists.
+      placeholder: |
+        uv run python tasks.py dbt-build
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: The output
+      description: |
+        Paste it verbatim. If it is a dbt test failure, include the test name and
+        the result count — "Got 6 results" is the most useful part.
+      render: shell
+    validations:
+      required: true
+
+  - type: input
+    id: where
+    attributes:
+      label: Where it happened
+      description: The model, script or file involved, if you know it.
+      placeholder: projects/01-retail-analytics/dbt_project/models/marts/fct_orders.sql
+    validations:
+      required: false
+
+  - type: input
+    id: version
+    attributes:
+      label: Environment
+      description: |
+        Run `uv run python tasks.py doctor` and paste what it says, or give the
+        OS and the output of `uv --version`.
+      placeholder: Fedora 40, uv 0.13.1
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I ran `uv run python tasks.py doctor` and Docker is running.
+          required: false
+        - label: This is not already reported in an open issue.
+          required: true
