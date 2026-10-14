@@ -18,9 +18,15 @@ uv run python tasks.py lint
 uv run python tasks.py dbt-build
 git commit -m "feat: add RFM segmentation mart"
 git push -u origin HEAD
-gh pr create --fill
+gh pr create --template .github/PULL_REQUEST_TEMPLATE.md
 gh pr merge --merge --delete-branch
 ```
+
+**`--template`, not `--fill`.** `gh pr create --fill` takes the title and body
+from the commit message and skips `.github/PULL_REQUEST_TEMPLATE.md` entirely.
+The template is the checklist; a body that looks like it but was retyped from
+memory is a body where the verification boxes drift from what was actually run.
+Load the file, then fill it in.
 
 Branch and commit types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`,
 `perf`. A commit that fixes a bug says which bug, and what the symptom was.
@@ -40,7 +46,7 @@ request is ready.
 **`dbt build`, not `dbt run`.** `dbt run` proves the SQL compiles. `dbt build` runs
 the tests, which is what proves the data agrees with what the SQL assumes. The five
 errors and one wrong definition this project has already caught were all caught
-this way — see [the decision log](docs/decisions/README.md).
+this way — see [the decision log](decisions/README.md).
 
 ## Adding a model
 
@@ -65,12 +71,12 @@ this way — see [the decision log](docs/decisions/README.md).
 
 ## Changing a definition
 
-Metric definitions live in [docs/metrics.md](docs/metrics.md). If a change alters
+Metric definitions live in [metrics.md](metrics.md). If a change alters
 what a number means, that document is part of the change — a number whose
 definition is not written down is a number two people will compute differently.
 
 If the change is a *decision* rather than a fix, add a record to
-[docs/decisions](docs/decisions/README.md). Do not edit an existing record to
+[decisions](decisions/README.md). Do not edit an existing record to
 reflect a new decision; add a new one and mark the old one superseded.
 
 ## What not to do

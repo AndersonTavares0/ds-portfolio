@@ -1,6 +1,17 @@
 <!--
-Paste this template into the PR description. Keep the headings — they exist
-because the answers to them are what a reviewer (including future you) needs.
+This file is the pull request body. Do not retype it — load it:
+
+    gh pr create --template .github/PULL_REQUEST_TEMPLATE.md
+
+Then fill in the sections and tick the boxes you actually ran. GitHub loads this
+same file automatically when a pull request is opened through the web interface,
+so the body is the same either way.
+
+Two rules:
+
+  * Tick a box only if the command ran.
+  * If something was not run, say so under "Not run" rather than leaving a box
+    unticked. An empty box and a box that explains itself are different answers.
 -->
 
 ## What this changes
@@ -13,13 +24,17 @@ because the answers to them are what a reviewer (including future you) needs.
 
 ## How it was verified
 
+Run these through `tasks.py`. Never call `dbt`, `pytest` or `ruff` directly: the
+task runner is what loads `.env` and sets `PYTHONPATH`.
+
 - [ ] `uv run python tasks.py dbt-build` — `ERROR=0`
 - [ ] `uv run python tasks.py test`
 - [ ] `uv run python tasks.py lint`
-- [ ] The claim above was checked against the database, not against the code
+- [ ] The claims above were checked against the database, not against the code
 
-<!-- If dbt-build was NOT run, say why. "It was only a docs change" is a valid
-     answer. Silence is not. -->
+**Not run, and why:**
+
+<!-- "It was only a documentation change" is a valid answer. Silence is not. -->
 
 ## Evidence
 
