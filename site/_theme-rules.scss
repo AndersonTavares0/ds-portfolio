@@ -361,3 +361,55 @@ input:focus-visible {
     font-size: 1.5rem;
   }
 }
+
+/* Decision memo ------------------------------------------------------------ */
+/* The memo is a document someone reads once and forwards, so it gets a
+   letterhead: a heavy rule above the recipient, set in sans, with the body left
+   at the normal measure. */
+.memo-head {
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: $muted;
+  border-top: 2px solid $body-color;
+  padding-top: 0.7rem;
+  margin-bottom: 1.6rem;
+}
+
+.memo-head strong {
+  color: $body-color;
+  font-weight: 600;
+}
+
+/* A one-pager is read top to bottom, so it can afford a shorter measure. */
+.memo #quarto-document-content {
+  max-width: 36rem;
+}
+
+/* Print -------------------------------------------------------------------- */
+/* The report and the memo are the artefacts people print. Chrome that exists
+   only to navigate a screen is noise on paper. */
+@media print {
+  .navbar,
+  .sidebar,
+  #quarto-sidebar,
+  #TOC,
+  .quarto-title-meta,
+  .page-footer {
+    display: none !important;
+  }
+
+  a {
+    color: $body-color;
+    text-decoration: none;
+  }
+
+  img.quarto-figure {
+    break-inside: avoid;
+  }
+
+  h2,
+  h3 {
+    break-after: avoid;
+  }
+}

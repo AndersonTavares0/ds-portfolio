@@ -2,12 +2,13 @@
 toc: false
 ---
 
-# Delivery performance decides whether customers come back — and what they say when they do. {.hero}
+# Late delivery is the strongest signal of customer dissatisfaction in this marketplace. {.hero}
 
-I measured it, I predicted it, and I read what customers actually wrote. All three
-projects run on the same Olist dataset — around 100,000 orders across nine related
-tables — and each one ships a written analysis, a one-page decision memo, and an
-honest account of what the data cannot support.
+I measured it across 99,441 orders. Two more projects follow on the same Olist
+dataset: a model that predicts late delivery from what is known at the moment of
+purchase, and a read of the 99,000 Portuguese reviews customers wrote about it.
+Each project ships a written analysis, a one-page decision memo, and a statement
+of what the data cannot support.
 
 ## Projects
 
@@ -17,7 +18,7 @@ honest account of what the data cannot support.
 <div class="project-seq">01<span class="project-status status-published">Published</span></div>
 <div class="project-detail">
 <h3>Which levers actually move customer satisfaction and repeat purchase?</h3>
-<p>RFM segmentation, monthly cohort retention, and a decomposition of delivery performance, modelled with dbt on top of PostgreSQL — with data tests that fail the build when the data stops making sense.</p>
+<p>RFM segmentation, monthly cohort retention, and a breakdown of delivery performance, modelled with dbt on top of PostgreSQL. The data tests fail the build when the data stops making sense.</p>
 <p class="project-stack">PostgreSQL, dbt, SQL, Python, Quarto</p>
 <p class="project-links"><a href="reports/01-retail-analytics/01-business-analytics.qmd">Read the analysis</a> <a href="reports/01-retail-analytics/00-executive-memo.qmd">One-page decision memo</a></p>
 </div>
@@ -27,7 +28,7 @@ honest account of what the data cannot support.
 <div class="project-seq">02<span class="project-status status-wip">In progress</span></div>
 <div class="project-detail">
 <h3>At the moment of purchase, can we tell which orders will arrive late?</h3>
-<p>A cost-sensitive classifier that is honest about leakage: only features available when the order is placed are allowed in.</p>
+<p>A cost-sensitive classifier that only uses features available when the order is placed, so it cannot quietly learn the answer it is meant to predict.</p>
 <p class="project-stack">Python, pandas, scikit-learn</p>
 </div>
 </article>
@@ -35,8 +36,8 @@ honest account of what the data cannot support.
 <article class="project">
 <div class="project-seq">03<span class="project-status status-planned">Planned</span></div>
 <div class="project-detail">
-<h3>What do 99,000 Portuguese-language reviews actually complain about?</h3>
-<p>Sentiment and topic modelling, to test from the customer's side the claim the first project makes from the delivery side: that the complaints are about logistics, not products.</p>
+<h3>What do 99,000 Portuguese-language reviews complain about?</h3>
+<p>Sentiment and topic modelling, to check from the customer's side what project 01 finds from the delivery side: whether the complaints are about the parcel or the product.</p>
 <p class="project-stack">Python, NLP, topic modelling</p>
 </div>
 </article>
@@ -53,4 +54,5 @@ uv run python tasks.py pipeline   # load, build, charts, tests, render
 ```
 
 The dataset comes from a revision-pinned mirror and is checked against expected
-file sizes on download, so the numbers cannot change quietly underneath you.
+file sizes on download, so a change to the source data fails the build instead of
+quietly moving a published number.

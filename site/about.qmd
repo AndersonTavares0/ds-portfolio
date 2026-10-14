@@ -5,9 +5,10 @@ toc: false
 
 ## Anderson Tavares
 
-Data analyst focused on turning messy, real-world data into decisions someone can
-actually act on. I work in SQL as a first language, model data with dbt, and write
-the analysis up so a non-technical reader can follow it.
+Data analyst. I work in SQL as a first language, model data with dbt, and write
+the analysis up so someone who does not write SQL can still follow the argument
+and recheck the numbers. Most of my work is on marketplace and operations data,
+where the hard part is deciding what a number means.
 
 > **Looking for:** data analyst / data scientist roles.
 

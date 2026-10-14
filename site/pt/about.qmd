@@ -5,10 +5,11 @@ toc: false
 
 ## Anderson Tavares
 
-Analista de dados focado em transformar dados reais e desorganizados em decisões
-que alguém realmente consegue colocar em prática. Trabalho com SQL como primeira
-língua, modelo dados com dbt e escrevo a análise de modo que um leitor não técnico
-consiga acompanhá-la.
+Analista de dados. Trabalho com SQL como primeira língua, modelo dados com dbt e
+escrevo a análise de modo que alguém que não escreve SQL consiga acompanhar o
+argumento e reconferir os números. A maior parte do meu trabalho é com dados de
+marketplace e de operações, onde a parte difícil é decidir o que um número
+significa.
 
 > **Em busca de:** posições de analista de dados / cientista de dados.
 
