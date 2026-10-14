@@ -12,7 +12,10 @@ project:
   render:
     - index.qmd
     - about.qmd
+    - pt/index.qmd
+    - pt/about.qmd
     - reports/01-retail-analytics/*.qmd
+    - pt/reports/01-retail-analytics/*.qmd
 
 website:
   title: "Retail Analytics Portfolio"
@@ -22,17 +25,30 @@ website:
   navbar:
     background: primary
     search: true
+    # Quarto allows exactly ONE navbar for the whole website: a `_metadata.yml`
+    # in a subdirectory cannot override it. Both a nested `website.navbar` and a
+    # top-level `navbar` key were tried in `pt/` and both were ignored, so this
+    # navbar lists both languages rather than pretending to switch between them,
+    # and each translated page links to its counterpart in its own body.
     left:
       - href: index.qmd
         text: Home
-      - text: Projects
+      - href: pt/index.qmd
+        text: Início
+      - text: Projects · Projetos
         menu:
           - href: reports/01-retail-analytics/01-business-analytics.qmd
-            text: "01 · Retail Analytics"
+            text: "01 · Retail Analytics (EN)"
+          - href: pt/reports/01-retail-analytics/01-business-analytics.qmd
+            text: "01 · Análise de Varejo (PT)"
           - href: reports/01-retail-analytics/00-executive-memo.qmd
-            text: "01 · Decision memo"
+            text: "01 · Decision memo (EN)"
+          - href: pt/reports/01-retail-analytics/00-executive-memo.qmd
+            text: "01 · Memorando de decisão (PT)"
       - href: about.qmd
         text: About
+      - href: pt/about.qmd
+        text: Sobre
   page-footer:
     left: "Built with Quarto · Data © Olist"
     right:
