@@ -31,6 +31,8 @@ is the largest, cheapest opportunity.**
 - Lateness is geographic. São Paulo: **4.49%**. Rio de Janeiro: **12.10%**.
   Bahia: **12.16%**. Ceará: **13.76%**.
 
+![Average review score by delivery outcome, and the share scoring one or two.](figures/delivery-review.png){#fig-delivery fig-align="center"}
+
 ## What it costs
 
 Rio de Janeiro recorded 12,353 deliveries and 1,495 late orders. At São Paulo's
@@ -54,6 +56,17 @@ the same period. If lateness in Rio tracks particular sellers rather than the
 state itself, the fix is a seller conversation; if it tracks carriers, it is a
 contract conversation. The dataset can answer that question, and the answer
 determines which conversation to have.
+
+```{mermaid}
+flowchart TB
+  A["Rio de Janeiro<br/>12.10% late, against São Paulo's 4.49%"] --> B{"Does the lateness<br/>concentrate in a few sellers?"}
+  B -- "yes" --> C["Seller conversation<br/>handling time and stock"]
+  B -- "no" --> D{"Does it concentrate<br/>in particular carriers?"}
+  D -- "yes" --> E["Contract conversation<br/>carrier service levels in the corridor"]
+  D -- "no" --> F["Structural — distance, routing,<br/>or which warehouse ships it"]
+```
+
+*The question the dataset can answer, and the conversation each answer implies.*
 
 **Second, revisit the delivery promise.** The average delivery arrives **11.18
 days before** the estimate. A promise that is beaten almost every time is not

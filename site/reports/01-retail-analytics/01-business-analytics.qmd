@@ -82,6 +82,8 @@ total, because two of the twenty-five months are not what they look like.
 | 2018-09 | 16 | 14 | 4,439.54 | 277.47 |
 | 2018-10 | 4 | 4 | 589.67 | 147.42 |
 
+![Monthly revenue. The two grey bars are incomplete months.](figures/revenue-monthly.png){#fig-revenue fig-align="center"}
+
 **Two months are artefacts, and reading them as a trend would be a mistake.**
 
 The last two rows are not a collapse. The dataset ends on 17 October 2018, so
@@ -120,6 +122,8 @@ top line suggests.
 | auto | 3,897 | 4,235 | 592,720.11 | 139.96 |
 | garden_tools | 3,518 | 4,347 | 485,256.46 | 111.63 |
 
+![Top 12 categories by item revenue.](figures/top-categories.png){#fig-categories fig-align="center"}
+
 There are 74 categories, and the top ten account for **62.4%** of item revenue.
 
 **A note on why these numbers do not add up to the total.** Category revenue
@@ -133,6 +137,19 @@ orders that carry a payment but no item line at all.
 Three of the 74 categories have no English translation in the source. They keep
 their Portuguese names rather than being folded into an "unknown" bucket, which
 would hide them.
+
+### What the revenue figure includes
+
+Payments are not the same as completed sales. A payment is recorded for orders
+that were later cancelled or marked unavailable, so those orders sit inside the
+R$ 16.0M above.
+
+![Revenue by order status. The two amber bars are cancelled and unavailable orders.](figures/order-status.png){#fig-status fig-align="center"}
+
+Together they are R$ 269,735.11 — about 1.7% of the total — and they are counted
+deliberately: the payment was collected. Excluding them would be a different and
+equally defensible definition. Stating which one is in use here means a reader
+who disagrees can disagree knowingly rather than silently.
 
 ---
 
@@ -148,6 +165,8 @@ would hide them.
 | 4 | 30 | 0.03% |
 | 5–9 | 18 | 0.02% |
 | 17 | 1 | 0.001% |
+
+![How often a customer comes back. The log scale is what makes the tail visible.](figures/repeat-purchase.png){#fig-repeat fig-align="center"}
 
 ```{=html}
 <!-- Source: mart_rfm -->
@@ -198,6 +217,8 @@ of **3.12%**. Repeat customers account for 6,342 of 99,441 orders, or **6.4%**.
 | 12 | 22,317 | 40 | 0.18% |
 | 18 | 5,473 | 12 | 0.22% |
 
+![Cohort retention. Month zero is omitted because it is 100% by construction.](figures/cohort-retention.png){#fig-cohort fig-align="center"}
+
 Month zero is 100% by construction — it is the month the customer was acquired —
 and a test asserts that, because an offset-zero that is *not* 100% would mean
 the cohort logic is broken rather than that the business changed.
@@ -240,6 +261,8 @@ This is the strongest relationship in the dataset.
 | Late: more than 14 days | 1,384 | 1.39% | 1.723 | 78.35% | 54.62 |
 | Never delivered | 2,965 | 2.98% | 1.747 | 78.05% | — |
 
+![Average review score by delivery outcome, with the share scoring 1 or 2.](figures/delivery-review.png){#fig-delivery fig-align="center"}
+
 Aggregated, a late order averages **2.27** against **4.29** for an on-time one.
 That is not a rounding difference; it is the difference between a customer who
 is broadly satisfied and one who is not.
@@ -271,6 +294,8 @@ it as an observation rather than a finding.
 | SC | 3,547 | 291 | 8.20% | 14.96 | 4.074 |
 | BA | 3,256 | 396 | **12.16%** | 19.34 | 3.861 |
 | CE | 1,279 | 176 | **13.76%** | 21.27 | 3.857 |
+
+![Late delivery by state. Each bar is labelled with its number of deliveries, because a rate without a denominator is a headline, not a finding.](figures/late-by-state.png){#fig-late fig-align="center"}
 
 Lateness is not random across the country. São Paulo — 42% of all deliveries —
 is late 4.49% of the time and delivers in 8.76 days. Ceará is late 13.76% of the
@@ -306,9 +331,11 @@ case for a specific spend.
    than one told "in 12". Tightening the promise would trade a higher measured
    late rate for better-calibrated expectations, and that trade is worth
    quantifying rather than assuming.
-3. **Add charts.** Every result here is currently a table. The shape of the
-   retention curve and the delivery-time distribution are both more persuasive
-   as visuals, and that is the next iteration of this report.
+3. **Test the missing-parcel result.** An order that never arrived scored better
+   than one that arrived two weeks late. That is either a real difference in how
+   the two failures are handled or an artefact of who chooses to review at all,
+   and it is testable with the data already loaded. Until it is tested I am
+   reporting it as an observation, not a finding.
 4. **Feed Project 02.** The delivery buckets are the natural target for the
    late-delivery prediction model, and the constraint is already clear: only
    features knowable at purchase time may be used.
@@ -330,9 +357,10 @@ the numbers should be read:
   There is no cost, margin, refund or return data in this dataset, so no
   statement about profit is possible — only about money collected.
 - **Revenue includes orders later cancelled or marked unavailable** (1,234
-  orders, R$ 269,735.11), because a payment was recorded for them. Excluding
-  them would be a different and equally defensible definition; this one is
-  stated so the reader can disagree with it knowingly.
+  orders, R$ 269,735.11 — the two amber bars in @fig-status), because a payment
+  was recorded for them. Excluding them would be a different and equally
+  defensible definition; this one is stated so the reader can disagree with it
+  knowingly.
 - **`customer_unique_id` is derived and imperfect.** Repeat-purchase findings
   are a floor, not a ceiling.
 - **Order counts and item counts are different grains.** Anything about products
@@ -358,9 +386,59 @@ Every table above comes from a model in `projects/01-retail-analytics/dbt_projec
 | Delivery outcomes | `mart_delivery_performance` |
 | Lateness by state | `mart_late_delivery_by_state` |
 
+### How the order table is built
+
+The most important engineering decision in this analysis is that the
+order-level table is assembled by **aggregating three finer-grained tables before
+joining them**, instead of joining them directly.
+
+```{mermaid}
+%%{init: {"themeVariables": {"clusterBkg": "#eef3f8", "clusterBorder": "#c3ced9"}}}%%
+flowchart TB
+  O["orders<br/>99,441 rows"]
+  subgraph fine["finer-grained tables"]
+    I["order_items<br/>112,650 rows"]
+    P["order_payments<br/>103,886 rows"]
+    R["order_reviews<br/>99,224 rows"]
+  end
+  I --> AGG["aggregate to one row per order<br/>sum, count, latest review"]
+  P --> AGG
+  R --> AGG
+  AGG --> FO["fct_orders<br/>99,441 rows"]
+  O --> FO
+  FO --> Q["every total in this report"]
+```
+
+*Aggregate first, then join. A direct join multiplies rows, and nothing errors.*
+
+A direct join would multiply rows: an order with four items and three payments
+would contribute twelve rows to every count and twelve times its value to every
+sum. Every figure in this report would be wrong, the SQL would compile, and the
+build would pass. There is a written record of that decision, and of the review
+quirk it exposed, in `docs/decisions/`.
+
+### From the mirror to the page
+
+```{mermaid}
+flowchart TB
+  M["Hugging Face mirror<br/>revision pinned"] --> D["download_data.py"]
+  D --> CSV["9 CSV files<br/>~126 MB, never committed"]
+  CSV --> L["load_raw.py<br/>every column TEXT"]
+  L --> DB[("PostgreSQL<br/>schema: raw")]
+  DB --> S["dbt staging<br/>views — cast and rename"]
+  S --> F["dbt marts<br/>tables — 70 data tests"]
+  F --> C["make_charts.py"]
+  C --> FIG["PNG figures"]
+  F --> REP["Quarto report"]
+  FIG --> REP
+```
+
+*Only the three steps through `dbt marts` need a database. The report and the
+figures are committed, so the website builds without one.*
+
 ```bash
 uv run python tasks.py setup      # start the database and fetch the data
-uv run python tasks.py pipeline   # load, build, test, render
+uv run python tasks.py pipeline   # load, build, charts, test, render
 ```
 
 `dbt build` also runs 70 data tests, including one that asserts month-zero

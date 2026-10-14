@@ -134,6 +134,15 @@ def task_load() -> None:
     run([sys.executable, str(SCRIPTS / "load_raw.py")])
 
 
+def task_charts() -> None:
+    """Regenerate the report charts from the marts.
+
+    Needs a built database, which is why it is not part of `render`. The PNGs it
+    writes are committed, so publishing the site never touches the database.
+    """
+    run([sys.executable, str(SCRIPTS / "make_charts.py")])
+
+
 def task_dbt_build() -> None:
     """Build every dbt model and run every dbt test."""
     run(
@@ -202,6 +211,7 @@ def task_pipeline() -> None:
     """The full reproducible pipeline, in order."""
     task_load()
     task_dbt_build()
+    task_charts()
     task_test()
     task_render()
 
@@ -234,6 +244,7 @@ TASKS: dict[str, tuple[str, object]] = {
     "db-down": ("Stop the PostgreSQL service", task_db_down),
     "db-reset": ("Destroy the database volume and recreate it", task_db_reset),
     "load": ("Load raw CSVs into the `raw` schema", task_load),
+    "charts": ("Regenerate the report charts from the marts", task_charts),
     "dbt-build": ("Build and test all dbt models", task_dbt_build),
     "dbt-docs": ("Generate the dbt docs site", task_dbt_docs),
     "test": ("Run the Python test suite", task_test),
