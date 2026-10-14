@@ -3,7 +3,8 @@
 **Question.** Which levers actually move customer satisfaction and repeat purchase
 in this marketplace?
 
-**Status.** Data layer complete; analysis in progress.
+**Status.** Complete and published. The report and the one-page decision memo are
+live at <https://AndersonTavares0.github.io/ds-portfolio/>.
 
 ---
 
@@ -23,8 +24,9 @@ Four questions, each answered with SQL against a tested model:
    every customer look like a one-time buyer.
 3. **Do they come back?** Monthly cohort retention. The headline finding is
    brutal: repeat purchase is close to nonexistent in this dataset.
-4. **Does delivery performance explain satisfaction?** Delivery-time
-   distributions, late-delivery rate, and the relationship between
+4. **Does delivery performance explain satisfaction?** It does, and the delay is
+   not the sellers: it is created in the crossing between São Paulo and Rio.
+   Delivery-time distributions, the late rate by lane, and the relationship between
    `review_score` and lateness.
 
 Deliverables: the [report](../../site/reports/01-retail-analytics/01-business-analytics.qmd)

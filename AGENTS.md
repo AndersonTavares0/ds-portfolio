@@ -8,9 +8,10 @@ one is a bug.
 
 A data science portfolio. The thesis, stated once:
 
-> In this marketplace, delivery performance drives customer satisfaction and
-> retention. I **measured** it (Project 01), **predicted** it (Project 02), and
-> **explained the voice of the customer** (Project 03).
+> In this marketplace, late delivery is the strongest signal of customer
+> dissatisfaction, and it is created in the crossing between São Paulo and Rio
+> rather than by the sellers. I **measured** it (Project 01), **predicted** it
+> (Project 02), and **explained the voice of the customer** (Project 03).
 
 Project 01 is a retail analytics pipeline on the Olist Brazilian e-commerce
 dataset: raw CSVs → PostgreSQL → dbt → a published report.

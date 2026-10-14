@@ -20,9 +20,10 @@ format:
 ## Conclusão principal
 
 A entrega atrasada é rara (6.8% das entregas) e é o sinal mais forte de
-insatisfação do cliente neste conjunto de dados. Ela se concentra em alguns
-estados em vez de se distribuir de forma uniforme, o que a torna corrigível em
-princípio. **O Rio de Janeiro é a maior e mais barata oportunidade.**
+insatisfação do cliente neste conjunto de dados. Ela não se distribui de forma
+uniforme, e não são os vendedores. **O atraso é criado na travessia entre São
+Paulo e o Rio, que carrega dois terços dos pedidos do Rio e atrasa 14.2% das
+vezes.**
 
 ## A descoberta
 
@@ -31,16 +32,25 @@ princípio. **O Rio de Janeiro é a maior e mais barata oportunidade.**
   tem média de **4.29**.
 - Depois de uma semana de atraso, **~80% dos clientes dão uma ou duas estrelas**,
   contra 9.27% dos clientes com entrega no prazo.
-- O atraso é geográfico. São Paulo: **4.49%**. Rio de Janeiro: **12.10%**.
-  Bahia: **12.16%**. Ceará: **13.76%**.
+- São Paulo atrasa em **4.49%** das entregas, o Rio de Janeiro em **12.10%**, a
+  Bahia em **12.16%** e o Ceará em **13.76%**.
+- **Os vendedores não são a causa.** Os vendedores despacham em cerca de três dias
+  em todos os corredores. Um vendedor do Rio entregando dentro do Rio atrasa
+  **4.67%** das vezes, igualando os **4.63%** de São Paulo, e 53 dos 65 vendedores
+  que enviam para os dois estados vão pior para o Rio.
+- **O corredor é a causa.** De São Paulo ao Rio carrega **8,129** das 12,353
+  entregas do Rio e atrasa **14.17%**. Todo corredor que fica dentro de um único
+  estado fica em 4.8% ou menos.
+
+![Atraso de entrega por corredor. As barras azuis são corredores em que o vendedor e o cliente estão no mesmo estado.](../../../reports/01-retail-analytics/figures/pt/lane-late.png){#fig-lane fig-align="center"}
 
 ![Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.](../../../reports/01-retail-analytics/figures/pt/delivery-review.png){#fig-delivery fig-align="center"}
 
 ## Quanto custa
 
-O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados. À taxa de
-atraso de São Paulo, de 4.49%, cerca de **940 desses não teriam chegado
-atrasados**.
+O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados, e 8,129
+dessas entregas vieram de vendedores de São Paulo. À taxa de atraso de São Paulo,
+de 4.49%, cerca de **940 dos 1,495 não teriam chegado atrasados**.
 
 Esperava-se que esses 940 pedidos produzissem cerca de **370 avaliações de uma e
 duas estrelas a menos**, aplicando o comportamento observado de avaliação dos
@@ -49,44 +59,43 @@ pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo
 
 Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a
 entrega no prazo *causa* a avaliação melhor, apenas que as duas coisas ocorrem
-juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto
-específico, e, como o conjunto de dados não traz nenhum dado de custo ou margem,
-nada disso pode ser convertido em lucro.
+juntas, e, como o conjunto de dados não traz nenhum dado de custo ou margem, nada
+disso pode ser convertido em lucro.
 
 ## Recomendação
 
-**Investigue o corredor de entregas do Rio de Janeiro antes de comprar qualquer
-coisa.** Especificamente: compare pedidos do Rio atendidos por vendedores ou
-transportadoras diferentes no mesmo período. Se o atraso no Rio acompanha
-determinados vendedores em vez do próprio estado, a solução é uma conversa com o
-vendedor; se acompanha transportadoras, é uma conversa de contrato. O conjunto de
-dados consegue responder a essa pergunta, e a resposta determina qual conversa
-ter.
+**Trabalhe o corredor de São Paulo ao Rio, e pare de procurar um vendedor ruim.**
+Os vendedores despacham no prazo e os próprios vendedores do Rio são pontuais,
+então o atraso está nos 9 dias medianos que o pacote passa entre os dois, e nos
+379 pedidos que chegam mais de duas semanas depois da promessa. A pergunta para as
+transportadoras nesse corredor é por que o nonagésimo percentil é de 31 dias em um
+corredor cuja mediana é 12.8.
 
 ```{mermaid}
 flowchart TB
-  A["Rio de Janeiro<br/>12.10% atrasado, contra 4.49% de São Paulo"] --> B{"O atraso se<br/>concentra em poucos vendedores?"}
-  B -- "sim" --> C["Conversa com o vendedor<br/>tempo de manuseio e estoque"]
-  B -- "não" --> D{"Ele se concentra em<br/>transportadoras específicas?"}
-  D -- "sim" --> E["Conversa de contrato<br/>níveis de serviço da transportadora no corredor"]
-  D -- "não" --> F["Estrutural — distância, roteirização,<br/>ou qual armazém faz o envio"]
+  A["São Paulo ao Rio<br/>8,129 entregas, 14.17% atrasadas"] --> B{"Os vendedores<br/>causam isso?"}
+  B -- "não" --> C["Eles despacham em cerca de três dias<br/>em todos os corredores"]
+  C --> D{"É difícil chegar ao Rio?"}
+  D -- "não" --> E["Os próprios vendedores do Rio entregam<br/>com 4.67% de atraso"]
+  E --> F["A travessia é o problema,<br/>e sua promessa é a mais frágil:<br/>27 dias contra 30.3 para o corredor SP–RS, mais distante"]
 ```
 
-*A pergunta que o conjunto de dados consegue responder, e a conversa que cada
-resposta implica.*
+*A pergunta sobre os vendedores é respondida pelos dados. A pergunta sobre a
+transportadora não é, e é a que vale a pena fazer.*
 
-**Segundo, reveja a promessa de entrega.** A entrega média chega **11.18 dias
-antes** da estimativa. Uma promessa superada quase sempre não é gratuita. Ela pode
-estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa de
-atraso medida enquanto melhoraria a experiência real do cliente, e essa troca
-deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém
-escolheu.
+**Segundo, amplie a promessa nesse corredor.** O pacote médio chega **11.18 dias
+antes** e 14% do corredor ainda chega atrasado. Três dias a mais na promessa
+registrariam **11.60%** em vez de **14.17%**, e sete a mais registrariam
+**8.37%**. Ampliar uma promessa move a medição, e não o pacote, então ela pertence
+ao lado da pergunta operacional acima, e não no lugar dela.
 
 ## O que mudaria minha opinião
 
-- **Se o atraso do Rio se concentrasse em poucos vendedores**, a descoberta
-  deixaria de ser regional e passaria a ser um problema de qualidade de
-  vendedores, uma solução diferente e mais barata.
+- **Se o atraso no corredor de São Paulo ao Rio se concentrasse em poucas
+  transportadoras ou poucos armazéns**, ele passaria a ser um problema de
+  contrato ou de roteirização, e não um problema de corredor. O conjunto de dados
+  não tem identificador de transportadora, então esse teste exige o lado
+  operacional, e não outra consulta.
 - **Se os clientes com entrega atrasada diferissem sistematicamente** (produtos
   diferentes, tamanhos de cesta diferentes, expectativas diferentes), a diferença
   nas avaliações poderia refletir em parte quem eles são, e não o que aconteceu

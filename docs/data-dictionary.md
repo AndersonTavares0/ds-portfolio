@@ -141,3 +141,16 @@ by severity instead of alphabetically.
 `customer_state`, `delivered_orders`, `late_orders`, `late_pct`,
 `avg_delivery_days`, `avg_review_score`. `late_pct` is NULL where nothing was
 delivered, and the denominator is published next to the rate.
+
+### `mart_late_delivery_by_lane` - one row per (seller state, customer state)
+
+`seller_state`, `customer_state`, `lane` (the label `SP -> RJ`, which is also the
+uniqueness key), `is_intrastate`, `delivered_orders`, `late_orders`, `late_pct`,
+`avg_handling_days`, `avg_transit_days`, `avg_delivery_days`, `p50_delivery_days`,
+`p90_delivery_days`, `promised_days`, `avg_review_score`, `avg_days_late_when_late`,
+`orders_over_2w_late`, `late_pct_if_promise_plus3`, `late_pct_if_promise_plus7`.
+
+Covers the 96,411 of 96,476 delivered orders whose items all came from sellers in a
+single state; an order spanning two seller states has no single lane and is left
+out. The handling/transit split and the promise counterfactuals are defined in
+[metrics.md](metrics.md).

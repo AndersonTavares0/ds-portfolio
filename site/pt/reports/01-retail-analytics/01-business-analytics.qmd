@@ -35,12 +35,19 @@ recompra foi incômoda.
   prometida. Os 6.8% que não cumpriram têm nota média de avaliação de **2.27**,
   contra **4.29** para pedidos no prazo. Além de uma semana de atraso, cerca de
   **80% dos clientes dão uma ou duas estrelas**.
-- **O atraso é geográfico e concentrado.** O Rio de Janeiro atrasa em **12.1%**
-  das entregas, a Bahia em **12.2%** e o Ceará em **13.8%**, contra **4.5%** de
-  São Paulo.
-- **A melhoria mais barata disponível está no Rio de Janeiro.** É o segundo maior
-  mercado, e cerca de **940 pedidos por ano** não chegariam atrasados se ele
-  tivesse o desempenho de São Paulo.
+- **O atraso é uma propriedade de um corredor, e não dos lugares ou dos
+  vendedores.** O Rio de Janeiro atrasa em **12.1%** das entregas e o Ceará em
+  **13.8%**, contra **4.5%** de São Paulo. Mas um vendedor do Rio entregando
+  dentro do Rio iguala São Paulo (**4.7%** contra **4.6%**), e 53 dos 65
+  vendedores que enviam para os dois estados vão pior para o Rio. O atraso é
+  criado na travessia entre São Paulo e o Rio, que carrega dois terços dos pedidos
+  do Rio a **14.2%** de atraso.
+- **Esse corredor carrega a promessa mais frágil do conjunto de dados.** De São
+  Paulo ao Rio promete-se 27 dias, contra 30.3 do corredor mais distante, de São
+  Paulo ao Rio Grande do Sul, e sua cauda é mais pesada. Três dias a mais na
+  promessa registrariam **11.6%** em vez de **14.2%**, e sete a mais registrariam
+  **8.4%**. O pacote médio no corredor chega **10.9 dias antes**, então a promessa
+  não é o que torna as entregas atrasadas: é por que tanto do atraso é registrado.
 
 ---
 
@@ -175,11 +182,11 @@ leitor que discorda pode discordar conscientemente, e não em silêncio.
 
 | Segmento | Clientes | Participação | Gasto médio (R$) | Média de dias desde o último pedido |
 |---|---:|---:|---:|---:|
-| Outros | 27,746 | 28.87% | 142.45 | 235 |
-| Em risco (era valioso) | 22,659 | 23.58% | 242.91 | 446 |
-| Campeões | 15,880 | 16.53% | 310.04 | 142 |
-| Perdidos / baixo valor | 15,427 | 16.05% | 55.16 | 448 |
-| Novos / promissores | 14,384 | 14.97% | 54.11 | 140 |
+| Others | 27,746 | 28.87% | 142.45 | 235 |
+| At risk (was valuable) | 22,659 | 23.58% | 242.91 | 446 |
+| Champions | 15,880 | 16.53% | 310.04 | 142 |
+| Lost / low value | 15,427 | 16.05% | 55.16 | 448 |
+| New / promising | 14,384 | 14.97% | 54.11 | 140 |
 
 **Não vou fingir que esta segmentação é mais útil do que é.** O RFM funciona
 encontrando clientes que compram com frequência, e a frequência quase não varia
@@ -314,25 +321,79 @@ de **370 avaliações de uma e duas estrelas a menos por ano** só do Rio.
 Essa estimativa é uma associação, não uma previsão causal. Não demonstrei que
 fazer a entrega no prazo *causa* a avaliação melhor, apenas que as duas andam
 juntas, e os clientes que passam por entrega atrasada podem diferir em outros
-aspectos. Eu trataria o número como um motivo para investigar, não como um caso
-de negócio para um gasto específico.
+aspectos. Então a próxima pergunta não é quanto valem os 940 pedidos, e sim onde o
+atraso é criado, e isso é respondível com os dados já carregados.
+
+### Onde o atraso acontece
+
+A explicação óbvia é que alguns vendedores são ruins e outros são bons, e os
+dados não a sustentam. Dividindo as entregas do Rio entre o tempo antes de o
+pacote chegar à transportadora e o tempo depois:
+
+| | entregas | dias até a transportadora | dias em trânsito | dias no total | atraso |
+|---|---:|---:|---:|---:|---:|
+| Rio de Janeiro | 12,353 | 3.31 | **12.00** | 15.31 | 12.10% |
+| São Paulo | 40,495 | 3.16 | **5.60** | 8.76 | 4.49% |
+
+Os vendedores dos dois estados despacham na mesma velocidade, com diferença de um
+quinto de dia, e toda a diferença está no trânsito.
+
+Isso se sustenta quando o mesmo vendedor envia para os dois estados. Dos 65
+vendedores com pelo menos 30 entregas para o Rio *e* pelo menos 30 para São Paulo,
+**53 vão pior para o Rio**, e a taxa média de atraso é de **12.45%** lá contra
+**4.80%** para São Paulo. Um vendedor ruim seria ruim nas duas direções.
+
+O teste inverso resolve o destino. Um vendedor do Rio entregando no Rio atrasa
+**4.67%** das vezes, que é o que um vendedor de São Paulo alcança dentro de São
+Paulo (**4.63%**). O Rio não é um lugar difícil para entregar. Um vendedor de São
+Paulo enviando o mesmo tipo de pacote para o Rio atrasa **14.07%** das vezes.
+
+![Atraso de entrega por corredor. As barras azuis são corredores em que o vendedor e o cliente estão no mesmo estado.](../../../reports/01-retail-analytics/figures/pt/lane-late.png){#fig-lane fig-align="center"}
+
+Dois terços das entregas do Rio, 8,129 de 12,353, saem de vendedores de São Paulo,
+e esse corredor é o pior da tabela, com **14.17%**. Todo corredor que fica dentro
+de um único estado fica em 4.8% ou menos. A dificuldade é criada na travessia.
+
+### A promessa nesse corredor é a mais frágil
+
+São Paulo ao Rio não é a rota mais longa do conjunto de dados. É a rota com a
+menor margem para erro. A entrega mediana leva 12.8 dias, quase o mesmo que São
+Paulo ao Rio Grande do Sul, com 13.9 dias, mas seu nonagésimo percentil é de 31.0
+dias contra 27.1, e sua promessa é de **27.0 dias contra 30.3**. Uma cauda mais
+pesada e um prazo mais curto no mesmo corredor.
+
+Dar três dias a mais a esse corredor o levaria de 14.17% de atraso para **11.60%**;
+sete dias a mais o levariam para **8.37%**. São Paulo ao Rio Grande do Sul, que é
+mais distante, registra 6.65%.
+
+O pacote médio de São Paulo ao Rio chega **10.9 dias antes** e 14% ainda chegam
+atrasados. A maioria das entregas no corredor tem dias de sobra e uma minoria não
+tem nenhum, e 379 pedidos chegam mais de duas semanas depois da promessa.
+
+Uma ressalva decide até onde isso alcança. A promessa é definida pela Olist, então
+ampliá-la muda a medição, não a entrega. Se ela também muda o que o cliente pensa,
+não se pode resolver com estes dados, porque a promessa e o tempo real de entrega
+estão correlacionados por construção.
 
 ---
 
 ## O que eu faria em seguida
 
-1. **Investigue primeiro o corredor do Rio de Janeiro.** É o maior conjunto de
-   insatisfação recuperável do conjunto de dados, é concentrado o suficiente para
-   ser estudado, e o contrafactual é testável: compare pedidos do Rio atendidos
-   por vendedores ou transportadoras diferentes no mesmo período.
-2. **Reexamine a própria promessa de entrega.** As estimativas da Olist são
-   extremamente conservadoras. A entrega média chega **11.18 dias antes**, e 93.2%
-   dos pedidos chegam no prazo. Uma promessa que é batida quase sempre não é
-   necessariamente boa: ela pode estar custando conversões, e um cliente a quem se
-   diz "em até 25 dias" e que recebe em 12 teve uma experiência pior do que um a
-   quem se diz "em 12". Encurtar a promessa trocaria uma taxa de atraso medida
-   maior por expectativas mais bem calibradas, e vale a pena quantificar essa
-   troca em vez de presumi-la.
+1. **Conserte o corredor de São Paulo ao Rio, e não os vendedores nele.** Os
+   vendedores despacham em cerca de três dias em todos os corredores, os próprios
+   vendedores do Rio entregam no prazo dentro do Rio, e 53 dos 65 vendedores que
+   enviam para os dois estados vão pior para o Rio. O atraso é criado na travessia:
+   8,129 entregas, 14.17% atrasadas, e 379 delas mais de duas semanas atrasadas. A
+   pergunta operacional é o que acontece durante os 9 dias de trânsito mediano e
+   nos 31 dias do nonagésimo percentil.
+2. **Depois, recalibre a promessa, corredor por corredor.** A promessa é uniforme
+   onde o serviço não é. São Paulo ao Rio recebe 27 dias contra 30.3 do corredor
+   mais distante, São Paulo ao Rio Grande do Sul, e três dias a mais registrariam
+   11.60% em vez de 14.17%. Como o pacote médio chega 11.18 dias antes e 93.2%
+   chegam no prazo, uma promessa mais ampla custa pouco operacionalmente. O que
+   ela muda para o cliente não pode ser medido aqui, porque a promessa e o tempo
+   de entrega andam juntos, então eu a executaria como um experimento deliberado
+   em vez de inferi-la.
 3. **Teste o resultado do pacote que sumiu.** Um pedido que nunca chegou recebeu
    nota melhor do que um que chegou duas semanas atrasado. Isso é ou uma diferença
    real na forma como as duas falhas são tratadas, ou um artefato de quem decide
@@ -371,6 +432,18 @@ como os números devem ser lidos:
   Tudo sobre produtos ou categorias vem de `fct_order_items`; tudo sobre dinheiro,
   entrega ou avaliação vem de `fct_orders`. Misturá-los é a forma mais provável de
   produzir um total errado.
+- **Um corredor é um par de estados, não uma rota medida.** Os estados do vendedor
+  e do cliente são a geografia mais fina que o conjunto de dados carrega, então
+  "São Paulo ao Rio" significa um vendedor em um estado e um cliente no outro, e
+  não uma distância ou uma estrada específica.
+- **O conjunto de dados não tem identificador de transportadora.** A descoberta do
+  corredor diz onde o atraso é criado. Ela não pode dizer quem o cria, então
+  restringi-la a uma transportadora ou a um armazém exige o lado operacional, e
+  não outra consulta.
+- **Os números de corredor cobrem 96,411 das 96,476 entregas.** Um pedido cujos
+  itens vieram de vendedores em mais de um estado, 65 pedidos, não tem um único
+  corredor e fica fora da tabela de corredores. Nenhum outro número de entrega é
+  afetado.
 - **Onde faltam carimbos de data e hora de entrega** (2,965 pedidos), esses
   pedidos são excluídos das estatísticas de entrega em vez de imputados, e
   mantidos como um grupo próprio onde o assunto é a experiência do cliente.
@@ -431,7 +504,7 @@ flowchart TB
   CSV --> L["load_raw.py<br/>toda coluna TEXT"]
   L --> DB[("PostgreSQL<br/>schema: raw")]
   DB --> S["dbt staging<br/>views — cast e renomeação"]
-  S --> F["dbt marts<br/>tabelas — 70 testes de dados"]
+  S --> F["dbt marts<br/>tabelas — 80 testes de dados"]
   F --> C["make_charts.py"]
   C --> FIG["figuras PNG"]
   F --> REP["relatório Quarto"]
@@ -446,7 +519,8 @@ uv run python tasks.py setup      # start the database and fetch the data
 uv run python tasks.py pipeline   # load, build, charts, test, render
 ```
 
-`dbt build` também executa 70 testes de dados, incluindo um que garante que a
-retenção do mês zero é exatamente 100% e outro que garante que o sinalizador de
-atraso e o número de dias de atraso não podem discordar. Ambos existem porque já
-estiveram errados uma vez.
+`dbt build` também executa 80 testes de dados, incluindo um que garante que a
+retenção do mês zero é exatamente 100%, um que garante que o sinalizador de
+atraso e o número de dias de atraso não podem discordar, e um que garante que uma
+promessa mais longa nunca pode deixar mais pedidos atrasados. Os dois primeiros
+existem porque já estiveram errados uma vez.

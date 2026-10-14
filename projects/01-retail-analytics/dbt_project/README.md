@@ -51,3 +51,6 @@ dbt build --project-dir projects/01-retail-analytics/dbt_project \
 - Raw column typos from the source (`product_name_lenght`) are corrected in
   staging, not in the source declaration, so it stays obvious what upstream
   actually sent.
+- `mart_late_delivery_by_lane` counts only orders whose items all came from sellers
+  in one state, because an order spanning two seller states has no single lane. That
+  drops 65 of the 96,476 delivered orders.

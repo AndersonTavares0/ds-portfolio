@@ -112,6 +112,10 @@ STRINGS = {
         "state_title": "Late delivery by state (states with at least 1,000 deliveries)",
         "state_x": "Deliveries arriving after the promised date (%)",
         "state_label": "{pct:.1f}% ({orders:,})",
+        "lane_title": "Late delivery by lane (lanes with at least 900 deliveries)",
+        "lane_x": "Deliveries arriving after the promised date (%)",
+        "lane_label": "{pct:.1f}%  ({orders:,})",
+        "lane_note": "Blue = the seller and the customer are in the same state.",
         "cohort_title": "Retention after the first order",
         "cohort_x": "Months after the customer's first order",
         "cohort_y": "Customers who ordered again (%)",
@@ -145,6 +149,10 @@ STRINGS = {
         "state_title": "Atraso na entrega por estado (estados com ao menos 1,000 entregas)",
         "state_x": "Entregas após a data prometida (%)",
         "state_label": "{pct:.1f}% ({orders:,})",
+        "lane_title": "Atraso por rota (rotas com ao menos 900 entregas)",
+        "lane_x": "Entregas após a data prometida (%)",
+        "lane_label": "{pct:.1f}%  ({orders:,})",
+        "lane_note": "Azul = vendedor e cliente no mesmo estado.",
         "cohort_title": "Retenção após o primeiro pedido",
         "cohort_x": "Meses após o primeiro pedido do cliente",
         "cohort_y": "Clientes que compraram de novo (%)",
@@ -197,6 +205,21 @@ def load_data(engine) -> dict[str, pd.DataFrame]:
             select customer_state, delivered_orders, late_orders, late_pct
             from analytics_marts.mart_late_delivery_by_state
             where delivered_orders >= 1000
+            order by late_pct
+            """,
+        ),
+        "lanes": read(
+            engine,
+            """
+            -- Ordered ascending so the worst lane lands at the top of a barh
+            -- chart. `is_intrastate` drives the colour: it is the comparison that
+            -- makes the point, because every lane inside one state is fine.
+            -- 900 rather than 1,000 so RJ -> RJ (946 deliveries) survives the cut.
+            -- It is the most useful bar on the chart: a Rio seller delivering in
+            -- Rio is not late, which is what rules out the destination itself.
+            select lane, is_intrastate, delivered_orders, late_pct
+            from analytics_marts.mart_late_delivery_by_lane
+            where delivered_orders >= 900
             order by late_pct
             """,
         ),
@@ -405,6 +428,45 @@ def chart_late_by_state(data, s, lang: str) -> None:
     save(fig, lang, "late-by-state.png")
 
 
+def chart_lane_late(data, s, lang: str) -> None:
+    """Lateness belongs to the route, not to the seller or the destination.
+
+    The destination-only view says "Rio is late". This one adds the origin and
+    shows that Rio receiving from Sao Paulo is late while Rio receiving from Rio
+    is not, which is a different problem with a different owner.
+    """
+    df = data["lanes"]
+
+    fig, ax = plt.subplots(figsize=(8.2, 5.6))
+    colours = [PRIMARY if same else ACCENT for same in df["is_intrastate"]]
+    ax.barh(df["lane"], df["late_pct"], color=colours, height=0.68)
+    ax.set_xlabel(s["lane_x"])
+    ax.set_title(s["lane_title"])
+    ax.grid(axis="y", visible=False)
+
+    for y, (pct, orders) in enumerate(zip(df["late_pct"], df["delivered_orders"], strict=True)):
+        ax.text(
+            pct + 0.22,
+            y,
+            s["lane_label"].format(pct=pct, orders=orders),
+            va="center",
+            fontsize=8,
+            color=SOFT,
+        )
+    ax.text(
+        0.99,
+        0.02,
+        s["lane_note"],
+        transform=ax.transAxes,
+        ha="right",
+        va="bottom",
+        fontsize=8,
+        color=SOFT,
+    )
+    ax.margins(x=0.26)
+    save(fig, lang, "lane-late.png")
+
+
 def chart_cohort_retention(data, s, lang: str) -> None:
     """Retention does not decay from a high base — it starts low and stays there."""
     df = data["cohort"]
@@ -495,6 +557,7 @@ CHARTS = (
     chart_top_categories,
     chart_delivery_review,
     chart_late_by_state,
+    chart_lane_late,
     chart_cohort_retention,
     chart_repeat_purchase,
     chart_order_status,
