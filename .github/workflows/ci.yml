@@ -16,10 +16,10 @@ jobs:
     name: lint + tests
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install uv
-        uses: astral-sh/setup-uv@v5
+        uses: astral-sh/setup-uv@v7
         with:
           enable-cache: true
 
@@ -68,8 +68,8 @@ jobs:
   #     POSTGRES_PASSWORD: portfolio
   #     POSTGRES_DB: olist
   #   steps:
-  #     - uses: actions/checkout@v4
-  #     - uses: astral-sh/setup-uv@v5
+  #     - uses: actions/checkout@v7
+  #     - uses: astral-sh/setup-uv@v7
   #     - run: uv sync --locked
   #     - run: uv run python projects/01-retail-analytics/scripts/load_raw.py --source tests/fixtures/sample
   #     - run: uv run python tasks.py dbt-build
