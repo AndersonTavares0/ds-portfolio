@@ -37,6 +37,10 @@ DBT_DIR = PROJECT / "dbt_project"
 # and published without the rest of the repository in reach. Every Quarto
 # command therefore runs with `cwd=SITE`.
 SITE = ROOT / "site"
+# The Portuguese pages are a second render of the same project into their own
+# directory (see `site/_quarto-pt.yml`); `render` copies the result into
+# `_site/pt`, which is where those sources live, so URLs are unchanged.
+BUILD_PT = SITE / ".build-pt"
 
 
 # ---------------------------------------------------------------------------
@@ -190,9 +194,20 @@ def task_fmt() -> None:
 
 
 def task_render() -> None:
-    """Render the Quarto website into `site/_site/`."""
+    """Render the bilingual Quarto website into `site/_site/`."""
     require("quarto", "install Quarto: https://quarto.org/docs/get-started/")
-    run(["quarto", "render"], cwd=SITE)
+    # Two builds of one project, because Quarto allows exactly one navbar per
+    # website and there is no per-directory override. They cannot share an
+    # output directory: a render empties the directory it writes to, and the
+    # profile with no page at the site root also emits a redirect `index.html`
+    # that would replace the English home page.
+    run(["quarto", "render", "--profile", "en"], cwd=SITE)
+    run(["quarto", "render", "--profile", "pt"], cwd=SITE)
+    source = BUILD_PT / "pt"
+    destination = SITE / "_site" / "pt"
+    shutil.rmtree(destination, ignore_errors=True)
+    shutil.copytree(source, destination)
+    print(f"copied {source.relative_to(SITE)} -> {destination.relative_to(SITE)}")
 
 
 def task_preview() -> None:
@@ -202,9 +217,11 @@ def task_preview() -> None:
 
 
 def task_publish() -> None:
-    """Publish the rendered site to the `gh-pages` branch."""
+    """Publish the already-rendered site to the `gh-pages` branch."""
     require("quarto", "install Quarto: https://quarto.org/docs/get-started/")
-    run(["quarto", "publish", "gh-pages"], cwd=SITE)
+    # `--no-render` publishes `_site` as `task_render` built it; letting Quarto
+    # render here would produce the English build only.
+    run(["quarto", "publish", "gh-pages", "--no-render"], cwd=SITE)
 
 
 def task_pipeline() -> None:
@@ -222,6 +239,7 @@ def task_clean() -> None:
         ROOT / ".pytest_cache",
         ROOT / ".ruff_cache",
         SITE / "_site",
+        BUILD_PT,
         SITE / ".quarto",
         DBT_DIR / "target",
         DBT_DIR / "dbt_packages",

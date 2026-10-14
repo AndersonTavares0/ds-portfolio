@@ -1,0 +1,63 @@
+/*-- scss:defaults --*/
+
+// The dark half of the same system.
+//
+// Every variable below has the same name as its counterpart in `theme.scss`, so
+// the rules in `_theme-rules.scss` compile unchanged against either palette —
+// only the values differ. Quarto chooses between the two bundles from the
+// reader's `prefers-color-scheme`, so there is no toggle to build and no state
+// to store: a reader who has set their operating system to dark gets this, and
+// one who has not gets `theme.scss`.
+//
+// The hues are unchanged. Only lightness moves, which is why the amber stays
+// amber and the blue stays blue — a reader switching modes should recognise the
+// same document, not meet a different one.
+
+$ink:        #e6edf3;   // body text
+$paper:      #14181c;   // page
+$surface:    #1d242b;   // raised panels: code, table stripes
+$brand:      #4d9fdd;   // chart PRIMARY, lightened to clear the dark ground
+$brand-deep: #8cc4ef;   // links: lighter again, so they pass contrast here
+$alert:      #e0a45c;   // chart ACCENT
+$alert-text: #eebb84;   // the amber, lightened to be readable as text
+$muted:      #93a3b1;
+$rule:       #2b343d;
+
+// Type is identical in both modes: same three roles, same superfamily.
+$font-family-base:       "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-family-sans-serif: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+$font-family-monospace:  "Source Code Pro", ui-monospace, Consolas, monospace;
+$headings-font-family:   "Source Serif 4", Georgia, serif;
+$headings-font-weight:   600;
+
+$font-size-root:  17px;
+$line-height-base: 1.65;
+
+// Bootstrap overrides ---------------------------------------------------------
+$body-bg:     $paper;
+$body-color:  $ink;
+$primary:     $brand;
+$secondary:   $alert;
+$link-color:       $brand-deep;
+$link-hover-color: $ink;
+$border-color: $rule;
+$border-radius: 4px;
+$code-color: $ink;
+$code-bg:    $surface;
+$table-border-color: $rule;
+$table-striped-bg:   $surface;
+
+/*-- scss:rules --*/
+
+@import "theme-rules";
+
+// Figures are committed PNGs drawn on white. Inverting them would invent a
+// palette the data was never designed with — the amber would come out cyan — so
+// on the dark page they keep their white ground and are framed as an inset
+// plate instead. That reads as a deliberate figure rather than a hole in the
+// page, which is what an untreated white rectangle looks like.
+img.quarto-figure {
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 0.6rem;
+}

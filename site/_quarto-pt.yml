@@ -1,0 +1,43 @@
+# Portuguese build of the same website.
+#
+# Why a profile: Quarto allows exactly one navbar per website, and a
+# `_metadata.yml` inside a subdirectory cannot override it (both a nested
+# `website.navbar` and a top-level `navbar` key were tried in `pt/` and both
+# were ignored). Profiles are Quarto's documented way to publish several
+# versions of one website, so each language is a profile with its own `lang`,
+# its own navigation, and its own render list.
+#
+# Why its own output directory: a render empties the directory it writes to, so
+# two renders pointed at `_site` erase each other, and the profile without a
+# page at the site root also emits a redirect `index.html` that would replace
+# the English home page. Rendering here instead keeps both builds independent;
+# `tasks.py render` copies `.build-pt/pt` into `site/_site/pt` afterwards, which
+# is the same path these sources have, so the pages land on their public URLs.
+
+lang: pt-BR
+
+project:
+  render:
+    - pt/index.qmd
+    - pt/about.qmd
+    - pt/reports/01-retail-analytics/*.qmd
+  output-dir: .build-pt
+
+website:
+  navbar:
+    background: light
+    search: true
+    left:
+      - href: pt/index.qmd
+        text: Início
+      - text: Projetos
+        menu:
+          - href: pt/reports/01-retail-analytics/01-business-analytics.qmd
+            text: "01 · Análise de varejo"
+          - href: pt/reports/01-retail-analytics/00-executive-memo.qmd
+            text: "01 · Memorando de decisão"
+      - href: pt/about.qmd
+        text: Sobre
+    right:
+      - href: index.qmd
+        text: "English"

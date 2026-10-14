@@ -8,8 +8,6 @@ format:
     toc: false
 ---
 
-> Este documento também está disponível em [inglês](../../../reports/01-retail-analytics/00-executive-memo.qmd).
-
 **Preparado para:** Diretor de Operações<br>
 **Preparado por:** Anderson Tavares
 
@@ -33,7 +31,7 @@ princípio. **O Rio de Janeiro é a maior e mais barata oportunidade.**
 - O atraso é geográfico. São Paulo: **4.49%**. Rio de Janeiro: **12.10%**.
   Bahia: **12.16%**. Ceará: **13.76%**.
 
-![Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.](../../../reports/01-retail-analytics/figures/delivery-review.png){#fig-delivery fig-align="center"}
+![Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.](../../../reports/01-retail-analytics/figures/pt/delivery-review.png){#fig-delivery fig-align="center"}
 
 ## Quanto custa
 

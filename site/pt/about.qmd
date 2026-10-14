@@ -3,8 +3,6 @@ title: "Sobre"
 toc: false
 ---
 
-> Este documento também está disponível em [inglês](../about.qmd).
-
 ## Anderson Tavares
 
 Analista de dados focado em transformar dados reais e desorganizados em decisões

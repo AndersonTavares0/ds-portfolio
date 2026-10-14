@@ -1,0 +1,46 @@
+/*-- scss:defaults --*/
+
+// Palette ---------------------------------------------------------------------
+// These are the four colours the charts are drawn with, in
+// `projects/01-retail-analytics/scripts/make_charts.py`. Reusing them here is
+// the point: the figures and the page they sit on should read as one system,
+// not as a report inside a Bootstrap theme.
+$ink:        #1f2933;   // chart INK      — body text
+$paper:      #ffffff;
+$surface:    #f1f5f8;   // a cool grey, deliberately not a warm parchment
+$brand:      #1f6fb2;   // chart PRIMARY  — structure, "published"
+$brand-deep: #16507f;   // a darker step so links pass contrast on white
+$alert:      #d97706;   // chart ACCENT   — "late", "unfinished"
+$alert-text: #b45309;   // the same amber, darkened to be readable as text
+$muted:      #5c6b7a;
+$rule:       #dbe3ea;
+
+// Type ------------------------------------------------------------------------
+// The Source family, designed for technical publishing: a serif for reading, a
+// sans for interface, a mono for code. Three roles, one superfamily.
+$font-family-base:       "Source Serif 4", Georgia, "Times New Roman", serif;
+$font-family-sans-serif: "Source Sans 3", system-ui, "Segoe UI", sans-serif;
+$font-family-monospace:  "Source Code Pro", ui-monospace, Consolas, monospace;
+$headings-font-family:   "Source Serif 4", Georgia, serif;
+$headings-font-weight:   600;
+
+$font-size-root:  17px;
+$line-height-base: 1.65;
+
+// Bootstrap overrides ---------------------------------------------------------
+$body-bg:     $paper;
+$body-color:  $ink;
+$primary:     $brand;
+$secondary:   $alert;
+$link-color:       $brand-deep;
+$link-hover-color: $ink;
+$border-color: $rule;
+$border-radius: 4px;
+$code-color: $ink;
+$code-bg:    $surface;
+$table-border-color: $rule;
+$table-striped-bg:   $surface;
+
+/*-- scss:rules --*/
+
+@import "theme-rules";

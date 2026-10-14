@@ -8,8 +8,6 @@ format:
     toc: true
 ---
 
-> Este documento também está disponível em [inglês](../../../reports/01-retail-analytics/01-business-analytics.qmd).
-
 Esta é uma análise do conjunto de dados de e-commerce brasileiro da Olist —
 99,441 pedidos feitos entre setembro de 2016 e outubro de 2018 em um marketplace
 que conecta vendedores a compradores. Todo número abaixo foi calculado em SQL a
@@ -83,7 +81,7 @@ que o total, porque dois dos vinte e cinco meses não são o que parecem.
 | 2018-09 | 16 | 14 | 4,439.54 | 277.47 |
 | 2018-10 | 4 | 4 | 589.67 | 147.42 |
 
-![Receita mensal. As duas barras cinzas são meses incompletos.](../../../reports/01-retail-analytics/figures/revenue-monthly.png){#fig-revenue fig-align="center"}
+![Receita mensal. Os quatro meses de borda quase vazios ficam de fora, em vez de virarem fatias invisíveis.](../../../reports/01-retail-analytics/figures/pt/revenue-monthly.png){#fig-revenue fig-align="center"}
 
 **Dois meses são artefatos, e lê-los como tendência seria um erro.**
 
@@ -123,7 +121,7 @@ que a linha do topo sugere.
 | auto | 3,897 | 4,235 | 592,720.11 | 139.96 |
 | garden_tools | 3,518 | 4,347 | 485,256.46 | 111.63 |
 
-![As 12 principais categorias por receita de itens.](../../../reports/01-retail-analytics/figures/top-categories.png){#fig-categories fig-align="center"}
+![As 12 principais categorias por receita de itens.](../../../reports/01-retail-analytics/figures/pt/top-categories.png){#fig-categories fig-align="center"}
 
 São 74 categorias, e as dez principais respondem por **62.4%** da receita de
 itens. Os nomes de categoria aparecem como estão no conjunto de dados, porque são
@@ -148,7 +146,7 @@ Pagamentos não são o mesmo que vendas concluídas. Um pagamento é registrado 
 pedidos que depois foram cancelados ou marcados como indisponíveis, então esses
 pedidos estão dentro dos R$ 16.0M acima.
 
-![Receita por status do pedido. As duas barras âmbar são pedidos cancelados e indisponíveis.](../../../reports/01-retail-analytics/figures/order-status.png){#fig-status fig-align="center"}
+![Receita por status do pedido. As duas barras âmbar são pedidos cancelados e indisponíveis.](../../../reports/01-retail-analytics/figures/pt/order-status.png){#fig-status fig-align="center"}
 
 Juntos, eles somam R$ 269,735.11 — cerca de 1.7% do total — e são contados de
 propósito: o pagamento foi recebido. Excluí-los seria uma definição diferente e
@@ -170,7 +168,7 @@ leitor que discorda pode discordar conscientemente, e não em silêncio.
 | 5–9 | 18 | 0.02% |
 | 17 | 1 | 0.001% |
 
-![Com que frequência um cliente volta. A escala logarítmica é o que torna a cauda visível.](../../../reports/01-retail-analytics/figures/repeat-purchase.png){#fig-repeat fig-align="center"}
+![Com que frequência um cliente volta. A escala logarítmica é o que torna a cauda visível.](../../../reports/01-retail-analytics/figures/pt/repeat-purchase.png){#fig-repeat fig-align="center"}
 
 ```{=html}
 <!-- Source: mart_rfm -->
@@ -223,7 +221,7 @@ taxa de recompra de **3.12%**. Clientes recorrentes respondem por 6,342 dos
 | 12 | 22,317 | 40 | 0.18% |
 | 18 | 5,473 | 12 | 0.22% |
 
-![Retenção por coorte. O mês zero é omitido porque é 100% por construção.](../../../reports/01-retail-analytics/figures/cohort-retention.png){#fig-cohort fig-align="center"}
+![Retenção por coorte. O mês zero é omitido porque é 100% por construção.](../../../reports/01-retail-analytics/figures/pt/cohort-retention.png){#fig-cohort fig-align="center"}
 
 O mês zero é 100% por construção — é o mês em que o cliente foi adquirido — e um
 teste garante isso, porque um offset zero que *não* fosse 100% significaria que a
@@ -267,7 +265,7 @@ Esta é a relação mais forte do conjunto de dados.
 | Atrasado: mais de 14 dias | 1,384 | 1.39% | 1.723 | 78.35% | 54.62 |
 | Nunca entregue | 2,965 | 2.98% | 1.747 | 78.05% | — |
 
-![Nota média de avaliação por resultado da entrega, com a parcela que atribui 1 ou 2.](../../../reports/01-retail-analytics/figures/delivery-review.png){#fig-delivery fig-align="center"}
+![Nota média de avaliação por resultado da entrega, com a parcela que atribui 1 ou 2.](../../../reports/01-retail-analytics/figures/pt/delivery-review.png){#fig-delivery fig-align="center"}
 
 Agregando, um pedido atrasado tem média de **2.27** contra **4.29** de um pedido
 no prazo. Isso não é uma diferença de arredondamento; é a diferença entre um
@@ -301,7 +299,7 @@ então o relato como observação, e não como conclusão.
 | BA | 3,256 | 396 | **12.16%** | 19.34 | 3.861 |
 | CE | 1,279 | 176 | **13.76%** | 21.27 | 3.857 |
 
-![Entregas atrasadas por estado. Cada barra está rotulada com seu número de entregas, porque uma taxa sem denominador é manchete, não conclusão.](../../../reports/01-retail-analytics/figures/late-by-state.png){#fig-late fig-align="center"}
+![Entregas atrasadas por estado. Cada barra está rotulada com seu número de entregas, porque uma taxa sem denominador é manchete, não conclusão.](../../../reports/01-retail-analytics/figures/pt/late-by-state.png){#fig-late fig-align="center"}
 
 O atraso não é aleatório pelo país. São Paulo — 42% de todas as entregas — atrasa
 4.49% das vezes e entrega em 8.76 dias. O Ceará atrasa 13.76% das vezes e leva
@@ -402,7 +400,6 @@ pedido é montada **agregando três tabelas de granularidade mais fina antes de
 juntá-las**, em vez de juntá-las diretamente.
 
 ```{mermaid}
-%%{init: {"themeVariables": {"clusterBkg": "#eef3f8", "clusterBorder": "#c3ced9"}}}%%
 flowchart TB
   O["orders<br/>99,441 linhas"]
   subgraph fine["tabelas de granularidade mais fina"]
