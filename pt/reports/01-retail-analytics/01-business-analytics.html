@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ecff8db827dceed84e341824dcdf69cb.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-8f9c0ad68bff6a8a98ced6db247d6f93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-ea0e3f50bb5ffff25d0e6e33147f23dc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -437,8 +437,8 @@ window.Quarto = {
 </header>
 
 
-<p>Esta é uma análise do conjunto de dados de e-commerce brasileiro da Olist — 99,441 pedidos feitos entre setembro de 2016 e outubro de 2018 em um marketplace que conecta vendedores a compradores. Todo número abaixo foi calculado em SQL a partir dos modelos testados em <code>projects/01-retail-analytics/dbt_project</code>, e o modelo de onde cada tabela vem é nomeado logo abaixo dela.</p>
-<p>A pergunta que eu me propus a responder não era “o que aconteceu”, mas <strong>quais alavancas realmente movem a satisfação do cliente e a recompra</strong>. Três respostas surgiram, e uma delas foi incômoda.</p>
+<p>Esta é uma análise do conjunto de dados de e-commerce brasileiro da Olist: 99,441 pedidos feitos entre setembro de 2016 e outubro de 2018 em um marketplace que conecta vendedores a compradores. Todo número abaixo foi calculado em SQL a partir dos modelos testados em <code>projects/01-retail-analytics/dbt_project</code>, e o modelo de onde cada tabela vem é nomeado logo abaixo dela.</p>
+<p>A pergunta era <strong>quais alavancas realmente movem a satisfação do cliente e a recompra</strong>, e não o que aconteceu. Três conclusões saíram dela, e a que tratava da recompra foi incômoda.</p>
 <hr>
 <section id="resumo-executivo" class="level2">
 <h2 class="anchored" data-anchor-id="resumo-executivo">Resumo executivo</h2>
@@ -657,9 +657,9 @@ Figura&nbsp;1: Receita mensal. Os quatro meses de borda quase vazios ficam de fo
 </figure>
 </div>
 <p><strong>Dois meses são artefatos, e lê-los como tendência seria um erro.</strong></p>
-<p>As duas últimas linhas não são um colapso. O conjunto de dados termina em 17 de outubro de 2018, então setembro e outubro são meses parciais — os 16 pedidos de setembro representam mais ou menos a primeira metade do mês, e os 4 pedidos de outubro representam dezessete dias de um mês que em grande parte não aconteceu. O crescimento mês a mês lido nessas linhas não tem sentido.</p>
+<p>As duas últimas linhas não são um colapso. O conjunto de dados termina em 17 de outubro de 2018, então setembro e outubro são meses parciais. Os 16 pedidos de setembro representam mais ou menos a primeira metade do mês, e os 4 pedidos de outubro representam dezessete dias de um mês que em grande parte não aconteceu. O crescimento mês a mês lido nessas linhas não tem sentido.</p>
 <p>2016 é o problema oposto: é um lançamento, não um ano tranquilo. Dez pedidos em três meses e, depois, 324 só em outubro. O negócio efetivamente começa em 2017, e qualquer comparação ano a ano que comece em 2016 compara uma empresa com uma empresa que ainda não tinha aberto.</p>
-<p>O sinal real está em outro lugar. <strong>Novembro de 2017 é o maior mês do conjunto de dados</strong> — 7,544 pedidos e R$ 1.19M, 63% acima de outubro —, o que é consistente com a Black Friday. E 2018 se acomoda em um platô em torno de 6,300–7,300 pedidos por mês, sem uma tendência forte de crescimento, o que é uma história diferente da que a linha do topo sugere.</p>
+<p><strong>Novembro de 2017 é o maior mês do conjunto de dados</strong>, com 7,544 pedidos e R$ 1.19M, 63% acima de outubro. Isso é consistente com a Black Friday. E 2018 se acomoda em um platô em torno de 6,300–7,300 pedidos por mês, sem uma tendência forte de crescimento, o que é uma história diferente da que a linha do topo sugere.</p>
 <section id="o-que-vende" class="level3">
 <h3 class="anchored" data-anchor-id="o-que-vende">O que vende</h3>
 <!-- Source: mart_category_revenue -->
@@ -763,7 +763,7 @@ Figura&nbsp;2: As 12 principais categorias por receita de itens.
 </figcaption>
 </figure>
 </div>
-<p>São 74 categorias, e as dez principais respondem por <strong>62.4%</strong> da receita de itens. Os nomes de categoria aparecem como estão no conjunto de dados, porque são valores de coluna que precisam poder ser encontrados no banco.</p>
+<p>São 74 categorias, e as dez principais respondem por <strong>62.4%</strong> da receita de itens.</p>
 <p><strong>Uma observação sobre por que esses números não somam o total.</strong> A receita por categoria conta apenas o preço dos itens, e o frete é excluído de propósito: um mesmo envio costuma levar produtos de várias categorias, e o frete é cobrado uma única vez pelo pedido inteiro, então não há forma honesta de atribuí-lo. As categorias, portanto, somam R$ 13.59M contra R$ 16.0M de pagamentos, e <strong>a diferença é o frete, não um erro</strong>. Dos R$ 2.25M que o frete representa, R$ 162,591.95 pertencem a 775 pedidos que têm um pagamento, mas nenhuma linha de item alguma.</p>
 <p>Três das 74 categorias não têm tradução para o inglês na fonte. Elas mantêm seus nomes em português em vez de serem agrupadas em um balde “unknown”, o que as esconderia.</p>
 </section>
@@ -780,7 +780,7 @@ Figura&nbsp;3: Receita por status do pedido. As duas barras âmbar são pedidos 
 </figcaption>
 </figure>
 </div>
-<p>Juntos, eles somam R$ 269,735.11 — cerca de 1.7% do total — e são contados de propósito: o pagamento foi recebido. Excluí-los seria uma definição diferente e igualmente defensável. Declarar qual delas está em uso aqui significa que um leitor que discorda pode discordar conscientemente, e não em silêncio.</p>
+<p>Juntos, eles somam R$ 269,735.11, cerca de 1.7% do total, e são contados de propósito: o pagamento foi recebido. Excluí-los seria uma definição diferente e igualmente defensável. Declarar qual delas está em uso aqui significa que um leitor que discorda pode discordar conscientemente, e não em silêncio.</p>
 <hr>
 </section>
 </section>
@@ -894,13 +894,13 @@ Figura&nbsp;4: Com que frequência um cliente volta. A escala logarítmica é o 
 </tr>
 </tbody>
 </table>
-<p><strong>Não vou fingir que esta segmentação é mais útil do que é.</strong> O RFM funciona encontrando clientes que compram com frequência — e a frequência quase não varia aqui: 96.9% dos clientes fizeram exatamente um pedido, então quase todos empatam em F e a divisão por <code>ntile</code> separa essa massa empatada de forma arbitrária. O que resta é uma segmentação por recência e gasto, na qual “Champions” significa <em>comprou recentemente e gastou bem</em>, não <em>leal</em>. Uma campanha de retenção voltada a esse grupo estaria voltada a compradores de primeira viagem.</p>
+<p><strong>Não vou fingir que esta segmentação é mais útil do que é.</strong> O RFM funciona encontrando clientes que compram com frequência, e a frequência quase não varia aqui: 96.9% dos clientes fizeram exatamente um pedido, então quase todos empatam em F e a divisão por <code>ntile</code> separa essa massa empatada de forma arbitrária. O que resta é uma segmentação por recência e gasto, na qual “Champions” significa <em>comprou recentemente e gastou bem</em>, e não <em>leal</em>. Uma campanha de retenção voltada a esse grupo estaria voltada a compradores de primeira viagem.</p>
 <p>Mantive-a mesmo assim, por dois motivos. É a primeira coisa que a maioria dos stakeholders pede, e seu fracasso aqui <strong>é</strong> a descoberta: não se chega a uma estratégia de retenção por segmentação em um negócio onde ninguém recompra. A coluna <code>f_score</code> está documentada em <code>mart_rfm</code> como quase sem significado exatamente por isso.</p>
 <hr>
 </section>
 <section id="eles-voltam" class="level2">
 <h2 class="anchored" data-anchor-id="eles-voltam">3. Eles voltam?</h2>
-<p><strong>Não.</strong> 2,997 clientes entre 96,096 fizeram um segundo pedido alguma vez — uma taxa de recompra de <strong>3.12%</strong>. Clientes recorrentes respondem por 6,342 dos 99,441 pedidos, ou <strong>6.4%</strong>.</p>
+<p>2,997 dos 96,096 clientes fizeram um segundo pedido alguma vez, uma taxa de recompra de <strong>3.12%</strong>. Clientes recorrentes respondem por 6,342 dos 99,441 pedidos, ou <strong>6.4%</strong>.</p>
 <!-- Source: mart_cohort_retention -->
 <table class="caption-top table">
 <colgroup>
@@ -990,16 +990,16 @@ Figura&nbsp;5: Retenção por coorte. O mês zero é omitido porque é 100% por 
 </figcaption>
 </figure>
 </div>
-<p>O mês zero é 100% por construção — é o mês em que o cliente foi adquirido — e um teste garante isso, porque um offset zero que <em>não</em> fosse 100% significaria que a lógica de coorte está quebrada, e não que o negócio mudou.</p>
-<p>O formato é o ponto. A retenção não decai de uma base alta; ela <strong>começa</strong> em 0.48% e permanece estável em torno de 0.2%. Essa não é a curva de um negócio perdendo clientes. É a curva de um marketplace em que cada compra é quase independente da anterior.</p>
-<p><strong>Duas ressalvas honestas.</strong> A janela de observação é de 25 meses, então um cliente que voltaria no terceiro ano é simplesmente invisível aqui — isto é um piso, não a verdadeira taxa de recompra ao longo da vida. E <code>customer_unique_id</code> é um identificador derivado, então uma pessoa que altere seus dados pode aparecer duas vezes, o que infla ligeiramente a contagem em vez de reduzi-la.</p>
-<p><strong>O que isto significa estrategicamente.</strong> Se 96.9% da receita vem de primeiros pedidos, o crescimento é um problema de aquisição, não de retenção. Um programa de fidelidade gastaria dinheiro para influenciar uma decisão que 96.9% dos clientes hoje não estão tomando. As duas alavancas que existem de fato são adquirir mais clientes e elevar o valor dos pedidos — e elevar o valor dos pedidos sem recompra significa aumentar o tamanho da cesta por visita.</p>
+<p>O mês zero é 100% por construção, porque é o mês em que o cliente foi adquirido. Um teste garante isso: um offset zero que <em>não</em> seja 100% significa que a lógica de coorte está quebrada, não que o negócio mudou.</p>
+<p>A retenção não decai de uma base alta. Ela <strong>começa</strong> em 0.48% e fica estável em torno de 0.2%, que é a curva de um marketplace em que cada compra é quase independente da anterior.</p>
+<p><strong>Duas ressalvas.</strong> A janela de observação é de 25 meses, então um cliente que voltaria no terceiro ano é simplesmente invisível aqui. Isto é um piso, não a verdadeira taxa de recompra ao longo da vida. E <code>customer_unique_id</code> é um identificador derivado, então uma pessoa que altere seus dados pode aparecer duas vezes, o que infla ligeiramente a contagem em vez de reduzi-la.</p>
+<p><strong>O que isto significa estrategicamente.</strong> Se 96.9% da receita vem de primeiros pedidos, o crescimento tem de vir da aquisição de clientes. Um programa de fidelidade gastaria dinheiro para influenciar uma decisão que 96.9% dos clientes hoje não estão tomando. As duas alavancas que existem são adquirir mais clientes e elevar o valor dos pedidos, e elevar o valor dos pedidos sem recompra significa aumentar o tamanho da cesta por visita.</p>
 <hr>
 </section>
 <section id="o-desempenho-das-entregas-explica-a-satisfação" class="level2">
 <h2 class="anchored" data-anchor-id="o-desempenho-das-entregas-explica-a-satisfação">4. O desempenho das entregas explica a satisfação?</h2>
 <p>Esta é a relação mais forte do conjunto de dados.</p>
-<p>6,535 de 96,476 entregas chegaram depois da data prometida — <strong>6.77%</strong>.</p>
+<p>6,535 de 96,476 entregas chegaram depois da data prometida, <strong>6.77%</strong>.</p>
 <!-- Source: mart_delivery_performance -->
 <table class="caption-top table">
 <colgroup>
@@ -1073,9 +1073,9 @@ Figura&nbsp;6: Nota média de avaliação por resultado da entrega, com a parcel
 </figcaption>
 </figure>
 </div>
-<p>Agregando, um pedido atrasado tem média de <strong>2.27</strong> contra <strong>4.29</strong> de um pedido no prazo. Isso não é uma diferença de arredondamento; é a diferença entre um cliente amplamente satisfeito e um que não está.</p>
+<p>Agregando, um pedido atrasado tem média de <strong>2.27</strong> contra <strong>4.29</strong> de um pedido no prazo. Essa diferença é a distância entre um cliente amplamente satisfeito e um que não está.</p>
 <p><strong>Um resultado dessa tabela me surpreendeu.</strong> Um pedido que nunca chegou tem nota <strong>1.747</strong>, que é <em>melhor</em> do que a de um pedido que chegou de oito a quatorze dias atrasado (<strong>1.672</strong>). A pior experiência da tabela não é o pacote que sumiu.</p>
-<p>A explicação provável é que se trata de situações diferentes, e não de gravidades diferentes. Um pedido cancelado ou indisponível é um evento <strong>encerrado</strong> — geralmente reembolsado e, muitas vezes, comunicado. Um pedido que só aparece 35 dias atrasado não está encerrado: o cliente esperou e ainda teve de lidar com o produto. Eu gostaria de testar isso antes de agir com base nisso, e não testei, então o relato como observação, e não como conclusão.</p>
+<p>A explicação provável é que se trata de situações diferentes, e não de gravidades diferentes. Um pedido cancelado ou indisponível é um evento <strong>encerrado</strong>, geralmente reembolsado e, muitas vezes, comunicado. Um pedido que só aparece 35 dias atrasado não está encerrado: o cliente esperou e ainda teve de lidar com o produto. Eu gostaria de testar isso antes de agir com base nisso, e não testei, então o relato como observação, e não como conclusão.</p>
 <section id="onde-está-o-atraso" class="level3">
 <h3 class="anchored" data-anchor-id="onde-está-o-atraso">Onde está o atraso</h3>
 <!-- Source: mart_late_delivery_by_state -->
@@ -1175,9 +1175,9 @@ Figura&nbsp;7: Entregas atrasadas por estado. Cada barra está rotulada com seu 
 </figcaption>
 </figure>
 </div>
-<p>O atraso não é aleatório pelo país. São Paulo — 42% de todas as entregas — atrasa 4.49% das vezes e entrega em 8.76 dias. O Ceará atrasa 13.76% das vezes e leva 21.27 dias. A correlação entre distância e atraso é visível nos próprios prazos de entrega.</p>
+<p>O atraso não é aleatório pelo país. São Paulo, que representa 42% de todas as entregas, atrasa 4.49% das vezes e entrega em 8.76 dias. O Ceará atrasa 13.76% das vezes e leva 21.27 dias. Entre os estados, prazos de entrega mais longos e atrasos mais altos andam juntos.</p>
 <p><strong>O Rio de Janeiro é o caso acionável.</strong> É o segundo maior mercado, com 12,353 entregas, e atrasa <strong>2.7×</strong> mais do que São Paulo. Se o Rio tivesse o desempenho de São Paulo, cerca de <strong>940 de seus 1,495 pedidos atrasados não estariam atrasados</strong>. Aplicando o comportamento de avaliação dos pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo (9.27%), isso equivale a cerca de <strong>370 avaliações de uma e duas estrelas a menos por ano</strong> só do Rio.</p>
-<p>Essa estimativa é uma associação, não uma previsão causal — não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas andam juntas, e os clientes que passam por entrega atrasada podem diferir em outros aspectos. Eu trataria o número como um motivo para investigar, não como um caso de negócio para um gasto específico.</p>
+<p>Essa estimativa é uma associação, não uma previsão causal. Não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas andam juntas, e os clientes que passam por entrega atrasada podem diferir em outros aspectos. Eu trataria o número como um motivo para investigar, não como um caso de negócio para um gasto específico.</p>
 <hr>
 </section>
 </section>
@@ -1185,7 +1185,7 @@ Figura&nbsp;7: Entregas atrasadas por estado. Cada barra está rotulada com seu 
 <h2 class="anchored" data-anchor-id="o-que-eu-faria-em-seguida">O que eu faria em seguida</h2>
 <ol type="1">
 <li><strong>Investigue primeiro o corredor do Rio de Janeiro.</strong> É o maior conjunto de insatisfação recuperável do conjunto de dados, é concentrado o suficiente para ser estudado, e o contrafactual é testável: compare pedidos do Rio atendidos por vendedores ou transportadoras diferentes no mesmo período.</li>
-<li><strong>Reexamine a própria promessa de entrega.</strong> As estimativas da Olist são extremamente conservadoras — a entrega média chega <strong>11.18 dias antes</strong>, e 93.2% dos pedidos chegam no prazo. Uma promessa que é batida quase sempre não é necessariamente boa: ela pode estar custando conversões, e um cliente a quem se diz “em até 25 dias” e que recebe em 12 teve uma experiência pior do que um a quem se diz “em 12”. Encurtar a promessa trocaria uma taxa de atraso medida maior por expectativas mais bem calibradas, e vale a pena quantificar essa troca em vez de presumi-la.</li>
+<li><strong>Reexamine a própria promessa de entrega.</strong> As estimativas da Olist são extremamente conservadoras. A entrega média chega <strong>11.18 dias antes</strong>, e 93.2% dos pedidos chegam no prazo. Uma promessa que é batida quase sempre não é necessariamente boa: ela pode estar custando conversões, e um cliente a quem se diz “em até 25 dias” e que recebe em 12 teve uma experiência pior do que um a quem se diz “em 12”. Encurtar a promessa trocaria uma taxa de atraso medida maior por expectativas mais bem calibradas, e vale a pena quantificar essa troca em vez de presumi-la.</li>
 <li><strong>Teste o resultado do pacote que sumiu.</strong> Um pedido que nunca chegou recebeu nota melhor do que um que chegou duas semanas atrasado. Isso é ou uma diferença real na forma como as duas falhas são tratadas, ou um artefato de quem decide avaliar, e é testável com os dados já carregados. Até ser testado, eu o relato como observação, não como conclusão.</li>
 <li><strong>Alimente o Projeto 02.</strong> Os grupos de entrega são o alvo natural do modelo de previsão de entregas atrasadas, e a restrição já está clara: só podem ser usadas variáveis conhecidas no momento da compra.</li>
 </ol>
@@ -1196,8 +1196,8 @@ Figura&nbsp;7: Entregas atrasadas por estado. Cada barra está rotulada com seu 
 <p>Elas são declaradas antes de os números serem usados, e não depois, porque moldam como os números devem ser lidos:</p>
 <ul>
 <li><strong>O conjunto de dados é um recorte de setembro de 2016 a outubro de 2018, não um fluxo ao vivo.</strong> Setembro e outubro de 2018 são parciais. Qualquer coisa descrita aqui é uma observação de um período, não uma tendência.</li>
-<li><strong>As avaliações são autosselecionadas.</strong> Só aparecem os clientes que optaram por deixar uma avaliação — 98,673 de 99,441 pedidos. A satisfação deles não é a da população, e uma média de 4.29 entre os respondentes não é uma média de 4.29 entre os clientes.</li>
-<li><strong>“Receita” significa valor bruto de mercadorias</strong> conforme registrado na tabela de pagamentos. Não há dados de custo, margem, reembolso ou devolução neste conjunto de dados, então nenhuma afirmação sobre lucro é possível — apenas sobre dinheiro recebido.</li>
+<li><strong>As avaliações são autosselecionadas.</strong> Só aparecem os clientes que optaram por deixar uma avaliação, 98,673 de 99,441 pedidos. A satisfação deles não é a da população, e uma média de 4.29 entre os respondentes não é uma média de 4.29 entre os clientes.</li>
+<li><strong>“Receita” significa valor bruto de mercadorias</strong> conforme registrado na tabela de pagamentos. Não há dados de custo, margem, reembolso ou devolução neste conjunto de dados, então nenhuma afirmação sobre lucro é possível, apenas sobre dinheiro recebido.</li>
 <li><strong>A receita inclui pedidos posteriormente cancelados ou marcados como indisponíveis</strong> (1,234 pedidos, R$ 269,735.11 — as duas barras âmbar em <a href="#fig-status" class="quarto-xref">Figura&nbsp;3</a>), porque um pagamento foi registrado para eles. Excluí-los seria uma definição diferente e igualmente defensável; esta é declarada para que o leitor possa discordar dela conscientemente.</li>
 <li><strong><code>customer_unique_id</code> é derivado e imperfeito.</strong> As conclusões sobre recompra são um piso, não um teto.</li>
 <li><strong>Contagens de pedidos e contagens de itens são granularidades diferentes.</strong> Tudo sobre produtos ou categorias vem de <code>fct_order_items</code>; tudo sobre dinheiro, entrega ou avaliação vem de <code>fct_orders</code>. Misturá-los é a forma mais provável de produzir um total errado.</li>

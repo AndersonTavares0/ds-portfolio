@@ -82,9 +82,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-ecff8db827dceed84e341824dcdf69cb.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="site_libs/bootstrap/bootstrap-dark-8f9c0ad68bff6a8a98ced6db247d6f93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-ea0e3f50bb5ffff25d0e6e33147f23dc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -356,9 +356,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<section id="delivery-performance-decides-whether-customers-come-back-and-what-they-say-when-they-do." class="level1 hero">
-<h1 class="hero">Delivery performance decides whether customers come back — and what they say when they do.</h1>
-<p>I measured it, I predicted it, and I read what customers actually wrote. All three projects run on the same Olist dataset — around 100,000 orders across nine related tables — and each one ships a written analysis, a one-page decision memo, and an honest account of what the data cannot support.</p>
+<section id="late-delivery-is-the-strongest-signal-of-customer-dissatisfaction-in-this-marketplace." class="level1 hero">
+<h1 class="hero">Late delivery is the strongest signal of customer dissatisfaction in this marketplace.</h1>
+<p>I measured it across 99,441 orders. Two more projects follow on the same Olist dataset: a model that predicts late delivery from what is known at the moment of purchase, and a read of the 99,000 Portuguese reviews customers wrote about it. Each project ships a written analysis, a one-page decision memo, and a statement of what the data cannot support.</p>
 <section id="projects" class="level2">
 <h2 class="anchored" data-anchor-id="projects">Projects</h2>
 <div class="projects">
@@ -371,7 +371,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 Which levers actually move customer satisfaction and repeat purchase?
 </h3>
 <p>
-RFM segmentation, monthly cohort retention, and a decomposition of delivery performance, modelled with dbt on top of PostgreSQL — with data tests that fail the build when the data stops making sense.
+RFM segmentation, monthly cohort retention, and a breakdown of delivery performance, modelled with dbt on top of PostgreSQL. The data tests fail the build when the data stops making sense.
 </p>
 <p class="project-stack">
 PostgreSQL, dbt, SQL, Python, Quarto
@@ -390,7 +390,7 @@ PostgreSQL, dbt, SQL, Python, Quarto
 At the moment of purchase, can we tell which orders will arrive late?
 </h3>
 <p>
-A cost-sensitive classifier that is honest about leakage: only features available when the order is placed are allowed in.
+A cost-sensitive classifier that only uses features available when the order is placed, so it cannot quietly learn the answer it is meant to predict.
 </p>
 <p class="project-stack">
 Python, pandas, scikit-learn
@@ -403,10 +403,10 @@ Python, pandas, scikit-learn
 </div>
 <div class="project-detail">
 <h3 class="anchored">
-What do 99,000 Portuguese-language reviews actually complain about?
+What do 99,000 Portuguese-language reviews complain about?
 </h3>
 <p>
-Sentiment and topic modelling, to test from the customer’s side the claim the first project makes from the delivery side: that the complaints are about logistics, not products.
+Sentiment and topic modelling, to check from the customer’s side what project 01 finds from the delivery side: whether the complaints are about the parcel or the product.
 </p>
 <p class="project-stack">
 Python, NLP, topic modelling
@@ -420,7 +420,7 @@ Python, NLP, topic modelling
 <p>Every project here runs from a clean clone.</p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py setup      <span class="co"># dependencies + database + dataset</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py pipeline   <span class="co"># load, build, charts, tests, render</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p>The dataset comes from a revision-pinned mirror and is checked against expected file sizes on download, so the numbers cannot change quietly underneath you.</p>
+<p>The dataset comes from a revision-pinned mirror and is checked against expected file sizes on download, so a change to the source data fails the build instead of quietly moving a published number.</p>
 
 
 </section>

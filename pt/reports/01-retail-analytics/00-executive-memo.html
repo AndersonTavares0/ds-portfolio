@@ -47,9 +47,9 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-ecff8db827dceed84e341824dcdf69cb.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
-<link href="../../../site_libs/bootstrap/bootstrap-dark-8f9c0ad68bff6a8a98ced6db247d6f93.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
-<link href="../../../site_libs/bootstrap/bootstrap-6382f3152e19ee578cd0ec0c4b99f7e1.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="../../../site_libs/bootstrap/bootstrap-dark-ea0e3f50bb5ffff25d0e6e33147f23dc.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="../../../site_libs/bootstrap/bootstrap-dbd850586f7e21c69e9a6c9f5bcb7da7.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -87,7 +87,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+<body class="nav-fixed memo fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
     const toggleBodyColorMode = (bsSheetEl) => {
       const mode = bsSheetEl.getAttribute("data-mode");
       const bodyEl = window.document.querySelector("body");
@@ -347,9 +347,11 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
+<div class="memo-head">
 <p><strong>Preparado para:</strong> Diretor de Operações<br> <strong>Preparado por:</strong> Anderson Tavares</p>
+</div>
 <blockquote class="blockquote">
-<p>Raciocínio completo, método e limitações: o <a href="../../../pt/reports/01-retail-analytics/01-business-analytics.html">relatório 01 · Análise de Varejo</a>.</p>
+<p>Método, raciocínio completo e limitações estão no <a href="../../../pt/reports/01-retail-analytics/01-business-analytics.html">relatório 01 · Análise de Varejo</a>.</p>
 </blockquote>
 <section id="conclusão-principal" class="level2">
 <h2 class="anchored" data-anchor-id="conclusão-principal">Conclusão principal</h2>
@@ -377,8 +379,8 @@ Figura&nbsp;1: Nota média de avaliação por resultado da entrega, e a parcela 
 <section id="quanto-custa" class="level2">
 <h2 class="anchored" data-anchor-id="quanto-custa">Quanto custa</h2>
 <p>O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados. À taxa de atraso de São Paulo, de 4.49%, cerca de <strong>940 desses não teriam chegado atrasados</strong>.</p>
-<p>Esperava-se que esses 940 pedidos produzissem cerca de <strong>370 avaliações de uma e duas estrelas a menos</strong> — aplicando o comportamento observado de avaliação dos pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo (9.27%).</p>
-<p>Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas coisas ocorrem juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto específico — e, como o conjunto de dados não traz nenhum dado de custo ou margem, nada disso pode ser convertido em lucro.</p>
+<p>Esperava-se que esses 940 pedidos produzissem cerca de <strong>370 avaliações de uma e duas estrelas a menos</strong>, aplicando o comportamento observado de avaliação dos pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo (9.27%).</p>
+<p>Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas coisas ocorrem juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto específico, e, como o conjunto de dados não traz nenhum dado de custo ou margem, nada disso pode ser convertido em lucro.</p>
 </section>
 <section id="recomendação" class="level2">
 <h2 class="anchored" data-anchor-id="recomendação">Recomendação</h2>
@@ -401,14 +403,14 @@ Figura&nbsp;1: Nota média de avaliação por resultado da entrega, e a parcela 
 </div>
 </div>
 <p><em>A pergunta que o conjunto de dados consegue responder, e a conversa que cada resposta implica.</em></p>
-<p><strong>Segundo, reveja a promessa de entrega.</strong> A entrega média chega <strong>11.18 dias antes</strong> da estimativa. Uma promessa superada quase sempre não é gratuita: ela pode estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa de atraso medida enquanto melhoraria a experiência real do cliente, e essa troca deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém escolheu.</p>
+<p><strong>Segundo, reveja a promessa de entrega.</strong> A entrega média chega <strong>11.18 dias antes</strong> da estimativa. Uma promessa superada quase sempre não é gratuita. Ela pode estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa de atraso medida enquanto melhoraria a experiência real do cliente, e essa troca deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém escolheu.</p>
 </section>
 <section id="o-que-mudaria-minha-opinião" class="level2">
 <h2 class="anchored" data-anchor-id="o-que-mudaria-minha-opinião">O que mudaria minha opinião</h2>
 <ul>
-<li><strong>Se o atraso do Rio se concentrasse em poucos vendedores</strong>, a descoberta deixaria de ser regional e passaria a ser um problema de qualidade de vendedores — uma solução diferente e mais barata.</li>
+<li><strong>Se o atraso do Rio se concentrasse em poucos vendedores</strong>, a descoberta deixaria de ser regional e passaria a ser um problema de qualidade de vendedores, uma solução diferente e mais barata.</li>
 <li><strong>Se os clientes com entrega atrasada diferissem sistematicamente</strong> (produtos diferentes, tamanhos de cesta diferentes, expectativas diferentes), a diferença nas avaliações poderia refletir em parte quem eles são, e não o que aconteceu com o pacote. Comparar notas de avaliação dentro da mesma categoria de produto e faixa de valor de pedido testaria isso.</li>
-<li><strong>Se o grupo “nunca entregue” tivesse nota melhor do que o grupo “8–14 dias de atraso” por um motivo específico</strong> — reembolsos, comunicação, expectativas — então o mecanismo que vale a pena melhorar é a gestão de expectativas, e não apenas a velocidade. Os dados mostram esse padrão (1.747 contra 1.672); eu não estabeleci por quê.</li>
+<li><strong>Se o grupo “nunca entregue” tivesse nota melhor do que o grupo “8–14 dias de atraso” por um motivo específico</strong> (reembolsos, comunicação, expectativas), então a gestão de expectativas pode importar tanto quanto a velocidade. Os dados mostram esse padrão (1.747 contra 1.672); eu não estabeleci por quê.</li>
 </ul>
 
 
