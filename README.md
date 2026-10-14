@@ -113,5 +113,6 @@ Data: © Olist, used under its own (non-commercial) license — see
 
 ## Contact
 
-- LinkedIn: `<your-linkedin>`
-- Email: `<your-email>`
+- GitHub: [AndersonTavares0](https://github.com/AndersonTavares0)
+- LinkedIn: [andersonlimatavares](https://www.linkedin.com/in/andersonlimatavares)
+- Email: `anderson.g.tavares@gmail.com`

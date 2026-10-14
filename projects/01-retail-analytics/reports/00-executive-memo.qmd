@@ -13,9 +13,8 @@ format:
 prose. It is the artefact a hiring manager is most likely to actually read.
 :::
 
-**Prepared for:** Head of Operations
-**Prepared by:** `Anderson Tavares`
-**Date:** `<DATE>`
+**Prepared for:** Head of Operations<br>
+**Prepared by:** Anderson Tavares
 
 ## Bottom line
 
