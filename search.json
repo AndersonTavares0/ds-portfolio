@@ -1,63 +1,63 @@
 [
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html",
+    "href": "reports/01-retail-analytics/01-business-analytics.html",
     "title": "01 · Retail Analytics",
     "section": "",
     "text": "This is an analysis of the Olist Brazilian e-commerce dataset — 99,441 orders placed between September 2016 and October 2018 on a marketplace that connects sellers to buyers. Every number below was computed in SQL from the tested models in projects/01-retail-analytics/dbt_project, and the model each table comes from is named underneath it.\nThe question I set out to answer was not “what happened” but which levers actually move customer satisfaction and repeat purchase. Three answers emerged, and one of them was uncomfortable."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#executive-summary",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#executive-summary",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#executive-summary",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#executive-summary",
     "title": "01 · Retail Analytics",
     "section": "Executive summary",
     "text": "Executive summary\n\nShort on time? The one-page decision memo carries the recommendation and the numbers behind it. This report is the reasoning.\n\n\nR$ 16.0M passed through the marketplace in 25 months, across 99,441 orders at an average of R$ 160.99. Freight is 14.1% of everything customers paid.\nThis is an acquisition business, not a retention business. Of 96,096 customers, 96.9% bought exactly once. The repeat rate is 3.1%, and month-one retention is 0.48%. Growth here cannot come from a loyalty programme, because there is almost nothing to be loyal with.\nLate delivery is rare and expensive. 93.2% of deliveries met the promised date. The 6.8% that did not average a review score of 2.27, against 4.29 for on-time orders. Beyond a week late, roughly 80% of customers give one or two stars.\nLateness is geographic and concentrated. Rio de Janeiro is late on 12.1% of deliveries, Bahia 12.2% and Ceará 13.8%, against São Paulo’s 4.5%.\nThe cheapest improvement available is in Rio de Janeiro. It is the second-largest market, and roughly 940 orders a year would not be late if it performed like São Paulo."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#where-the-revenue-comes-from",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#where-the-revenue-comes-from",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#where-the-revenue-comes-from",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#where-the-revenue-comes-from",
     "title": "01 · Retail Analytics",
     "section": "1. Where the revenue comes from",
     "text": "1. Where the revenue comes from\nR$ 16,008,872.12 across 99,441 orders. The shape over time matters more than the total, because two of the twenty-five months are not what they look like.\n\n\n\n\nMonth\nOrders\nCustomers\nRevenue (R\\() | Avg order (R\\))\n\n\n\n\n\n2016-09\n4\n4\n252.24\n84.08\n\n\n2016-10\n324\n321\n59,090.48\n182.38\n\n\n2016-12\n1\n1\n19.62\n19.62\n\n\n2017-01\n800\n765\n138,488.04\n173.11\n\n\n2017-02\n1,780\n1,755\n291,908.01\n163.99\n\n\n2017-03\n2,682\n2,642\n449,863.60\n167.73\n\n\n2017-04\n2,404\n2,372\n417,788.03\n173.79\n\n\n2017-05\n3,700\n3,625\n592,918.82\n160.25\n\n\n2017-06\n3,245\n3,180\n511,276.38\n157.56\n\n\n2017-07\n4,026\n3,947\n592,382.92\n147.14\n\n\n2017-08\n4,331\n4,246\n674,396.32\n155.71\n\n\n2017-09\n4,285\n4,212\n727,762.45\n169.84\n\n\n2017-10\n4,631\n4,561\n779,677.88\n168.36\n\n\n2017-11\n7,544\n7,430\n1,194,882.80\n158.39\n\n\n2017-12\n5,673\n5,603\n878,401.48\n154.84\n\n\n2018-01\n7,269\n7,166\n1,115,004.18\n153.39\n\n\n2018-02\n6,728\n6,569\n992,463.34\n147.51\n\n\n2018-03\n7,211\n7,115\n1,159,652.12\n160.82\n\n\n2018-04\n6,939\n6,882\n1,160,785.48\n167.28\n\n\n2018-05\n6,873\n6,814\n1,153,982.15\n167.90\n\n\n2018-06\n6,167\n6,128\n1,023,880.50\n166.03\n\n\n2018-07\n6,292\n6,230\n1,066,540.75\n169.51\n\n\n2018-08\n6,512\n6,460\n1,022,425.32\n157.01\n\n\n2018-09\n16\n14\n4,439.54\n277.47\n\n\n2018-10\n4\n4\n589.67\n147.42\n\n\n\nTwo months are artefacts, and reading them as a trend would be a mistake.\nThe last two rows are not a collapse. The dataset ends on 17 October 2018, so September and October are partial months — September’s 16 orders represent roughly the first half of the month, and October’s 4 orders represent seventeen days of a month that mostly did not happen. Month-over-month growth read from those rows is meaningless.\n2016 is the opposite problem: it is a launch, not a quiet year. Ten orders across three months, then 324 in October alone. The business effectively starts in 2017, and any year-over-year comparison that begins in 2016 is comparing a company to a company that had not opened yet.\nThe real signal is elsewhere. November 2017 is the largest month in the dataset — 7,544 orders and R$ 1.19M, 63% above October — which is consistent with Black Friday. And 2018 settles into a plateau around 6,300–7,300 orders a month with no strong growth trend, which is a different story from the one the top line suggests.\n\nWhat sells\n\n\n\n\nCategory\nOrders\nItems\nRevenue (R\\() | Avg item (R\\))\n\n\n\n\n\nhealth_beauty\n8,836\n9,670\n1,258,681.34\n130.16\n\n\nwatches_gifts\n5,624\n5,991\n1,205,005.68\n201.14\n\n\nbed_bath_table\n9,417\n11,115\n1,036,988.68\n93.30\n\n\nsports_leisure\n7,720\n8,641\n988,048.97\n114.34\n\n\ncomputers_accessories\n6,689\n7,827\n911,954.32\n116.51\n\n\nfurniture_decor\n6,449\n8,334\n729,762.49\n87.56\n\n\ncool_stuff\n3,632\n3,796\n635,290.85\n167.36\n\n\nhousewares\n5,884\n6,964\n632,248.66\n90.79\n\n\nauto\n3,897\n4,235\n592,720.11\n139.96\n\n\ngarden_tools\n3,518\n4,347\n485,256.46\n111.63\n\n\n\nThere are 74 categories, and the top ten account for 62.4% of item revenue.\nA note on why these numbers do not add up to the total. Category revenue counts item price only, and freight is excluded deliberately: one shipment often carries products from several categories, and freight is charged once for the whole order, so there is no honest way to attribute it. Categories therefore sum to R$ 13.59M against R$ 16.0M of payments, and the gap is freight, not a mistake. Of the R$ 2.25M that freight represents, R$ 162,591.95 belongs to 775 orders that carry a payment but no item line at all.\nThree of the 74 categories have no English translation in the source. They keep their Portuguese names rather than being folded into an “unknown” bucket, which would hide them."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#who-the-customers-are",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#who-the-customers-are",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#who-the-customers-are",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#who-the-customers-are",
     "title": "01 · Retail Analytics",
     "section": "2. Who the customers are",
     "text": "2. Who the customers are\n96,096 people made 99,441 orders.\n\n\n\nOrders placed\nCustomers\nShare\n\n\n\n\n1\n93,099\n96.88%\n\n\n2\n2,745\n2.86%\n\n\n3\n203\n0.21%\n\n\n4\n30\n0.03%\n\n\n5–9\n18\n0.02%\n\n\n17\n1\n0.001%\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nSegment\nCustomers\nShare\nAvg spend (R$)\nAvg days since last order\n\n\n\n\nOthers\n27,746\n28.87%\n142.45\n235\n\n\nAt risk (was valuable)\n22,659\n23.58%\n242.91\n446\n\n\nChampions\n15,880\n16.53%\n310.04\n142\n\n\nLost / low value\n15,427\n16.05%\n55.16\n448\n\n\nNew / promising\n14,384\n14.97%\n54.11\n140\n\n\n\nI am not going to pretend this segmentation is more useful than it is. RFM works by finding customers who buy often — and frequency barely varies here: 96.9% of customers ordered exactly once, so almost everyone ties on F and the ntile split separates that tied mass arbitrarily. What remains is a segmentation on recency and spend, in which “Champions” means bought recently and spent well, not loyal. A retention campaign aimed at that group would be aimed at first-time buyers.\nI kept it anyway, for two reasons. It is the first thing most stakeholders ask for, and its failure here is the finding: you cannot segment your way into a retention strategy for a business where nobody repeats. The f_score column is documented in mart_rfm as close to meaningless for exactly this reason."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#do-they-come-back",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#do-they-come-back",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#do-they-come-back",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#do-they-come-back",
     "title": "01 · Retail Analytics",
     "section": "3. Do they come back?",
     "text": "3. Do they come back?\nNo. 2,997 customers out of 96,096 ever placed a second order — a repeat rate of 3.12%. Repeat customers account for 6,342 of 99,441 orders, or 6.4%.\n\n\n\n\nMonths after first order\nCohort size\nStill active\nRetention\n\n\n\n\n0\n96,096\n96,096\n100.00%\n\n\n1\n95,765\n461\n0.48%\n\n\n2\n95,764\n289\n0.30%\n\n\n3\n77,482\n202\n0.26%\n\n\n4\n76,800\n186\n0.24%\n\n\n5\n64,149\n143\n0.22%\n\n\n6\n57,505\n133\n0.23%\n\n\n9\n37,778\n65\n0.17%\n\n\n12\n22,317\n40\n0.18%\n\n\n18\n5,473\n12\n0.22%\n\n\n\nMonth zero is 100% by construction — it is the month the customer was acquired — and a test asserts that, because an offset-zero that is not 100% would mean the cohort logic is broken rather than that the business changed.\nThe shape is the point. Retention does not decay from a high base; it starts at 0.48% and stays flat at roughly 0.2%. That is not the curve of a business losing customers. It is the curve of a marketplace where each purchase is close to independent of the last.\nTwo honest caveats. The observation window is 25 months, so a customer who would return in year three is simply invisible here — this is a floor, not the true lifetime repeat rate. And customer_unique_id is a derived identifier, so a person who changes their details may appear twice, which inflates the count slightly rather than deflating it.\nWhat this means strategically. If 96.9% of revenue comes from first orders, growth is an acquisition problem, not a retention problem. A loyalty programme would spend money to influence a decision that 96.9% of customers are not currently making. The two levers that do exist are acquiring more customers and raising order value — and raising order value without repeat purchase means raising basket size per visit."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#does-delivery-performance-explain-satisfaction",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#does-delivery-performance-explain-satisfaction",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#does-delivery-performance-explain-satisfaction",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#does-delivery-performance-explain-satisfaction",
     "title": "01 · Retail Analytics",
     "section": "4. Does delivery performance explain satisfaction?",
     "text": "4. Does delivery performance explain satisfaction?\nThis is the strongest relationship in the dataset.\n6,535 of 96,476 deliveries arrived after the promised date — 6.77%.\n\n\n\n\n\n\n\n\n\n\n\n\nOutcome\nOrders\nShare\nAvg review\nReviews ≤2\nAvg delivery (days)\n\n\n\n\nOn time\n89,941\n90.45%\n4.290\n9.27%\n11.00\n\n\nLate: up to 7 days\n3,672\n3.69%\n2.715\n49.36%\n25.73\n\n\nLate: 8 to 14 days\n1,479\n1.49%\n1.672\n80.10%\n35.03\n\n\nLate: more than 14 days\n1,384\n1.39%\n1.723\n78.35%\n54.62\n\n\nNever delivered\n2,965\n2.98%\n1.747\n78.05%\n—\n\n\n\nAggregated, a late order averages 2.27 against 4.29 for an on-time one. That is not a rounding difference; it is the difference between a customer who is broadly satisfied and one who is not.\nOne result in that table surprised me. An order that never arrived scores 1.747, which is better than an order that arrived eight to fourteen days late (1.672). The worst experience in the table is not the missing parcel.\nThe likely explanation is that these are different situations rather than different severities. A cancelled or unavailable order is a closed event — usually refunded, and often communicated. An order that turns up 35 days late is not closed: the customer waited, and then still had to deal with the product. I would want to test that before acting on it, and I have not, so I am reporting it as an observation rather than a finding.\n\nWhere the lateness is\n\n\n\n\n\n\n\n\n\n\n\n\nState\nDeliveries\nLate\nLate rate\nAvg delivery (days)\nAvg review\n\n\n\n\nSP\n40,495\n1,820\n4.49%\n8.76\n4.173\n\n\nRJ\n12,353\n1,495\n12.10%\n15.31\n3.878\n\n\nMG\n11,355\n520\n4.58%\n12.01\n4.135\n\n\nRS\n5,344\n325\n6.08%\n15.30\n4.132\n\n\nPR\n4,923\n199\n4.04%\n11.99\n4.182\n\n\nSC\n3,547\n291\n8.20%\n14.96\n4.074\n\n\nBA\n3,256\n396\n12.16%\n19.34\n3.861\n\n\nCE\n1,279\n176\n13.76%\n21.27\n3.857\n\n\n\nLateness is not random across the country. São Paulo — 42% of all deliveries — is late 4.49% of the time and delivers in 8.76 days. Ceará is late 13.76% of the time and takes 21.27 days. The correlation between distance and lateness is visible in the delivery times themselves.\nRio de Janeiro is the actionable case. It is the second-largest market, 12,353 deliveries, and it is late 2.7× as often as São Paulo. If Rio performed at São Paulo’s rate, roughly 940 of its 1,495 late orders would not be late. Applying the review behaviour of late orders (49.36% scoring ≤2) against on-time orders (9.27%), that is on the order of 370 fewer one- and two-star reviews a year from Rio alone.\nThat estimate is an association, not a causal forecast — I have not shown that making a delivery on time causes the better review, only that the two travel together, and the customers who experience late delivery may differ in other ways. I would treat the number as a reason to investigate, not as a business case for a specific spend."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#what-i-would-do-next",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#what-i-would-do-next",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#what-i-would-do-next",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#what-i-would-do-next",
     "title": "01 · Retail Analytics",
     "section": "What I would do next",
     "text": "What I would do next\n\nInvestigate the Rio de Janeiro corridor first. It is the largest pool of recoverable dissatisfaction in the dataset, it is concentrated enough to study, and the counterfactual is testable: compare Rio orders handled by different sellers or carriers over the same period.\nRe-examine the delivery promise itself. Olist’s estimates are extremely conservative — the average delivery arrives 11.18 days early, and 93.2% of orders are on time. A promise that is beaten almost every time is not necessarily a good one: it may be costing conversions, and a customer who is told “up to 25 days” and receives it in 12 has been given a worse experience than one told “in 12”. Tightening the promise would trade a higher measured late rate for better-calibrated expectations, and that trade is worth quantifying rather than assuming.\nAdd charts. Every result here is currently a table. The shape of the retention curve and the delivery-time distribution are both more persuasive as visuals, and that is the next iteration of this report.\nFeed Project 02. The delivery buckets are the natural target for the late-delivery prediction model, and the constraint is already clear: only features knowable at purchase time may be used."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#limitations",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#limitations",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#limitations",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#limitations",
     "title": "01 · Retail Analytics",
     "section": "Limitations",
     "text": "Limitations\nThese are stated before the numbers are used, not after, because they shape how the numbers should be read:\n\nThe dataset is a snapshot from September 2016 to October 2018, not a live feed. September and October 2018 are partial. Anything described here is one observation of one period, not a trend.\nReviews are self-selected. Only customers who chose to leave a review appear — 98,673 of 99,441 orders. Their satisfaction is not the population’s, and a 4.29 average among respondents is not a 4.29 average among customers.\n“Revenue” means gross merchandise value as recorded in the payment table. There is no cost, margin, refund or return data in this dataset, so no statement about profit is possible — only about money collected.\nRevenue includes orders later cancelled or marked unavailable (1,234 orders, R$ 269,735.11), because a payment was recorded for them. Excluding them would be a different and equally defensible definition; this one is stated so the reader can disagree with it knowingly.\ncustomer_unique_id is derived and imperfect. Repeat-purchase findings are a floor, not a ceiling.\nOrder counts and item counts are different grains. Anything about products or categories comes from fct_order_items; anything about money, delivery or review comes from fct_orders. Mixing them is the most likely way to produce a wrong total.\nWhere delivery timestamps are missing (2,965 orders), those orders are excluded from delivery statistics rather than imputed, and kept as their own bucket where the customer’s experience is the subject."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/01-business-analytics.html#reproducing-this",
-    "href": "projects/01-retail-analytics/reports/01-business-analytics.html#reproducing-this",
+    "objectID": "reports/01-retail-analytics/01-business-analytics.html#reproducing-this",
+    "href": "reports/01-retail-analytics/01-business-analytics.html#reproducing-this",
     "title": "01 · Retail Analytics",
     "section": "Reproducing this",
     "text": "Reproducing this\nEvery table above comes from a model in projects/01-retail-analytics/dbt_project:\n\n\n\nTable\nModel\n\n\n\n\nRevenue by month\nmart_revenue_monthly\n\n\nCategory revenue\nmart_category_revenue\n\n\nCustomer segments\nmart_rfm\n\n\nCohort retention\nmart_cohort_retention\n\n\nDelivery outcomes\nmart_delivery_performance\n\n\nLateness by state\nmart_late_delivery_by_state\n\n\n\nuv run python tasks.py setup      # start the database and fetch the data\nuv run python tasks.py pipeline   # load, build, test, render\ndbt build also runs 70 data tests, including one that asserts month-zero retention is exactly 100% and one that asserts the late flag and the lateness in days cannot disagree. Both exist because they were wrong once."
@@ -126,43 +126,43 @@
     "text": "How this is built\nEvery project in this repository is reproducible from a clean clone:\nuv run python tasks.py setup      # dependencies + database + dataset\nuv run python tasks.py pipeline   # load -&gt; dbt build -&gt; tests -&gt; render\nThe dataset is downloaded from a revision-pinned mirror and validated against expected file sizes, so the numbers in these reports do not quietly change underneath you."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html",
+    "href": "reports/01-retail-analytics/00-executive-memo.html",
     "title": "Decision memo — Delivery performance",
     "section": "",
     "text": "Prepared for: Head of Operations Prepared by: Anderson Tavares"
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html#bottom-line",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html#bottom-line",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html#bottom-line",
+    "href": "reports/01-retail-analytics/00-executive-memo.html#bottom-line",
     "title": "Decision memo — Delivery performance",
     "section": "Bottom line",
     "text": "Bottom line\nLate delivery is rare (6.8% of deliveries) and is the single strongest signal of customer dissatisfaction in this dataset. It is concentrated in a few states rather than spread evenly, which makes it fixable in principle. Rio de Janeiro is the largest, cheapest opportunity."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html#the-finding",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html#the-finding",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html#the-finding",
+    "href": "reports/01-retail-analytics/00-executive-memo.html#the-finding",
     "title": "Decision memo — Delivery performance",
     "section": "The finding",
     "text": "The finding\n\n6,535 of 96,476 deliveries arrived after the promised date — 6.77%.\nA late order averages a review score of 2.27; an on-time order averages 4.29.\nPast a week late, ~80% of customers give one or two stars, against 9.27% of on-time customers.\nLateness is geographic. São Paulo: 4.49%. Rio de Janeiro: 12.10%. Bahia: 12.16%. Ceará: 13.76%."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html#what-it-costs",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html#what-it-costs",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html#what-it-costs",
+    "href": "reports/01-retail-analytics/00-executive-memo.html#what-it-costs",
     "title": "Decision memo — Delivery performance",
     "section": "What it costs",
     "text": "What it costs\nRio de Janeiro recorded 12,353 deliveries and 1,495 late orders. At São Paulo’s 4.49% late rate, roughly 940 of those would not have been late.\nThose 940 orders would have been expected to produce about 370 fewer one- and two-star reviews — applying the observed review behaviour of late orders (49.36% scoring ≤2) against on-time orders (9.27%).\nThis is an association, not a causal estimate. I have not shown that making a delivery on time causes the better review, only that the two occur together. It is a reason to investigate Rio, not a business case for a specific spend — and because the dataset carries no cost or margin data, none of this can be converted into profit."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html#recommendation",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html#recommendation",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html#recommendation",
+    "href": "reports/01-retail-analytics/00-executive-memo.html#recommendation",
     "title": "Decision memo — Delivery performance",
     "section": "Recommendation",
     "text": "Recommendation\nInvestigate the Rio de Janeiro delivery corridor before buying anything. Specifically: compare Rio orders handled by different sellers or carriers over the same period. If lateness in Rio tracks particular sellers rather than the state itself, the fix is a seller conversation; if it tracks carriers, it is a contract conversation. The dataset can answer that question, and the answer determines which conversation to have.\nSecond, revisit the delivery promise. The average delivery arrives 11.18 days before the estimate. A promise that is beaten almost every time is not free: it may be suppressing conversion at checkout. Tightening the window would raise the measured late rate while improving the customer’s actual experience, and that trade should be quantified deliberately rather than left at a default nobody chose."
   },
   {
-    "objectID": "projects/01-retail-analytics/reports/00-executive-memo.html#what-would-change-my-mind",
-    "href": "projects/01-retail-analytics/reports/00-executive-memo.html#what-would-change-my-mind",
+    "objectID": "reports/01-retail-analytics/00-executive-memo.html#what-would-change-my-mind",
+    "href": "reports/01-retail-analytics/00-executive-memo.html#what-would-change-my-mind",
     "title": "Decision memo — Delivery performance",
     "section": "What would change my mind",
     "text": "What would change my mind\n\nIf Rio’s lateness concentrated in a few sellers, the finding stops being regional and becomes a seller-quality problem — a different and cheaper fix.\nIf late-delivery customers differ systematically (different products, different basket sizes, different expectations), the review gap may partly reflect who they are rather than what happened to their parcel. Comparing review scores within the same product category and order value would test this.\nIf the “never delivered” group scores better than the “8–14 days late” group for a specific reason — refunds, communication, expectations — then the mechanism worth improving is expectation management, not only speed. The data shows this pattern (1.747 against 1.672); I have not established why."
