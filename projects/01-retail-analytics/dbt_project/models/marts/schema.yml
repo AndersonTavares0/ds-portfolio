@@ -200,3 +200,41 @@ models:
         data_tests:
           - unique
           - not_null
+
+  - name: mart_late_delivery_by_lane
+    description: >
+      Lateness by delivery lane, meaning where the parcel shipped from and where
+      it went. Adds the origin that mart_late_delivery_by_state leaves out, which
+      is what separates "a few sellers are bad" from "this route is bad".
+      Handling and transit are reported separately because the split says which
+      of the two is late. Restricted to orders whose items came from sellers in
+      one state; an order spanning two states has no single lane.
+    columns:
+      - name: lane
+        description: >
+          The lane, as "ORIGIN -> DESTINATION". This is the table's uniqueness
+          key, since the pair of states is what a lane is.
+        data_tests:
+          - unique
+          - not_null
+      - name: seller_state
+        data_tests:
+          - not_null
+      - name: customer_state
+        data_tests:
+          - not_null
+      - name: is_intrastate
+        data_tests:
+          - not_null
+      - name: delivered_orders
+        data_tests:
+          - not_null
+      - name: late_pct
+        data_tests:
+          - not_null
+      - name: late_pct_if_promise_plus3
+        data_tests:
+          - not_null
+      - name: late_pct_if_promise_plus7
+        data_tests:
+          - not_null

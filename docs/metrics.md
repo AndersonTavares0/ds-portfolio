@@ -106,6 +106,38 @@ must not be able to rank as "perfect" by arithmetic accident. The
 
 ---
 
+## Lane
+
+**Definition.** A lane is a pair of states, `seller_state` to `customer_state`, in
+`mart_late_delivery_by_lane`. `SP -> RJ` means the seller is in São Paulo and the
+customer is in Rio de Janeiro. A lane is not a distance and not a route: the state
+is the finest geography the dataset carries.
+
+**Only orders with one seller state are counted.** An order whose items came from
+sellers in more than one state, 65 of the 96,476 delivered orders, has no single
+lane and is left out. No other delivery figure is affected.
+
+**Handling and transit are split, and that split is the point of the table.**
+`avg_handling_days` is purchase to carrier and `avg_transit_days` is carrier to
+customer. Handling sits near three days on every lane with enough volume, so a
+seller dispatches on schedule whatever the destination; the differences between
+lanes are in transit.
+
+**`late_pct_if_promise_plus3` and `late_pct_if_promise_plus7` are
+counterfactuals.** They report the share of that lane's orders that would have been
+late had the promise been three or seven days longer, computed as the share with
+`days_late >= 4` and `days_late >= 8` respectively, because `is_late` means
+`days_late >= 1`. A longer promise can never make more orders late, which is what
+`assert_promise_counterfactuals_are_monotone` enforces. These numbers move the
+measurement and not the parcel: the promise is set by Olist, so they say what the
+record would show, never what the customer would experience.
+
+**No carrier is identified.** A lane says where the delay is created. It cannot say
+who creates it, and narrowing it to a carrier or a warehouse needs data this
+dataset does not carry.
+
+---
+
 ## Review score
 
 **Definition.** `review_score`, an integer 1–5, left by the customer.

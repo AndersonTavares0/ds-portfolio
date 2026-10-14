@@ -40,7 +40,7 @@ Hugging Face mirror, revision pinned
   -> load_raw.py            every column TEXT, chunked
   -> PostgreSQL             schema: raw
   -> dbt staging            analytics_staging, views: cast and rename
-  -> dbt marts              analytics_marts, tables: 70 data tests
+  -> dbt marts              analytics_marts, tables: 80 data tests
   -> make_charts.py         figures, committed so publishing needs no database
   -> Quarto                 site/
 ```
@@ -72,7 +72,7 @@ The dataset is 126 MB and is not committed. It comes from a Hugging Face mirror 
 
 ```
 projects/01-retail-analytics/   the analysis
-  dbt_project/                  staging models, mart models, 70 data tests, 6 singular tests
+  dbt_project/                  staging models, mart models, 80 data tests, 7 singular tests
   src/retail/                   the data layer: config, dataset manifest, download and load
   scripts/                      download_data.py, load_raw.py, make_charts.py
   tests/                        Python tests, no network and no database
@@ -83,7 +83,7 @@ site/                           what gets published, as its own Quarto project
   theme/                        a light and a dark palette over one set of rules
 docs/                           how and why
   metrics.md                    the definition of every number in the report
-  decisions/                    why the obvious approach was wrong, five times
+  decisions/                    why the obvious approach was wrong, six times
   data-dictionary.md            every column, in every layer
   architecture.md               the map, and where the boundaries are enforced
 data/                           the input, downloaded and never committed
@@ -111,7 +111,7 @@ One folder is one purpose. `site/` is what gets published, `projects/` is the an
 | [Architecture](docs/architecture.md) | the map, and why it is separated this way |
 | [Metrics](docs/metrics.md) | what every number in the report means |
 | [Data dictionary](docs/data-dictionary.md) | every column, in every layer |
-| [Decisions](docs/decisions/) | five decisions, and the evidence that forced each |
+| [Decisions](docs/decisions/) | six decisions, and the evidence that forced each |
 | [Contributing](docs/CONTRIBUTING.md) | the workflow this repository follows |
 
 The decision log is the one to read first. It records what was measured, what the obvious approach was, and why the obvious approach was wrong.
