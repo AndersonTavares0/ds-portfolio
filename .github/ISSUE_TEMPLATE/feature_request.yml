@@ -1,0 +1,61 @@
+name: Feature request
+description: Suggest a new analysis, model or capability.
+title: "[feat] "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        The roadmap is three projects, and this repository is deliberately built
+        depth-first. A suggestion that makes an existing answer more trustworthy
+        is usually more valuable here than one that adds a new answer.
+
+  - type: textarea
+    id: question
+    attributes:
+      label: What question would this answer?
+      description: |
+        Start with the question, not the technique. "Does seller quality explain
+        the delivery variance?" is a question; "add an XGBoost model" is a
+        technique looking for a problem.
+    validations:
+      required: true
+
+  - type: textarea
+    id: value
+    attributes:
+      label: Why does it matter?
+      description: Who would make a different decision because of the answer?
+    validations:
+      required: true
+
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Where do you think it belongs?
+      options:
+        - In Project 01, extending the current analysis
+        - A mart model
+        - Something for Project 02 (prediction)
+        - Something for Project 03 (the review text)
+        - Documentation or tooling
+    validations:
+      required: true
+
+  - type: textarea
+    id: approach
+    attributes:
+      label: Any idea how you would approach it?
+      description: |
+        Optional. Include the baseline you would compare against — a result
+        without a baseline is not yet a result.
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: This is not already on the roadmap in the README.
+          required: true

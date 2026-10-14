@@ -16,11 +16,11 @@ clean-targets: ["target", "dbt_packages"]
 # Layout: `staging` cleans and types the raw tables one-to-one; `marts` is what
 # a business user would query. Staging stays as views (cheap, always fresh),
 # marts are materialised as tables because they are read repeatedly.
-#
-# The `marts` block is added together with the first mart model. Declaring a
-# configuration path before any model uses it makes dbt warn on every run.
 models:
   olist:
     staging:
       +materialized: view
       +schema: staging
+    marts:
+      +materialized: table
+      +schema: marts

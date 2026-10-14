@@ -1,0 +1,202 @@
+# Contracts for the marts layer.
+#
+# A test that cannot fail is decoration. Each test below is here because a real
+# mistake would break it, and the mistakes it guards against are named in the
+# model comments: joining a finer-grained table without aggregating it first,
+# inverting the RFM scores, or keying a dimension on `customer_id`.
+#
+# `accepted_values` over INTEGER columns uses `quote: false` on purpose, so the
+# values render as numbers (`in (1, 2, 3)`). On a TEXT column the same setting
+# renders them as bare identifiers and the test dies with
+# `column "credit_card" does not exist` — which is exactly what happened in the
+# staging layer, where it is now deliberately absent.
+
+version: 2
+
+models:
+  - name: dim_customers
+    description: >
+      One row per real person (`customer_unique_id`). Keyed on the person, not
+      on `customer_id`, which is assigned per order and would make every
+      customer look like a one-time buyer.
+    columns:
+      - name: customer_unique_id
+        description: "The person. Unique by construction of this model."
+        data_tests:
+          - unique
+          - not_null
+      - name: order_count
+        description: "How many orders this person placed across the whole snapshot."
+        data_tests:
+          - not_null
+      - name: first_order_at
+        data_tests:
+          - not_null
+
+  - name: fct_orders
+    description: >
+      One row per order: customer, status, timestamps, delivery performance in
+      days, revenue from the payment table, and the customer's latest review
+      score. The only model in the project at order grain that has already
+      aggregated items, payments and reviews, so it is safe to sum.
+    columns:
+      - name: order_id
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_unique_id
+        description: "Foreign key to dim_customers."
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('dim_customers')
+                field: customer_unique_id
+      - name: order_status
+        data_tests:
+          - not_null
+      - name: review_score
+        description: "Latest review score for the order; NULL when never reviewed (768 orders)."
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: order_value
+        description: >
+          Amount recorded as paid, summed across payment methods. NULL for the
+          single order that has no payment row at all.
+      - name: days_late
+        description: >
+          Whole days between the promised date and the delivery date. Negative is
+          early, 0 is on the promised day, positive is the number of days late.
+          Counted in whole days because every estimate in the source is a date
+          stored at midnight, so the promise had no time of day to be late
+          against.
+      - name: is_late
+        description: "TRUE when delivery happened after the promised date. NULL when never delivered."
+
+  - name: fct_order_items
+    description: >
+      One row per item, at the source's documented grain
+      (`order_id`, `order_item_id`). Totals over this model must be sums of
+      items, never counts of orders.
+    columns:
+      - name: order_item_key
+        description: "Surrogate key, so the composite grain can be tested."
+        data_tests:
+          - unique
+          - not_null
+      - name: order_id
+        data_tests:
+          - not_null
+          - relationships:
+              arguments:
+                to: ref('fct_orders')
+                field: order_id
+      - name: product_id
+        data_tests:
+          - not_null
+      - name: price
+        data_tests:
+          - not_null
+
+  - name: mart_revenue_monthly
+    description: "Revenue, orders and average order value per calendar month."
+    columns:
+      - name: month
+        data_tests:
+          - unique
+          - not_null
+      - name: orders
+        data_tests:
+          - not_null
+
+  - name: mart_category_revenue
+    description: >
+      Item revenue per product category (English name). Built from items, so the
+      categories sum to item revenue and not to order revenue.
+    columns:
+      - name: category
+        data_tests:
+          - unique
+          - not_null
+
+  - name: mart_rfm
+    description: >
+      One row per person with recency in days, frequency, monetary value, R/F/M
+      scores from 1-5 and a segment label. `r_score = 5` is the MOST recent
+      customer. `f_score` barely discriminates here because 96.9% of customers
+      ordered exactly once.
+    columns:
+      - name: customer_unique_id
+        data_tests:
+          - unique
+          - not_null
+      - name: recency_days
+        data_tests:
+          - not_null
+      - name: r_score
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: f_score
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: m_score
+        data_tests:
+          - accepted_values:
+              arguments:
+                values: [1, 2, 3, 4, 5]
+                quote: false
+      - name: rfm_segment
+        data_tests:
+          - not_null
+
+  - name: mart_cohort_retention
+    description: >
+      Monthly cohort retention. One row per cohort month and month offset.
+      Offset 0 is the acquisition month and is always 100%.
+    columns:
+      - name: cohort_offset_key
+        data_tests:
+          - unique
+          - not_null
+      - name: cohort_month
+        data_tests:
+          - not_null
+      - name: month_offset
+        data_tests:
+          - not_null
+      - name: retention_pct
+        data_tests:
+          - not_null
+
+  - name: mart_delivery_performance
+    description: >
+      The headline table: delivery outcome versus review score. Orders are
+      bucketed by lateness against the estimate the customer was shown, with
+      never-delivered orders kept as their own bucket.
+    columns:
+      - name: delivery_bucket
+        data_tests:
+          - unique
+          - not_null
+      - name: orders
+        data_tests:
+          - not_null
+
+  - name: mart_late_delivery_by_state
+    description: >
+      Lateness and delivery time by the customer's state, with the delivered
+      order count exposed so a small state cannot rank as the worst by accident.
+    columns:
+      - name: customer_state
+        data_tests:
+          - unique
+          - not_null
