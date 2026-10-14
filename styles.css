@@ -1,0 +1,42 @@
+/* Minimal custom styling on top of the `cosmo` Bootswatch theme.
+   Keeping this small is deliberate: the reports should look considered, not
+   decorated. */
+
+.quarto-title-block .quarto-title-banner {
+  margin-bottom: 1.5rem;
+}
+
+/* Project cards on the home page ------------------------------------------- */
+.project-card {
+  border: 1px solid var(--bs-border-color);
+  border-radius: 0.5rem;
+  padding: 1rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.project-card h3 {
+  margin-top: 0;
+  font-size: 1.15rem;
+}
+
+.project-card .stack {
+  font-size: 0.85rem;
+  opacity: 0.75;
+  font-variant-numeric: tabular-nums;
+}
+
+.status-published {
+  color: #1a7f37;
+  font-weight: 600;
+}
+
+.status-wip {
+  color: #9a6700;
+  font-weight: 600;
+}
+
+/* Tables in reports are read a lot — make them breathe. */
+table.dataframe,
+.table {
+  font-size: 0.9rem;
+}

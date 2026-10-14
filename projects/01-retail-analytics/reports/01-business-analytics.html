@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.19">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>01 · Retail Analytics – Retail Analytics Portfolio</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../../">
+<script src="../../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../../site_libs/bootstrap/bootstrap-6cda313592c53e8294749172f2faf4fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-chtml.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="../../../styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../../../index.html">
+    <span class="navbar-title">Retail Analytics Portfolio</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Projects</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
+        <li>
+    <a class="dropdown-item" href="../../../projects/01-retail-analytics/reports/01-business-analytics.html">
+ <span class="dropdown-text">01 · Retail Analytics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../../../projects/01-retail-analytics/reports/00-executive-memo.html">
+ <span class="dropdown-text">01 · Decision memo</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="../../../about.html"> 
+<span class="menu-text">About</span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#executive-summary" id="toc-executive-summary" class="nav-link active" data-scroll-target="#executive-summary">Executive summary</a></li>
+  <li><a href="#where-the-revenue-comes-from" id="toc-where-the-revenue-comes-from" class="nav-link" data-scroll-target="#where-the-revenue-comes-from">1. Where the revenue comes from</a>
+  <ul class="collapse">
+  <li><a href="#what-sells" id="toc-what-sells" class="nav-link" data-scroll-target="#what-sells">What sells</a></li>
+  </ul></li>
+  <li><a href="#who-the-customers-are" id="toc-who-the-customers-are" class="nav-link" data-scroll-target="#who-the-customers-are">2. Who the customers are</a></li>
+  <li><a href="#do-they-come-back" id="toc-do-they-come-back" class="nav-link" data-scroll-target="#do-they-come-back">3. Do they come back?</a></li>
+  <li><a href="#does-delivery-performance-explain-satisfaction" id="toc-does-delivery-performance-explain-satisfaction" class="nav-link" data-scroll-target="#does-delivery-performance-explain-satisfaction">4. Does delivery performance explain satisfaction?</a>
+  <ul class="collapse">
+  <li><a href="#where-the-lateness-is" id="toc-where-the-lateness-is" class="nav-link" data-scroll-target="#where-the-lateness-is">Where the lateness is</a></li>
+  </ul></li>
+  <li><a href="#what-i-would-do-next" id="toc-what-i-would-do-next" class="nav-link" data-scroll-target="#what-i-would-do-next">What I would do next</a></li>
+  <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
+  <li><a href="#reproducing-this" id="toc-reproducing-this" class="nav-link" data-scroll-target="#reproducing-this">Reproducing this</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">01 · Retail Analytics</h1>
+<p class="subtitle lead">What this marketplace sells, who buys it, and what a late delivery costs</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">October 2026</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>This is an analysis of the Olist Brazilian e-commerce dataset — 99,441 orders placed between September 2016 and October 2018 on a marketplace that connects sellers to buyers. Every number below was computed in SQL from the tested models in <code>projects/01-retail-analytics/dbt_project</code>, and the model each table comes from is named underneath it.</p>
+<p>The question I set out to answer was not “what happened” but <strong>which levers actually move customer satisfaction and repeat purchase</strong>. Three answers emerged, and one of them was uncomfortable.</p>
+<hr>
+<section id="executive-summary" class="level2">
+<h2 class="anchored" data-anchor-id="executive-summary">Executive summary</h2>
+<blockquote class="blockquote">
+<p><strong>Short on time?</strong> The <a href="../../../projects/01-retail-analytics/reports/00-executive-memo.html">one-page decision memo</a> carries the recommendation and the numbers behind it. This report is the reasoning.</p>
+</blockquote>
+<ul>
+<li><strong>R$ 16.0M passed through the marketplace</strong> in 25 months, across 99,441 orders at an average of <strong>R$ 160.99</strong>. Freight is <strong>14.1%</strong> of everything customers paid.</li>
+<li><strong>This is an acquisition business, not a retention business.</strong> Of 96,096 customers, <strong>96.9% bought exactly once</strong>. The repeat rate is <strong>3.1%</strong>, and month-one retention is <strong>0.48%</strong>. Growth here cannot come from a loyalty programme, because there is almost nothing to be loyal with.</li>
+<li><strong>Late delivery is rare and expensive.</strong> 93.2% of deliveries met the promised date. The 6.8% that did not average a review score of <strong>2.27</strong>, against <strong>4.29</strong> for on-time orders. Beyond a week late, roughly <strong>80% of customers give one or two stars</strong>.</li>
+<li><strong>Lateness is geographic and concentrated.</strong> Rio de Janeiro is late on <strong>12.1%</strong> of deliveries, Bahia <strong>12.2%</strong> and Ceará <strong>13.8%</strong>, against São Paulo’s <strong>4.5%</strong>.</li>
+<li><strong>The cheapest improvement available is in Rio de Janeiro.</strong> It is the second-largest market, and roughly <strong>940 orders a year</strong> would not be late if it performed like São Paulo.</li>
+</ul>
+<hr>
+</section>
+<section id="where-the-revenue-comes-from" class="level2">
+<h2 class="anchored" data-anchor-id="where-the-revenue-comes-from">1. Where the revenue comes from</h2>
+<p>R$ 16,008,872.12 across 99,441 orders. The shape over time matters more than the total, because two of the twenty-five months are not what they look like.</p>
+<!-- Source: mart_revenue_monthly -->
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Month</th>
+<th style="text-align: right;">Orders</th>
+<th style="text-align: right;">Customers</th>
+<th style="text-align: right;">Revenue (R<span class="math inline">\() | Avg order (R\)</span>)</th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>2016-09</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">252.24</td>
+<td style="text-align: right;">84.08</td>
+</tr>
+<tr class="even">
+<td>2016-10</td>
+<td style="text-align: right;">324</td>
+<td style="text-align: right;">321</td>
+<td style="text-align: right;">59,090.48</td>
+<td style="text-align: right;">182.38</td>
+</tr>
+<tr class="odd">
+<td>2016-12</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">19.62</td>
+<td style="text-align: right;">19.62</td>
+</tr>
+<tr class="even">
+<td>2017-01</td>
+<td style="text-align: right;">800</td>
+<td style="text-align: right;">765</td>
+<td style="text-align: right;">138,488.04</td>
+<td style="text-align: right;">173.11</td>
+</tr>
+<tr class="odd">
+<td>2017-02</td>
+<td style="text-align: right;">1,780</td>
+<td style="text-align: right;">1,755</td>
+<td style="text-align: right;">291,908.01</td>
+<td style="text-align: right;">163.99</td>
+</tr>
+<tr class="even">
+<td>2017-03</td>
+<td style="text-align: right;">2,682</td>
+<td style="text-align: right;">2,642</td>
+<td style="text-align: right;">449,863.60</td>
+<td style="text-align: right;">167.73</td>
+</tr>
+<tr class="odd">
+<td>2017-04</td>
+<td style="text-align: right;">2,404</td>
+<td style="text-align: right;">2,372</td>
+<td style="text-align: right;">417,788.03</td>
+<td style="text-align: right;">173.79</td>
+</tr>
+<tr class="even">
+<td>2017-05</td>
+<td style="text-align: right;">3,700</td>
+<td style="text-align: right;">3,625</td>
+<td style="text-align: right;">592,918.82</td>
+<td style="text-align: right;">160.25</td>
+</tr>
+<tr class="odd">
+<td>2017-06</td>
+<td style="text-align: right;">3,245</td>
+<td style="text-align: right;">3,180</td>
+<td style="text-align: right;">511,276.38</td>
+<td style="text-align: right;">157.56</td>
+</tr>
+<tr class="even">
+<td>2017-07</td>
+<td style="text-align: right;">4,026</td>
+<td style="text-align: right;">3,947</td>
+<td style="text-align: right;">592,382.92</td>
+<td style="text-align: right;">147.14</td>
+</tr>
+<tr class="odd">
+<td>2017-08</td>
+<td style="text-align: right;">4,331</td>
+<td style="text-align: right;">4,246</td>
+<td style="text-align: right;">674,396.32</td>
+<td style="text-align: right;">155.71</td>
+</tr>
+<tr class="even">
+<td>2017-09</td>
+<td style="text-align: right;">4,285</td>
+<td style="text-align: right;">4,212</td>
+<td style="text-align: right;">727,762.45</td>
+<td style="text-align: right;">169.84</td>
+</tr>
+<tr class="odd">
+<td>2017-10</td>
+<td style="text-align: right;">4,631</td>
+<td style="text-align: right;">4,561</td>
+<td style="text-align: right;">779,677.88</td>
+<td style="text-align: right;">168.36</td>
+</tr>
+<tr class="even">
+<td><strong>2017-11</strong></td>
+<td style="text-align: right;"><strong>7,544</strong></td>
+<td style="text-align: right;"><strong>7,430</strong></td>
+<td style="text-align: right;"><strong>1,194,882.80</strong></td>
+<td style="text-align: right;">158.39</td>
+</tr>
+<tr class="odd">
+<td>2017-12</td>
+<td style="text-align: right;">5,673</td>
+<td style="text-align: right;">5,603</td>
+<td style="text-align: right;">878,401.48</td>
+<td style="text-align: right;">154.84</td>
+</tr>
+<tr class="even">
+<td>2018-01</td>
+<td style="text-align: right;">7,269</td>
+<td style="text-align: right;">7,166</td>
+<td style="text-align: right;">1,115,004.18</td>
+<td style="text-align: right;">153.39</td>
+</tr>
+<tr class="odd">
+<td>2018-02</td>
+<td style="text-align: right;">6,728</td>
+<td style="text-align: right;">6,569</td>
+<td style="text-align: right;">992,463.34</td>
+<td style="text-align: right;">147.51</td>
+</tr>
+<tr class="even">
+<td>2018-03</td>
+<td style="text-align: right;">7,211</td>
+<td style="text-align: right;">7,115</td>
+<td style="text-align: right;">1,159,652.12</td>
+<td style="text-align: right;">160.82</td>
+</tr>
+<tr class="odd">
+<td>2018-04</td>
+<td style="text-align: right;">6,939</td>
+<td style="text-align: right;">6,882</td>
+<td style="text-align: right;">1,160,785.48</td>
+<td style="text-align: right;">167.28</td>
+</tr>
+<tr class="even">
+<td>2018-05</td>
+<td style="text-align: right;">6,873</td>
+<td style="text-align: right;">6,814</td>
+<td style="text-align: right;">1,153,982.15</td>
+<td style="text-align: right;">167.90</td>
+</tr>
+<tr class="odd">
+<td>2018-06</td>
+<td style="text-align: right;">6,167</td>
+<td style="text-align: right;">6,128</td>
+<td style="text-align: right;">1,023,880.50</td>
+<td style="text-align: right;">166.03</td>
+</tr>
+<tr class="even">
+<td>2018-07</td>
+<td style="text-align: right;">6,292</td>
+<td style="text-align: right;">6,230</td>
+<td style="text-align: right;">1,066,540.75</td>
+<td style="text-align: right;">169.51</td>
+</tr>
+<tr class="odd">
+<td>2018-08</td>
+<td style="text-align: right;">6,512</td>
+<td style="text-align: right;">6,460</td>
+<td style="text-align: right;">1,022,425.32</td>
+<td style="text-align: right;">157.01</td>
+</tr>
+<tr class="even">
+<td>2018-09</td>
+<td style="text-align: right;">16</td>
+<td style="text-align: right;">14</td>
+<td style="text-align: right;">4,439.54</td>
+<td style="text-align: right;">277.47</td>
+</tr>
+<tr class="odd">
+<td>2018-10</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">589.67</td>
+<td style="text-align: right;">147.42</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two months are artefacts, and reading them as a trend would be a mistake.</strong></p>
+<p>The last two rows are not a collapse. The dataset ends on 17 October 2018, so September and October are partial months — September’s 16 orders represent roughly the first half of the month, and October’s 4 orders represent seventeen days of a month that mostly did not happen. Month-over-month growth read from those rows is meaningless.</p>
+<p>2016 is the opposite problem: it is a launch, not a quiet year. Ten orders across three months, then 324 in October alone. The business effectively starts in 2017, and any year-over-year comparison that begins in 2016 is comparing a company to a company that had not opened yet.</p>
+<p>The real signal is elsewhere. <strong>November 2017 is the largest month in the dataset</strong> — 7,544 orders and R$ 1.19M, 63% above October — which is consistent with Black Friday. And 2018 settles into a plateau around 6,300–7,300 orders a month with no strong growth trend, which is a different story from the one the top line suggests.</p>
+<section id="what-sells" class="level3">
+<h3 class="anchored" data-anchor-id="what-sells">What sells</h3>
+<!-- Source: mart_category_revenue -->
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th style="text-align: right;">Orders</th>
+<th style="text-align: right;">Items</th>
+<th style="text-align: right;">Revenue (R<span class="math inline">\() | Avg item (R\)</span>)</th>
+<th style="text-align: right;"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>health_beauty</td>
+<td style="text-align: right;">8,836</td>
+<td style="text-align: right;">9,670</td>
+<td style="text-align: right;">1,258,681.34</td>
+<td style="text-align: right;">130.16</td>
+</tr>
+<tr class="even">
+<td>watches_gifts</td>
+<td style="text-align: right;">5,624</td>
+<td style="text-align: right;">5,991</td>
+<td style="text-align: right;">1,205,005.68</td>
+<td style="text-align: right;">201.14</td>
+</tr>
+<tr class="odd">
+<td>bed_bath_table</td>
+<td style="text-align: right;">9,417</td>
+<td style="text-align: right;">11,115</td>
+<td style="text-align: right;">1,036,988.68</td>
+<td style="text-align: right;">93.30</td>
+</tr>
+<tr class="even">
+<td>sports_leisure</td>
+<td style="text-align: right;">7,720</td>
+<td style="text-align: right;">8,641</td>
+<td style="text-align: right;">988,048.97</td>
+<td style="text-align: right;">114.34</td>
+</tr>
+<tr class="odd">
+<td>computers_accessories</td>
+<td style="text-align: right;">6,689</td>
+<td style="text-align: right;">7,827</td>
+<td style="text-align: right;">911,954.32</td>
+<td style="text-align: right;">116.51</td>
+</tr>
+<tr class="even">
+<td>furniture_decor</td>
+<td style="text-align: right;">6,449</td>
+<td style="text-align: right;">8,334</td>
+<td style="text-align: right;">729,762.49</td>
+<td style="text-align: right;">87.56</td>
+</tr>
+<tr class="odd">
+<td>cool_stuff</td>
+<td style="text-align: right;">3,632</td>
+<td style="text-align: right;">3,796</td>
+<td style="text-align: right;">635,290.85</td>
+<td style="text-align: right;">167.36</td>
+</tr>
+<tr class="even">
+<td>housewares</td>
+<td style="text-align: right;">5,884</td>
+<td style="text-align: right;">6,964</td>
+<td style="text-align: right;">632,248.66</td>
+<td style="text-align: right;">90.79</td>
+</tr>
+<tr class="odd">
+<td>auto</td>
+<td style="text-align: right;">3,897</td>
+<td style="text-align: right;">4,235</td>
+<td style="text-align: right;">592,720.11</td>
+<td style="text-align: right;">139.96</td>
+</tr>
+<tr class="even">
+<td>garden_tools</td>
+<td style="text-align: right;">3,518</td>
+<td style="text-align: right;">4,347</td>
+<td style="text-align: right;">485,256.46</td>
+<td style="text-align: right;">111.63</td>
+</tr>
+</tbody>
+</table>
+<p>There are 74 categories, and the top ten account for <strong>62.4%</strong> of item revenue.</p>
+<p><strong>A note on why these numbers do not add up to the total.</strong> Category revenue counts item price only, and freight is excluded deliberately: one shipment often carries products from several categories, and freight is charged once for the whole order, so there is no honest way to attribute it. Categories therefore sum to R$ 13.59M against R$ 16.0M of payments, and <strong>the gap is freight, not a mistake</strong>. Of the R$ 2.25M that freight represents, R$ 162,591.95 belongs to 775 orders that carry a payment but no item line at all.</p>
+<p>Three of the 74 categories have no English translation in the source. They keep their Portuguese names rather than being folded into an “unknown” bucket, which would hide them.</p>
+<hr>
+</section>
+</section>
+<section id="who-the-customers-are" class="level2">
+<h2 class="anchored" data-anchor-id="who-the-customers-are">2. Who the customers are</h2>
+<p>96,096 people made 99,441 orders.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Orders placed</th>
+<th style="text-align: right;">Customers</th>
+<th style="text-align: right;">Share</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">93,099</td>
+<td style="text-align: right;">96.88%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">2,745</td>
+<td style="text-align: right;">2.86%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">203</td>
+<td style="text-align: right;">0.21%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">30</td>
+<td style="text-align: right;">0.03%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">5–9</td>
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">0.02%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">17</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">0.001%</td>
+</tr>
+</tbody>
+</table>
+<!-- Source: mart_rfm -->
+<table class="caption-top table">
+<colgroup>
+<col style="width: 15%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+<col style="width: 21%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Segment</th>
+<th style="text-align: right;">Customers</th>
+<th style="text-align: right;">Share</th>
+<th style="text-align: right;">Avg spend (R$)</th>
+<th style="text-align: right;">Avg days since last order</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Others</td>
+<td style="text-align: right;">27,746</td>
+<td style="text-align: right;">28.87%</td>
+<td style="text-align: right;">142.45</td>
+<td style="text-align: right;">235</td>
+</tr>
+<tr class="even">
+<td>At risk (was valuable)</td>
+<td style="text-align: right;">22,659</td>
+<td style="text-align: right;">23.58%</td>
+<td style="text-align: right;">242.91</td>
+<td style="text-align: right;">446</td>
+</tr>
+<tr class="odd">
+<td>Champions</td>
+<td style="text-align: right;">15,880</td>
+<td style="text-align: right;">16.53%</td>
+<td style="text-align: right;">310.04</td>
+<td style="text-align: right;">142</td>
+</tr>
+<tr class="even">
+<td>Lost / low value</td>
+<td style="text-align: right;">15,427</td>
+<td style="text-align: right;">16.05%</td>
+<td style="text-align: right;">55.16</td>
+<td style="text-align: right;">448</td>
+</tr>
+<tr class="odd">
+<td>New / promising</td>
+<td style="text-align: right;">14,384</td>
+<td style="text-align: right;">14.97%</td>
+<td style="text-align: right;">54.11</td>
+<td style="text-align: right;">140</td>
+</tr>
+</tbody>
+</table>
+<p><strong>I am not going to pretend this segmentation is more useful than it is.</strong> RFM works by finding customers who buy often — and frequency barely varies here: 96.9% of customers ordered exactly once, so almost everyone ties on F and the <code>ntile</code> split separates that tied mass arbitrarily. What remains is a segmentation on recency and spend, in which “Champions” means <em>bought recently and spent well</em>, not <em>loyal</em>. A retention campaign aimed at that group would be aimed at first-time buyers.</p>
+<p>I kept it anyway, for two reasons. It is the first thing most stakeholders ask for, and its failure here <strong>is</strong> the finding: you cannot segment your way into a retention strategy for a business where nobody repeats. The <code>f_score</code> column is documented in <code>mart_rfm</code> as close to meaningless for exactly this reason.</p>
+<hr>
+</section>
+<section id="do-they-come-back" class="level2">
+<h2 class="anchored" data-anchor-id="do-they-come-back">3. Do they come back?</h2>
+<p><strong>No.</strong> 2,997 customers out of 96,096 ever placed a second order — a repeat rate of <strong>3.12%</strong>. Repeat customers account for 6,342 of 99,441 orders, or <strong>6.4%</strong>.</p>
+<!-- Source: mart_cohort_retention -->
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: right;">Months after first order</th>
+<th style="text-align: right;">Cohort size</th>
+<th style="text-align: right;">Still active</th>
+<th style="text-align: right;">Retention</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">96,096</td>
+<td style="text-align: right;">96,096</td>
+<td style="text-align: right;">100.00%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">95,765</td>
+<td style="text-align: right;">461</td>
+<td style="text-align: right;">0.48%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2</td>
+<td style="text-align: right;">95,764</td>
+<td style="text-align: right;">289</td>
+<td style="text-align: right;">0.30%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: right;">77,482</td>
+<td style="text-align: right;">202</td>
+<td style="text-align: right;">0.26%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: right;">76,800</td>
+<td style="text-align: right;">186</td>
+<td style="text-align: right;">0.24%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">64,149</td>
+<td style="text-align: right;">143</td>
+<td style="text-align: right;">0.22%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: right;">57,505</td>
+<td style="text-align: right;">133</td>
+<td style="text-align: right;">0.23%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">37,778</td>
+<td style="text-align: right;">65</td>
+<td style="text-align: right;">0.17%</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">22,317</td>
+<td style="text-align: right;">40</td>
+<td style="text-align: right;">0.18%</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">18</td>
+<td style="text-align: right;">5,473</td>
+<td style="text-align: right;">12</td>
+<td style="text-align: right;">0.22%</td>
+</tr>
+</tbody>
+</table>
+<p>Month zero is 100% by construction — it is the month the customer was acquired — and a test asserts that, because an offset-zero that is <em>not</em> 100% would mean the cohort logic is broken rather than that the business changed.</p>
+<p>The shape is the point. Retention does not decay from a high base; it <strong>starts</strong> at 0.48% and stays flat at roughly 0.2%. That is not the curve of a business losing customers. It is the curve of a marketplace where each purchase is close to independent of the last.</p>
+<p><strong>Two honest caveats.</strong> The observation window is 25 months, so a customer who would return in year three is simply invisible here — this is a floor, not the true lifetime repeat rate. And <code>customer_unique_id</code> is a derived identifier, so a person who changes their details may appear twice, which inflates the count slightly rather than deflating it.</p>
+<p><strong>What this means strategically.</strong> If 96.9% of revenue comes from first orders, growth is an acquisition problem, not a retention problem. A loyalty programme would spend money to influence a decision that 96.9% of customers are not currently making. The two levers that do exist are acquiring more customers and raising order value — and raising order value without repeat purchase means raising basket size per visit.</p>
+<hr>
+</section>
+<section id="does-delivery-performance-explain-satisfaction" class="level2">
+<h2 class="anchored" data-anchor-id="does-delivery-performance-explain-satisfaction">4. Does delivery performance explain satisfaction?</h2>
+<p>This is the strongest relationship in the dataset.</p>
+<p>6,535 of 96,476 deliveries arrived after the promised date — <strong>6.77%</strong>.</p>
+<!-- Source: mart_delivery_performance -->
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Outcome</th>
+<th style="text-align: right;">Orders</th>
+<th style="text-align: right;">Share</th>
+<th style="text-align: right;">Avg review</th>
+<th style="text-align: right;">Reviews ≤2</th>
+<th style="text-align: right;">Avg delivery (days)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>On time</td>
+<td style="text-align: right;">89,941</td>
+<td style="text-align: right;">90.45%</td>
+<td style="text-align: right;"><strong>4.290</strong></td>
+<td style="text-align: right;">9.27%</td>
+<td style="text-align: right;">11.00</td>
+</tr>
+<tr class="even">
+<td>Late: up to 7 days</td>
+<td style="text-align: right;">3,672</td>
+<td style="text-align: right;">3.69%</td>
+<td style="text-align: right;">2.715</td>
+<td style="text-align: right;">49.36%</td>
+<td style="text-align: right;">25.73</td>
+</tr>
+<tr class="odd">
+<td>Late: 8 to 14 days</td>
+<td style="text-align: right;">1,479</td>
+<td style="text-align: right;">1.49%</td>
+<td style="text-align: right;">1.672</td>
+<td style="text-align: right;">80.10%</td>
+<td style="text-align: right;">35.03</td>
+</tr>
+<tr class="even">
+<td>Late: more than 14 days</td>
+<td style="text-align: right;">1,384</td>
+<td style="text-align: right;">1.39%</td>
+<td style="text-align: right;">1.723</td>
+<td style="text-align: right;">78.35%</td>
+<td style="text-align: right;">54.62</td>
+</tr>
+<tr class="odd">
+<td>Never delivered</td>
+<td style="text-align: right;">2,965</td>
+<td style="text-align: right;">2.98%</td>
+<td style="text-align: right;">1.747</td>
+<td style="text-align: right;">78.05%</td>
+<td style="text-align: right;">—</td>
+</tr>
+</tbody>
+</table>
+<p>Aggregated, a late order averages <strong>2.27</strong> against <strong>4.29</strong> for an on-time one. That is not a rounding difference; it is the difference between a customer who is broadly satisfied and one who is not.</p>
+<p><strong>One result in that table surprised me.</strong> An order that never arrived scores <strong>1.747</strong>, which is <em>better</em> than an order that arrived eight to fourteen days late (<strong>1.672</strong>). The worst experience in the table is not the missing parcel.</p>
+<p>The likely explanation is that these are different situations rather than different severities. A cancelled or unavailable order is a <strong>closed</strong> event — usually refunded, and often communicated. An order that turns up 35 days late is not closed: the customer waited, and then still had to deal with the product. I would want to test that before acting on it, and I have not, so I am reporting it as an observation rather than a finding.</p>
+<section id="where-the-lateness-is" class="level3">
+<h3 class="anchored" data-anchor-id="where-the-lateness-is">Where the lateness is</h3>
+<!-- Source: mart_late_delivery_by_state -->
+<table class="caption-top table">
+<colgroup>
+<col style="width: 13%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+<col style="width: 17%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>State</th>
+<th style="text-align: right;">Deliveries</th>
+<th style="text-align: right;">Late</th>
+<th style="text-align: right;">Late rate</th>
+<th style="text-align: right;">Avg delivery (days)</th>
+<th style="text-align: right;">Avg review</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>SP</td>
+<td style="text-align: right;">40,495</td>
+<td style="text-align: right;">1,820</td>
+<td style="text-align: right;"><strong>4.49%</strong></td>
+<td style="text-align: right;">8.76</td>
+<td style="text-align: right;">4.173</td>
+</tr>
+<tr class="even">
+<td>RJ</td>
+<td style="text-align: right;">12,353</td>
+<td style="text-align: right;">1,495</td>
+<td style="text-align: right;"><strong>12.10%</strong></td>
+<td style="text-align: right;">15.31</td>
+<td style="text-align: right;">3.878</td>
+</tr>
+<tr class="odd">
+<td>MG</td>
+<td style="text-align: right;">11,355</td>
+<td style="text-align: right;">520</td>
+<td style="text-align: right;">4.58%</td>
+<td style="text-align: right;">12.01</td>
+<td style="text-align: right;">4.135</td>
+</tr>
+<tr class="even">
+<td>RS</td>
+<td style="text-align: right;">5,344</td>
+<td style="text-align: right;">325</td>
+<td style="text-align: right;">6.08%</td>
+<td style="text-align: right;">15.30</td>
+<td style="text-align: right;">4.132</td>
+</tr>
+<tr class="odd">
+<td>PR</td>
+<td style="text-align: right;">4,923</td>
+<td style="text-align: right;">199</td>
+<td style="text-align: right;">4.04%</td>
+<td style="text-align: right;">11.99</td>
+<td style="text-align: right;">4.182</td>
+</tr>
+<tr class="even">
+<td>SC</td>
+<td style="text-align: right;">3,547</td>
+<td style="text-align: right;">291</td>
+<td style="text-align: right;">8.20%</td>
+<td style="text-align: right;">14.96</td>
+<td style="text-align: right;">4.074</td>
+</tr>
+<tr class="odd">
+<td>BA</td>
+<td style="text-align: right;">3,256</td>
+<td style="text-align: right;">396</td>
+<td style="text-align: right;"><strong>12.16%</strong></td>
+<td style="text-align: right;">19.34</td>
+<td style="text-align: right;">3.861</td>
+</tr>
+<tr class="even">
+<td>CE</td>
+<td style="text-align: right;">1,279</td>
+<td style="text-align: right;">176</td>
+<td style="text-align: right;"><strong>13.76%</strong></td>
+<td style="text-align: right;">21.27</td>
+<td style="text-align: right;">3.857</td>
+</tr>
+</tbody>
+</table>
+<p>Lateness is not random across the country. São Paulo — 42% of all deliveries — is late 4.49% of the time and delivers in 8.76 days. Ceará is late 13.76% of the time and takes 21.27 days. The correlation between distance and lateness is visible in the delivery times themselves.</p>
+<p><strong>Rio de Janeiro is the actionable case.</strong> It is the second-largest market, 12,353 deliveries, and it is late <strong>2.7×</strong> as often as São Paulo. If Rio performed at São Paulo’s rate, roughly <strong>940 of its 1,495 late orders would not be late</strong>. Applying the review behaviour of late orders (49.36% scoring ≤2) against on-time orders (9.27%), that is on the order of <strong>370 fewer one- and two-star reviews a year</strong> from Rio alone.</p>
+<p>That estimate is an association, not a causal forecast — I have not shown that making a delivery on time <em>causes</em> the better review, only that the two travel together, and the customers who experience late delivery may differ in other ways. I would treat the number as a reason to investigate, not as a business case for a specific spend.</p>
+<hr>
+</section>
+</section>
+<section id="what-i-would-do-next" class="level2">
+<h2 class="anchored" data-anchor-id="what-i-would-do-next">What I would do next</h2>
+<ol type="1">
+<li><strong>Investigate the Rio de Janeiro corridor first.</strong> It is the largest pool of recoverable dissatisfaction in the dataset, it is concentrated enough to study, and the counterfactual is testable: compare Rio orders handled by different sellers or carriers over the same period.</li>
+<li><strong>Re-examine the delivery promise itself.</strong> Olist’s estimates are extremely conservative — the average delivery arrives <strong>11.18 days early</strong>, and 93.2% of orders are on time. A promise that is beaten almost every time is not necessarily a good one: it may be costing conversions, and a customer who is told “up to 25 days” and receives it in 12 has been given a worse experience than one told “in 12”. Tightening the promise would trade a higher measured late rate for better-calibrated expectations, and that trade is worth quantifying rather than assuming.</li>
+<li><strong>Add charts.</strong> Every result here is currently a table. The shape of the retention curve and the delivery-time distribution are both more persuasive as visuals, and that is the next iteration of this report.</li>
+<li><strong>Feed Project 02.</strong> The delivery buckets are the natural target for the late-delivery prediction model, and the constraint is already clear: only features knowable at purchase time may be used.</li>
+</ol>
+<hr>
+</section>
+<section id="limitations" class="level2">
+<h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<p>These are stated before the numbers are used, not after, because they shape how the numbers should be read:</p>
+<ul>
+<li><strong>The dataset is a snapshot from September 2016 to October 2018, not a live feed.</strong> September and October 2018 are partial. Anything described here is one observation of one period, not a trend.</li>
+<li><strong>Reviews are self-selected.</strong> Only customers who chose to leave a review appear — 98,673 of 99,441 orders. Their satisfaction is not the population’s, and a 4.29 average among respondents is not a 4.29 average among customers.</li>
+<li><strong>“Revenue” means gross merchandise value</strong> as recorded in the payment table. There is no cost, margin, refund or return data in this dataset, so no statement about profit is possible — only about money collected.</li>
+<li><strong>Revenue includes orders later cancelled or marked unavailable</strong> (1,234 orders, R$ 269,735.11), because a payment was recorded for them. Excluding them would be a different and equally defensible definition; this one is stated so the reader can disagree with it knowingly.</li>
+<li><strong><code>customer_unique_id</code> is derived and imperfect.</strong> Repeat-purchase findings are a floor, not a ceiling.</li>
+<li><strong>Order counts and item counts are different grains.</strong> Anything about products or categories comes from <code>fct_order_items</code>; anything about money, delivery or review comes from <code>fct_orders</code>. Mixing them is the most likely way to produce a wrong total.</li>
+<li><strong>Where delivery timestamps are missing</strong> (2,965 orders), those orders are excluded from delivery statistics rather than imputed, and kept as their own bucket where the customer’s experience is the subject.</li>
+</ul>
+<hr>
+</section>
+<section id="reproducing-this" class="level2">
+<h2 class="anchored" data-anchor-id="reproducing-this">Reproducing this</h2>
+<p>Every table above comes from a model in <code>projects/01-retail-analytics/dbt_project</code>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Model</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Revenue by month</td>
+<td><code>mart_revenue_monthly</code></td>
+</tr>
+<tr class="even">
+<td>Category revenue</td>
+<td><code>mart_category_revenue</code></td>
+</tr>
+<tr class="odd">
+<td>Customer segments</td>
+<td><code>mart_rfm</code></td>
+</tr>
+<tr class="even">
+<td>Cohort retention</td>
+<td><code>mart_cohort_retention</code></td>
+</tr>
+<tr class="odd">
+<td>Delivery outcomes</td>
+<td><code>mart_delivery_performance</code></td>
+</tr>
+<tr class="even">
+<td>Lateness by state</td>
+<td><code>mart_late_delivery_by_state</code></td>
+</tr>
+</tbody>
+</table>
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py setup      <span class="co"># start the database and fetch the data</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py pipeline   <span class="co"># load, build, test, render</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<p><code>dbt build</code> also runs 70 data tests, including one that asserts month-zero retention is exactly 100% and one that asserts the late flag and the lateness in days cannot disagree. Both exist because they were wrong once.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/AndersonTavares0\.github\.io\/ds-portfolio\/");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Built with Quarto · Data © Olist</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://github.com/AndersonTavares0/ds-portfolio">
+<p>GitHub</p>
+</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
