@@ -23,7 +23,7 @@ ds-portfolio/
 │   ├── _quarto.yml               shared configuration
 │   ├── _quarto-en.yml            the English profile: language, navigation, render list
 │   ├── _quarto-pt.yml            the Portuguese profile
-│   ├── theme.scss, theme-dark.scss, _theme-rules.scss
+│   ├── theme/  theme.scss, theme-dark.scss, _theme-rules.scss
 │   └── index.qmd, about.qmd
 ├── AGENTS.md                     the rules an agent (or a person) works to here
 ├── README.md                     portfolio landing page

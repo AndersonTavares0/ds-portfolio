@@ -43,10 +43,10 @@ format:
     theme:
       light:
         - cosmo
-        - theme.scss
+        - theme/theme.scss
       dark:
         - darkly
-        - theme-dark.scss
+        - theme/theme-dark.scss
     # Quarto's light/dark pair defaults to light and only changes when the reader
     # clicks the toggle. This makes the first visit follow the operating system
     # instead, and a reader who then chooses explicitly keeps that choice.

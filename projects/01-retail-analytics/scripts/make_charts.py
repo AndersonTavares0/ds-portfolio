@@ -39,7 +39,7 @@ FIGURES_DIR = REPO_ROOT / "site" / "reports" / "01-retail-analytics" / "figures"
 LANGS = ("en", "pt")
 
 # One place for the palette, so every chart in the report looks like it belongs to
-# the same document. These are the light values from `site/theme.scss`; the dark
+# the same document. These are the light values from `site/theme/theme.scss`; the dark
 # bundle is only used for the page, and the figures keep their white ground.
 PRIMARY = "#1f6fb2"
 ACCENT = "#d97706"
