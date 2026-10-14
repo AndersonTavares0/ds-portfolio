@@ -396,6 +396,8 @@ window.Quarto = {
   <li><a href="#does-delivery-performance-explain-satisfaction" id="toc-does-delivery-performance-explain-satisfaction" class="nav-link" data-scroll-target="#does-delivery-performance-explain-satisfaction">4. Does delivery performance explain satisfaction?</a>
   <ul class="collapse">
   <li><a href="#where-the-lateness-is" id="toc-where-the-lateness-is" class="nav-link" data-scroll-target="#where-the-lateness-is">Where the lateness is</a></li>
+  <li><a href="#where-the-delay-happens" id="toc-where-the-delay-happens" class="nav-link" data-scroll-target="#where-the-delay-happens">Where the delay happens</a></li>
+  <li><a href="#the-promise-on-that-lane-is-the-thinnest" id="toc-the-promise-on-that-lane-is-the-thinnest" class="nav-link" data-scroll-target="#the-promise-on-that-lane-is-the-thinnest">The promise on that lane is the thinnest</a></li>
   </ul></li>
   <li><a href="#what-i-would-do-next" id="toc-what-i-would-do-next" class="nav-link" data-scroll-target="#what-i-would-do-next">What I would do next</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a></li>
@@ -449,8 +451,8 @@ window.Quarto = {
 <li><strong>R$ 16.0M passed through the marketplace</strong> in 25 months, across 99,441 orders at an average of <strong>R$ 160.99</strong>. Freight is <strong>14.1%</strong> of everything customers paid.</li>
 <li><strong>This is an acquisition business, not a retention business.</strong> Of 96,096 customers, <strong>96.9% bought exactly once</strong>. The repeat rate is <strong>3.1%</strong>, and month-one retention is <strong>0.48%</strong>. Growth here cannot come from a loyalty programme, because there is almost nothing to be loyal with.</li>
 <li><strong>Late delivery is rare and expensive.</strong> 93.2% of deliveries met the promised date. The 6.8% that did not average a review score of <strong>2.27</strong>, against <strong>4.29</strong> for on-time orders. Beyond a week late, roughly <strong>80% of customers give one or two stars</strong>.</li>
-<li><strong>Lateness is geographic and concentrated.</strong> Rio de Janeiro is late on <strong>12.1%</strong> of deliveries, Bahia <strong>12.2%</strong> and Ceará <strong>13.8%</strong>, against São Paulo’s <strong>4.5%</strong>.</li>
-<li><strong>The cheapest improvement available is in Rio de Janeiro.</strong> It is the second-largest market, and roughly <strong>940 of its orders a year</strong> would arrive on time if it were as punctual as São Paulo.</li>
+<li><strong>The delay is a property of one lane, not of the places or the sellers.</strong> Rio de Janeiro is late on <strong>12.1%</strong> of deliveries and Ceará on <strong>13.8%</strong>, against São Paulo’s <strong>4.5%</strong>. But a Rio seller delivering inside Rio matches São Paulo (<strong>4.7%</strong> against <strong>4.6%</strong>), and 53 of the 65 sellers who ship to both states are worse into Rio. The delay is created in the crossing between São Paulo and Rio, which carries two thirds of Rio’s orders at <strong>14.2%</strong> late.</li>
+<li><strong>That lane carries the thinnest promise in the dataset.</strong> São Paulo to Rio is promised 27 days against 30.3 for the farther São Paulo to Rio Grande do Sul lane, and its tail is heavier. Three more days on the promise would report <strong>11.6%</strong> instead of <strong>14.2%</strong>, and seven more would report <strong>8.4%</strong>. The average parcel on the lane arrives <strong>10.9 days early</strong>, so the promise is not what makes deliveries late, it is why so much of the lateness is recorded.</li>
 </ul>
 <hr>
 </section>
@@ -1164,15 +1166,70 @@ Figure&nbsp;7: Late delivery by state. Each bar is labelled with its number of d
 </div>
 <p>Lateness is not random across the country. São Paulo, which is 42% of all deliveries, is late 4.49% of the time and delivers in 8.76 days. Ceará is late 13.76% of the time and takes 21.27 days. Across states, longer delivery times and higher lateness go together.</p>
 <p><strong>Rio de Janeiro is the actionable case.</strong> It is the second-largest market, 12,353 deliveries, and it is late <strong>2.7×</strong> as often as São Paulo. If Rio performed at São Paulo’s rate, roughly <strong>940 of its 1,495 late orders would not be late</strong>. Applying the review behaviour of late orders (49.36% scoring ≤2) against on-time orders (9.27%), that is on the order of <strong>370 fewer one- and two-star reviews a year</strong> from Rio alone.</p>
-<p>That estimate is an association, not a causal forecast. I have not shown that making a delivery on time <em>causes</em> the better review, only that the two travel together, and the customers who experience late delivery may differ in other ways. I would treat the number as a reason to investigate, not as a business case for a specific spend.</p>
+<p>That estimate is an association, not a causal forecast. I have not shown that making a delivery on time <em>causes</em> the better review, only that the two travel together, and the customers who experience late delivery may differ in other ways. So the next question is not how much the 940 orders are worth, it is where the delay is created, and that is answerable with the data already loaded.</p>
+</section>
+<section id="where-the-delay-happens" class="level3">
+<h3 class="anchored" data-anchor-id="where-the-delay-happens">Where the delay happens</h3>
+<p>The obvious explanation is that some sellers are bad and others are good, and the data does not support it. Splitting Rio’s deliveries into the time before the parcel reaches the carrier and the time after it:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th></th>
+<th style="text-align: right;">deliveries</th>
+<th style="text-align: right;">days to carrier</th>
+<th style="text-align: right;">days in transit</th>
+<th style="text-align: right;">days total</th>
+<th style="text-align: right;">late</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rio de Janeiro</td>
+<td style="text-align: right;">12,353</td>
+<td style="text-align: right;">3.31</td>
+<td style="text-align: right;"><strong>12.00</strong></td>
+<td style="text-align: right;">15.31</td>
+<td style="text-align: right;">12.10%</td>
+</tr>
+<tr class="even">
+<td>São Paulo</td>
+<td style="text-align: right;">40,495</td>
+<td style="text-align: right;">3.16</td>
+<td style="text-align: right;"><strong>5.60</strong></td>
+<td style="text-align: right;">8.76</td>
+<td style="text-align: right;">4.49%</td>
+</tr>
+</tbody>
+</table>
+<p>Sellers in both states dispatch at the same speed, within a fifth of a day, and the entire gap is in transit.</p>
+<p>That holds when the same seller ships to both states. Of the 65 sellers with at least 30 deliveries to Rio <em>and</em> at least 30 to São Paulo, <strong>53 are worse into Rio</strong>, and the mean late rate is <strong>12.45%</strong> there against <strong>4.80%</strong> into São Paulo. A bad seller would be bad in both directions.</p>
+<p>The reverse test settles the destination. A seller in Rio delivering in Rio is late <strong>4.67%</strong> of the time, which is what a São Paulo seller achieves inside São Paulo (<strong>4.63%</strong>). Rio is not a hard place to deliver to. A São Paulo seller sending the same kind of parcel to Rio is late <strong>14.07%</strong> of the time.</p>
+<div id="fig-lane" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="figures/lane-late.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;8: Late delivery by lane. Blue bars are lanes where the seller and the customer are in the same state.
+</figcaption>
+</figure>
+</div>
+<p>Two thirds of Rio’s deliveries, 8,129 of 12,353, ship from São Paulo sellers, and that lane is the worst in the table at <strong>14.17%</strong>. Every lane that stays inside one state sits at 4.8% or below. The difficulty is created in the crossing.</p>
+</section>
+<section id="the-promise-on-that-lane-is-the-thinnest" class="level3">
+<h3 class="anchored" data-anchor-id="the-promise-on-that-lane-is-the-thinnest">The promise on that lane is the thinnest</h3>
+<p>São Paulo to Rio is not the longest route in the dataset. It is the route with the least room for error. The median delivery takes 12.8 days, almost the same as São Paulo to Rio Grande do Sul at 13.9 days, but its ninetieth percentile is 31.0 days against 27.1, and its promise is <strong>27.0 days against 30.3</strong>. A heavier tail and a shorter deadline on the same lane.</p>
+<p>Giving that lane three more days would move it from 14.17% late to <strong>11.60%</strong>; seven more days would move it to <strong>8.37%</strong>. São Paulo to Rio Grande do Sul, which is farther, reports 6.65%.</p>
+<p>The average São Paulo to Rio parcel arrives <strong>10.9 days early</strong> and 14% are still late. Most deliveries on the lane have days to spare and a minority has none, and 379 orders arrive more than two weeks past the promise.</p>
+<p>One caveat decides how far this reaches. The promise is set by Olist, so widening it changes the measurement, not the delivery. Whether it also changes what the customer thinks cannot be settled with this data, because the promise and the actual delivery time are correlated by construction.</p>
 <hr>
 </section>
 </section>
 <section id="what-i-would-do-next" class="level2">
 <h2 class="anchored" data-anchor-id="what-i-would-do-next">What I would do next</h2>
 <ol type="1">
-<li><strong>Investigate the Rio de Janeiro corridor first.</strong> It is the largest pool of recoverable dissatisfaction in the dataset, it is concentrated enough to study, and the counterfactual is testable: compare Rio orders handled by different sellers or carriers over the same period.</li>
-<li><strong>Re-examine the delivery promise itself.</strong> Olist’s estimates are extremely conservative. The average delivery arrives <strong>11.18 days early</strong>, and 93.2% of orders are on time. A promise that is beaten almost every time is not necessarily a good one: it may be costing conversions, and a customer who is told “up to 25 days” and receives it in 12 has been given a worse experience than one told “in 12”. Tightening the promise would trade a higher measured late rate for better-calibrated expectations, and that trade is worth quantifying rather than assuming.</li>
+<li><strong>Fix the São Paulo to Rio lane, not the sellers on it.</strong> Sellers dispatch in about three days on every lane, Rio’s own sellers deliver on time inside Rio, and 53 of the 65 sellers who ship to both states are worse into Rio. The delay is created in the crossing: 8,129 deliveries, 14.17% late, and 379 of them more than two weeks late. The operational question is what happens during the 9 days of median transit and in the 31 days at the ninetieth percentile.</li>
+<li><strong>Then recalibrate the promise, lane by lane.</strong> The promise is uniform where the service is not. São Paulo to Rio gets 27 days against 30.3 for the farther São Paulo to Rio Grande do Sul lane, and three more days would report 11.60% instead of 14.17%. Since the average parcel arrives 11.18 days early and 93.2% are on time, a wider promise costs little operationally. What it changes for the customer cannot be measured here, because the promise and the delivery time move together, so I would run it as a deliberate experiment rather than infer it.</li>
 <li><strong>Test the missing-parcel result.</strong> An order that never arrived scored better than one that arrived two weeks late. That is either a real difference in how the two failures are handled or an artefact of who chooses to review at all, and it is testable with the data already loaded. Until it is tested I am reporting it as an observation, not a finding.</li>
 <li><strong>Feed Project 02.</strong> The delivery buckets are the natural target for the late-delivery prediction model, and the constraint is already clear: only features knowable at purchase time may be used.</li>
 </ol>
@@ -1188,6 +1245,9 @@ Figure&nbsp;7: Late delivery by state. Each bar is labelled with its number of d
 <li><strong>Revenue includes orders later cancelled or marked unavailable</strong> (1,234 orders, R$ 269,735.11 — the two amber bars in <a href="#fig-status" class="quarto-xref">Figure&nbsp;3</a>), because a payment was recorded for them. Excluding them would be a different and equally defensible definition; this one is stated so the reader can disagree with it knowingly.</li>
 <li><strong><code>customer_unique_id</code> is derived and imperfect.</strong> Repeat-purchase findings are a floor, not a ceiling.</li>
 <li><strong>Order counts and item counts are different grains.</strong> Anything about products or categories comes from <code>fct_order_items</code>; anything about money, delivery or review comes from <code>fct_orders</code>. Mixing them is the most likely way to produce a wrong total.</li>
+<li><strong>A lane is a pair of states, not a measured route.</strong> Seller and customer states are the finest geography the dataset carries, so “São Paulo to Rio” means a seller in one state and a customer in the other, not a distance or a particular road.</li>
+<li><strong>The dataset has no carrier identifier.</strong> The lane finding says where the delay is created. It cannot say who creates it, so narrowing it to a carrier or a warehouse needs the operational side rather than another query.</li>
+<li><strong>Lane figures cover 96,411 of the 96,476 delivered orders.</strong> An order whose items came from sellers in more than one state, 65 orders, has no single lane and is left out of the lane table. No other delivery figure is affected.</li>
 <li><strong>Where delivery timestamps are missing</strong> (2,965 orders), those orders are excluded from delivery statistics rather than imputed, and kept as their own bucket where the customer’s experience is the subject.</li>
 </ul>
 <hr>
@@ -1272,7 +1332,7 @@ Figure&nbsp;7: Late delivery by state. Each bar is labelled with its number of d
   CSV --&gt; L["load_raw.py&lt;br/&gt;every column TEXT"]
   L --&gt; DB[("PostgreSQL&lt;br/&gt;schema: raw")]
   DB --&gt; S["dbt staging&lt;br/&gt;views — cast and rename"]
-  S --&gt; F["dbt marts&lt;br/&gt;tables — 70 data tests"]
+  S --&gt; F["dbt marts&lt;br/&gt;tables — 80 data tests"]
   F --&gt; C["make_charts.py"]
   C --&gt; FIG["PNG figures"]
   F --&gt; REP["Quarto report"]
@@ -1286,7 +1346,7 @@ Figure&nbsp;7: Late delivery by state. Each bar is labelled with its number of d
 <p><em>Only the three steps through <code>dbt marts</code> need a database. The report and the figures are committed, so the website builds without one.</em></p>
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py setup      <span class="co"># start the database and fetch the data</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">uv</span> run python tasks.py pipeline   <span class="co"># load, build, charts, test, render</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
-<p><code>dbt build</code> also runs 70 data tests, including one that asserts month-zero retention is exactly 100% and one that asserts the late flag and the lateness in days cannot disagree. Both exist because they were wrong once.</p>
+<p><code>dbt build</code> also runs 80 data tests, including one that asserts month-zero retention is exactly 100%, one that asserts the late flag and the lateness in days cannot disagree, and one that asserts a longer promise can never make more orders late. The first two exist because they were wrong once.</p>
 
 
 </section>

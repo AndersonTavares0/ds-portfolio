@@ -355,7 +355,7 @@ ul.task-list li input[type="checkbox"] {
 </blockquote>
 <section id="conclusão-principal" class="level2">
 <h2 class="anchored" data-anchor-id="conclusão-principal">Conclusão principal</h2>
-<p>A entrega atrasada é rara (6.8% das entregas) e é o sinal mais forte de insatisfação do cliente neste conjunto de dados. Ela se concentra em alguns estados em vez de se distribuir de forma uniforme, o que a torna corrigível em princípio. <strong>O Rio de Janeiro é a maior e mais barata oportunidade.</strong></p>
+<p>A entrega atrasada é rara (6.8% das entregas) e é o sinal mais forte de insatisfação do cliente neste conjunto de dados. Ela não se distribui de forma uniforme, e não são os vendedores. <strong>O atraso é criado na travessia entre São Paulo e o Rio, que carrega dois terços dos pedidos do Rio e atrasa 14.2% das vezes.</strong></p>
 </section>
 <section id="a-descoberta" class="level2">
 <h2 class="anchored" data-anchor-id="a-descoberta">A descoberta</h2>
@@ -363,52 +363,64 @@ ul.task-list li input[type="checkbox"] {
 <li><strong>6,535 de 96,476 entregas chegaram depois da data prometida — 6.77%.</strong></li>
 <li>Um pedido atrasado tem nota média de avaliação de <strong>2.27</strong>; um pedido no prazo tem média de <strong>4.29</strong>.</li>
 <li>Depois de uma semana de atraso, <strong>~80% dos clientes dão uma ou duas estrelas</strong>, contra 9.27% dos clientes com entrega no prazo.</li>
-<li>O atraso é geográfico. São Paulo: <strong>4.49%</strong>. Rio de Janeiro: <strong>12.10%</strong>. Bahia: <strong>12.16%</strong>. Ceará: <strong>13.76%</strong>.</li>
+<li>São Paulo atrasa em <strong>4.49%</strong> das entregas, o Rio de Janeiro em <strong>12.10%</strong>, a Bahia em <strong>12.16%</strong> e o Ceará em <strong>13.76%</strong>.</li>
+<li><strong>Os vendedores não são a causa.</strong> Os vendedores despacham em cerca de três dias em todos os corredores. Um vendedor do Rio entregando dentro do Rio atrasa <strong>4.67%</strong> das vezes, igualando os <strong>4.63%</strong> de São Paulo, e 53 dos 65 vendedores que enviam para os dois estados vão pior para o Rio.</li>
+<li><strong>O corredor é a causa.</strong> De São Paulo ao Rio carrega <strong>8,129</strong> das 12,353 entregas do Rio e atrasa <strong>14.17%</strong>. Todo corredor que fica dentro de um único estado fica em 4.8% ou menos.</li>
 </ul>
+<div id="fig-lane" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-lane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="../../../reports/01-retail-analytics/figures/pt/lane-late.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-lane-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;1: Atraso de entrega por corredor. As barras azuis são corredores em que o vendedor e o cliente estão no mesmo estado.
+</figcaption>
+</figure>
+</div>
 <div id="fig-delivery" class="quarto-float quarto-figure quarto-figure-center anchored" data-fig-align="center">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-delivery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <img src="../../../reports/01-retail-analytics/figures/pt/delivery-review.png" class="img-fluid quarto-figure quarto-figure-center figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-delivery-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.
+Figura&nbsp;2: Nota média de avaliação por resultado da entrega, e a parcela que atribui uma ou duas estrelas.
 </figcaption>
 </figure>
 </div>
 </section>
 <section id="quanto-custa" class="level2">
 <h2 class="anchored" data-anchor-id="quanto-custa">Quanto custa</h2>
-<p>O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados. À taxa de atraso de São Paulo, de 4.49%, cerca de <strong>940 desses não teriam chegado atrasados</strong>.</p>
+<p>O Rio de Janeiro registrou 12,353 entregas e 1,495 pedidos atrasados, e 8,129 dessas entregas vieram de vendedores de São Paulo. À taxa de atraso de São Paulo, de 4.49%, cerca de <strong>940 dos 1,495 não teriam chegado atrasados</strong>.</p>
 <p>Esperava-se que esses 940 pedidos produzissem cerca de <strong>370 avaliações de uma e duas estrelas a menos</strong>, aplicando o comportamento observado de avaliação dos pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo (9.27%).</p>
-<p>Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas coisas ocorrem juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto específico, e, como o conjunto de dados não traz nenhum dado de custo ou margem, nada disso pode ser convertido em lucro.</p>
+<p>Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a entrega no prazo <em>causa</em> a avaliação melhor, apenas que as duas coisas ocorrem juntas, e, como o conjunto de dados não traz nenhum dado de custo ou margem, nada disso pode ser convertido em lucro.</p>
 </section>
 <section id="recomendação" class="level2">
 <h2 class="anchored" data-anchor-id="recomendação">Recomendação</h2>
-<p><strong>Investigue o corredor de entregas do Rio de Janeiro antes de comprar qualquer coisa.</strong> Especificamente: compare pedidos do Rio atendidos por vendedores ou transportadoras diferentes no mesmo período. Se o atraso no Rio acompanha determinados vendedores em vez do próprio estado, a solução é uma conversa com o vendedor; se acompanha transportadoras, é uma conversa de contrato. O conjunto de dados consegue responder a essa pergunta, e a resposta determina qual conversa ter.</p>
+<p><strong>Trabalhe o corredor de São Paulo ao Rio, e pare de procurar um vendedor ruim.</strong> Os vendedores despacham no prazo e os próprios vendedores do Rio são pontuais, então o atraso está nos 9 dias medianos que o pacote passa entre os dois, e nos 379 pedidos que chegam mais de duas semanas depois da promessa. A pergunta para as transportadoras nesse corredor é por que o nonagésimo percentil é de 31 dias em um corredor cuja mediana é 12.8.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
 <div>
 <p></p><figure class="figure"><p></p>
 <div>
 <pre class="mermaid mermaid-js">flowchart TB
-  A["Rio de Janeiro&lt;br/&gt;12.10% atrasado, contra 4.49% de São Paulo"] --&gt; B{"O atraso se&lt;br/&gt;concentra em poucos vendedores?"}
-  B -- "sim" --&gt; C["Conversa com o vendedor&lt;br/&gt;tempo de manuseio e estoque"]
-  B -- "não" --&gt; D{"Ele se concentra em&lt;br/&gt;transportadoras específicas?"}
-  D -- "sim" --&gt; E["Conversa de contrato&lt;br/&gt;níveis de serviço da transportadora no corredor"]
-  D -- "não" --&gt; F["Estrutural — distância, roteirização,&lt;br/&gt;ou qual armazém faz o envio"]
+  A["São Paulo ao Rio&lt;br/&gt;8,129 entregas, 14.17% atrasadas"] --&gt; B{"Os vendedores&lt;br/&gt;causam isso?"}
+  B -- "não" --&gt; C["Eles despacham em cerca de três dias&lt;br/&gt;em todos os corredores"]
+  C --&gt; D{"É difícil chegar ao Rio?"}
+  D -- "não" --&gt; E["Os próprios vendedores do Rio entregam&lt;br/&gt;com 4.67% de atraso"]
+  E --&gt; F["A travessia é o problema,&lt;br/&gt;e sua promessa é a mais frágil:&lt;br/&gt;27 dias contra 30.3 para o corredor SP–RS, mais distante"]
 </pre>
 </div>
 <p></p></figure><p></p>
 </div>
 </div>
 </div>
-<p><em>A pergunta que o conjunto de dados consegue responder, e a conversa que cada resposta implica.</em></p>
-<p><strong>Segundo, reveja a promessa de entrega.</strong> A entrega média chega <strong>11.18 dias antes</strong> da estimativa. Uma promessa superada quase sempre não é gratuita. Ela pode estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa de atraso medida enquanto melhoraria a experiência real do cliente, e essa troca deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém escolheu.</p>
+<p><em>A pergunta sobre os vendedores é respondida pelos dados. A pergunta sobre a transportadora não é, e é a que vale a pena fazer.</em></p>
+<p><strong>Segundo, amplie a promessa nesse corredor.</strong> O pacote médio chega <strong>11.18 dias antes</strong> e 14% do corredor ainda chega atrasado. Três dias a mais na promessa registrariam <strong>11.60%</strong> em vez de <strong>14.17%</strong>, e sete a mais registrariam <strong>8.37%</strong>. Ampliar uma promessa move a medição, e não o pacote, então ela pertence ao lado da pergunta operacional acima, e não no lugar dela.</p>
 </section>
 <section id="o-que-mudaria-minha-opinião" class="level2">
 <h2 class="anchored" data-anchor-id="o-que-mudaria-minha-opinião">O que mudaria minha opinião</h2>
 <ul>
-<li><strong>Se o atraso do Rio se concentrasse em poucos vendedores</strong>, a descoberta deixaria de ser regional e passaria a ser um problema de qualidade de vendedores, uma solução diferente e mais barata.</li>
+<li><strong>Se o atraso no corredor de São Paulo ao Rio se concentrasse em poucas transportadoras ou poucos armazéns</strong>, ele passaria a ser um problema de contrato ou de roteirização, e não um problema de corredor. O conjunto de dados não tem identificador de transportadora, então esse teste exige o lado operacional, e não outra consulta.</li>
 <li><strong>Se os clientes com entrega atrasada diferissem sistematicamente</strong> (produtos diferentes, tamanhos de cesta diferentes, expectativas diferentes), a diferença nas avaliações poderia refletir em parte quem eles são, e não o que aconteceu com o pacote. Comparar notas de avaliação dentro da mesma categoria de produto e faixa de valor de pedido testaria isso.</li>
 <li><strong>Se o grupo “nunca entregue” tivesse nota melhor do que o grupo “8–14 dias de atraso” por um motivo específico</strong> (reembolsos, comunicação, expectativas), então a gestão de expectativas pode importar tanto quanto a velocidade. Os dados mostram esse padrão (1.747 contra 1.672); eu não estabeleci por quê.</li>
 </ul>
