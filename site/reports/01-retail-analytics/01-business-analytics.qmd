@@ -8,15 +8,15 @@ format:
     toc: true
 ---
 
-This is an analysis of the Olist Brazilian e-commerce dataset — 99,441 orders
+This is an analysis of the Olist Brazilian e-commerce dataset: 99,441 orders
 placed between September 2016 and October 2018 on a marketplace that connects
 sellers to buyers. Every number below was computed in SQL from the tested models
 in `projects/01-retail-analytics/dbt_project`, and the model each table comes
 from is named underneath it.
 
-The question I set out to answer was not "what happened" but **which levers
-actually move customer satisfaction and repeat purchase**. Three answers
-emerged, and one of them was uncomfortable.
+The question was **which levers actually move customer satisfaction and repeat
+purchase**, rather than what happened. Three findings came out of it, and the
+one about repeat purchase was uncomfortable.
 
 ---
 
@@ -40,8 +40,8 @@ emerged, and one of them was uncomfortable.
   **12.1%** of deliveries, Bahia **12.2%** and Ceará **13.8%**, against São
   Paulo's **4.5%**.
 - **The cheapest improvement available is in Rio de Janeiro.** It is the
-  second-largest market, and roughly **940 orders a year** would not be late if
-  it performed like São Paulo.
+  second-largest market, and roughly **940 of its orders a year** would arrive
+  on time if it were as punctual as São Paulo.
 
 ---
 
@@ -87,19 +87,18 @@ total, because two of the twenty-five months are not what they look like.
 **Two months are artefacts, and reading them as a trend would be a mistake.**
 
 The last two rows are not a collapse. The dataset ends on 17 October 2018, so
-September and October are partial months — September's 16 orders represent
+September and October are partial months. September's 16 orders represent
 roughly the first half of the month, and October's 4 orders represent
 seventeen days of a month that mostly did not happen. Month-over-month growth
 read from those rows is meaningless.
 
-2016 is the opposite problem: it is a launch, not a quiet year. Ten orders
-across three months, then 324 in October alone. The business effectively starts
-in 2017, and any year-over-year comparison that begins in 2016 is comparing a
-company to a company that had not opened yet.
+2016 has the opposite problem: it is a launch rather than a quiet year. Ten
+orders across three months, then 324 in October alone. The business effectively
+starts in 2017, and any year-over-year comparison that begins in 2016 is
+comparing a company to a company that had not opened yet.
 
-The real signal is elsewhere. **November 2017 is the largest month in the
-dataset** — 7,544 orders and R$ 1.19M, 63% above October — which is consistent
-with Black Friday. And 2018 settles into a plateau around 6,300–7,300 orders a
+**November 2017 is the largest month in the dataset**, with 7,544 orders and
+R$ 1.19M, 63% above October. That is consistent with Black Friday. And 2018 settles into a plateau around 6,300–7,300 orders a
 month with no strong growth trend, which is a different story from the one the
 top line suggests.
 
@@ -146,7 +145,7 @@ R$ 16.0M above.
 
 ![Revenue by order status. The two amber bars are cancelled and unavailable orders.](figures/order-status.png){#fig-status fig-align="center"}
 
-Together they are R$ 269,735.11 — about 1.7% of the total — and they are counted
+Together they are R$ 269,735.11, about 1.7% of the total, and they are counted
 deliberately: the payment was collected. Excluding them would be a different and
 equally defensible definition. Stating which one is in use here means a reader
 who disagrees can disagree knowingly rather than silently.
@@ -181,7 +180,7 @@ who disagrees can disagree knowingly rather than silently.
 | New / promising | 14,384 | 14.97% | 54.11 | 140 |
 
 **I am not going to pretend this segmentation is more useful than it is.** RFM
-works by finding customers who buy often — and frequency barely varies here:
+works by finding customers who buy often, and frequency barely varies here:
 96.9% of customers ordered exactly once, so almost everyone ties on F and the
 `ntile` split separates that tied mass arbitrarily. What remains is a
 segmentation on recency and spend, in which "Champions" means *bought recently
@@ -189,7 +188,7 @@ and spent well*, not *loyal*. A retention campaign aimed at that group would be
 aimed at first-time buyers.
 
 I kept it anyway, for two reasons. It is the first thing most stakeholders ask
-for, and its failure here **is** the finding: you cannot segment your way into a
+for, and its failure here is the finding: you cannot segment your way into a
 retention strategy for a business where nobody repeats. The `f_score` column is
 documented in `mart_rfm` as close to meaningless for exactly this reason.
 
@@ -197,8 +196,8 @@ documented in `mart_rfm` as close to meaningless for exactly this reason.
 
 ## 3. Do they come back?
 
-**No.** 2,997 customers out of 96,096 ever placed a second order — a repeat rate
-of **3.12%**. Repeat customers account for 6,342 of 99,441 orders, or **6.4%**.
+2,997 of 96,096 customers ever placed a second order, a repeat rate of **3.12%**.
+Repeat customers account for 6,342 of 99,441 orders, or **6.4%**.
 
 ```{=html}
 <!-- Source: mart_cohort_retention -->
@@ -219,27 +218,26 @@ of **3.12%**. Repeat customers account for 6,342 of 99,441 orders, or **6.4%**.
 
 ![Cohort retention. Month zero is omitted because it is 100% by construction.](figures/cohort-retention.png){#fig-cohort fig-align="center"}
 
-Month zero is 100% by construction — it is the month the customer was acquired —
-and a test asserts that, because an offset-zero that is *not* 100% would mean
-the cohort logic is broken rather than that the business changed.
+Month zero is 100% by construction, because it is the month the customer was
+acquired. A test asserts it: an offset zero that is *not* 100% means the cohort
+logic is broken, not that the business changed.
 
-The shape is the point. Retention does not decay from a high base; it **starts**
-at 0.48% and stays flat at roughly 0.2%. That is not the curve of a business
-losing customers. It is the curve of a marketplace where each purchase is close
-to independent of the last.
+Retention does not decay from a high base. It **starts** at 0.48% and stays flat
+at roughly 0.2%, which is the curve of a marketplace where each purchase is
+close to independent of the last.
 
-**Two honest caveats.** The observation window is 25 months, so a customer who
-would return in year three is simply invisible here — this is a floor, not the
+**Two caveats.** The observation window is 25 months, so a customer who
+would return in year three is simply invisible here. This is a floor, not the
 true lifetime repeat rate. And `customer_unique_id` is a derived identifier, so
 a person who changes their details may appear twice, which inflates the count
 slightly rather than deflating it.
 
 **What this means strategically.** If 96.9% of revenue comes from first orders,
-growth is an acquisition problem, not a retention problem. A loyalty programme
-would spend money to influence a decision that 96.9% of customers are not
-currently making. The two levers that do exist are acquiring more customers and
-raising order value — and raising order value without repeat purchase means
-raising basket size per visit.
+growth has to come from acquiring customers. A loyalty programme would spend
+money to influence a decision that 96.9% of customers are not currently making.
+The two levers that exist are acquiring more customers and raising order value,
+and without repeat purchase, raising order value means raising basket size per
+visit.
 
 ---
 
@@ -247,7 +245,7 @@ raising basket size per visit.
 
 This is the strongest relationship in the dataset.
 
-6,535 of 96,476 deliveries arrived after the promised date — **6.77%**.
+6,535 of 96,476 deliveries arrived after the promised date, **6.77%**.
 
 ```{=html}
 <!-- Source: mart_delivery_performance -->
@@ -264,16 +262,16 @@ This is the strongest relationship in the dataset.
 ![Average review score by delivery outcome, with the share scoring 1 or 2.](figures/delivery-review.png){#fig-delivery fig-align="center"}
 
 Aggregated, a late order averages **2.27** against **4.29** for an on-time one.
-That is not a rounding difference; it is the difference between a customer who
-is broadly satisfied and one who is not.
+That gap is the difference between a broadly satisfied customer and one who is
+not.
 
 **One result in that table surprised me.** An order that never arrived scores
 **1.747**, which is *better* than an order that arrived eight to fourteen days
 late (**1.672**). The worst experience in the table is not the missing parcel.
 
 The likely explanation is that these are different situations rather than
-different severities. A cancelled or unavailable order is a **closed** event —
-usually refunded, and often communicated. An order that turns up 35 days late is
+different severities. A cancelled or unavailable order is a **closed** event,
+usually refunded and often communicated. An order that turns up 35 days late is
 not closed: the customer waited, and then still had to deal with the product. I
 would want to test that before acting on it, and I have not, so I am reporting
 it as an observation rather than a finding.
@@ -297,10 +295,10 @@ it as an observation rather than a finding.
 
 ![Late delivery by state. Each bar is labelled with its number of deliveries, because a rate without a denominator is a headline, not a finding.](figures/late-by-state.png){#fig-late fig-align="center"}
 
-Lateness is not random across the country. São Paulo — 42% of all deliveries —
-is late 4.49% of the time and delivers in 8.76 days. Ceará is late 13.76% of the
-time and takes 21.27 days. The correlation between distance and lateness is
-visible in the delivery times themselves.
+Lateness is not random across the country. São Paulo, which is 42% of all
+deliveries, is late 4.49% of the time and delivers in 8.76 days. Ceará is late
+13.76% of the time and takes 21.27 days. Across states, longer delivery times
+and higher lateness go together.
 
 **Rio de Janeiro is the actionable case.** It is the second-largest market,
 12,353 deliveries, and it is late **2.7×** as often as São Paulo. If Rio
@@ -309,7 +307,7 @@ be late**. Applying the review behaviour of late orders (49.36% scoring ≤2)
 against on-time orders (9.27%), that is on the order of **370 fewer one- and
 two-star reviews a year** from Rio alone.
 
-That estimate is an association, not a causal forecast — I have not shown that
+That estimate is an association, not a causal forecast. I have not shown that
 making a delivery on time *causes* the better review, only that the two travel
 together, and the customers who experience late delivery may differ in other
 ways. I would treat the number as a reason to investigate, not as a business
@@ -324,8 +322,8 @@ case for a specific spend.
    study, and the counterfactual is testable: compare Rio orders handled by
    different sellers or carriers over the same period.
 2. **Re-examine the delivery promise itself.** Olist's estimates are extremely
-   conservative — the average delivery arrives **11.18 days early**, and 93.2%
-   of orders are on time. A promise that is beaten almost every time is not
+   conservative. The average delivery arrives **11.18 days early**, and 93.2% of
+   orders are on time. A promise that is beaten almost every time is not
    necessarily a good one: it may be costing conversions, and a customer who is
    told "up to 25 days" and receives it in 12 has been given a worse experience
    than one told "in 12". Tightening the promise would trade a higher measured
@@ -351,11 +349,11 @@ the numbers should be read:
   feed.** September and October 2018 are partial. Anything described here is one
   observation of one period, not a trend.
 - **Reviews are self-selected.** Only customers who chose to leave a review
-  appear — 98,673 of 99,441 orders. Their satisfaction is not the population's,
+  appear (98,673 of 99,441 orders). Their satisfaction is not the population's,
   and a 4.29 average among respondents is not a 4.29 average among customers.
 - **"Revenue" means gross merchandise value** as recorded in the payment table.
   There is no cost, margin, refund or return data in this dataset, so no
-  statement about profit is possible — only about money collected.
+  statement about profit is possible, only about money collected.
 - **Revenue includes orders later cancelled or marked unavailable** (1,234
   orders, R$ 269,735.11 — the two amber bars in @fig-status), because a payment
   was recorded for them. Excluding them would be a different and equally

@@ -3,15 +3,18 @@ title: "Memorando de decisão — Desempenho de entregas"
 subtitle: "Uma página. O que os dados dizem, quanto custa, o que fazer."
 date: today
 date-format: "MMMM YYYY"
+body-classes: memo
 format:
   html:
     toc: false
 ---
 
+::: {.memo-head}
 **Preparado para:** Diretor de Operações<br>
 **Preparado por:** Anderson Tavares
+:::
 
-> Raciocínio completo, método e limitações: o
+> Método, raciocínio completo e limitações estão no
 > [relatório 01 · Análise de Varejo](01-business-analytics.qmd).
 
 ## Conclusão principal
@@ -40,14 +43,14 @@ atraso de São Paulo, de 4.49%, cerca de **940 desses não teriam chegado
 atrasados**.
 
 Esperava-se que esses 940 pedidos produzissem cerca de **370 avaliações de uma e
-duas estrelas a menos** — aplicando o comportamento observado de avaliação dos
+duas estrelas a menos**, aplicando o comportamento observado de avaliação dos
 pedidos atrasados (49.36% com nota ≤2) em contraste com os pedidos no prazo
 (9.27%).
 
 Isto é uma associação, não uma estimativa causal. Não demonstrei que fazer a
 entrega no prazo *causa* a avaliação melhor, apenas que as duas coisas ocorrem
 juntas. É um motivo para investigar o Rio, não um caso de negócio para um gasto
-específico — e, como o conjunto de dados não traz nenhum dado de custo ou margem,
+específico, e, como o conjunto de dados não traz nenhum dado de custo ou margem,
 nada disso pode ser convertido em lucro.
 
 ## Recomendação
@@ -73,9 +76,9 @@ flowchart TB
 resposta implica.*
 
 **Segundo, reveja a promessa de entrega.** A entrega média chega **11.18 dias
-antes** da estimativa. Uma promessa superada quase sempre não é gratuita: ela
-pode estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa
-de atraso medida enquanto melhoraria a experiência real do cliente, e essa troca
+antes** da estimativa. Uma promessa superada quase sempre não é gratuita. Ela pode
+estar suprimindo a conversão no checkout. Encurtar a janela elevaria a taxa de
+atraso medida enquanto melhoraria a experiência real do cliente, e essa troca
 deveria ser quantificada de propósito, em vez de ficar no padrão que ninguém
 escolheu.
 
@@ -83,14 +86,13 @@ escolheu.
 
 - **Se o atraso do Rio se concentrasse em poucos vendedores**, a descoberta
   deixaria de ser regional e passaria a ser um problema de qualidade de
-  vendedores — uma solução diferente e mais barata.
+  vendedores, uma solução diferente e mais barata.
 - **Se os clientes com entrega atrasada diferissem sistematicamente** (produtos
   diferentes, tamanhos de cesta diferentes, expectativas diferentes), a diferença
   nas avaliações poderia refletir em parte quem eles são, e não o que aconteceu
   com o pacote. Comparar notas de avaliação dentro da mesma categoria de produto
   e faixa de valor de pedido testaria isso.
 - **Se o grupo "nunca entregue" tivesse nota melhor do que o grupo "8–14 dias
-  de atraso" por um motivo específico** — reembolsos, comunicação, expectativas —
-  então o mecanismo que vale a pena melhorar é a gestão de expectativas, e não
-  apenas a velocidade. Os dados mostram esse padrão (1.747 contra 1.672); eu não
-  estabeleci por quê.
+  de atraso" por um motivo específico** (reembolsos, comunicação, expectativas),
+  então a gestão de expectativas pode importar tanto quanto a velocidade. Os dados
+  mostram esse padrão (1.747 contra 1.672); eu não estabeleci por quê.

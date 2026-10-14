@@ -3,12 +3,13 @@ toc: false
 pagetitle: "Portfólio de Análise de Varejo"
 ---
 
-# O desempenho da entrega decide se o cliente volta — e o que ele diz quando volta. {.hero}
+# O atraso na entrega é o sinal mais forte de insatisfação do cliente neste marketplace. {.hero}
 
-Eu medi, eu previ e eu li o que os clientes realmente escreveram. Os três projetos
-usam o mesmo conjunto de dados da Olist — cerca de 100.000 pedidos em nove tabelas
-relacionadas — e cada um entrega uma análise escrita, um memorando de decisão de
-uma página e uma descrição honesta do que os dados não sustentam.
+Eu medi isso em 99,441 pedidos. Mais dois projetos vêm a seguir sobre o mesmo
+conjunto de dados da Olist: um modelo que prevê o atraso na entrega a partir do que
+se sabe no momento da compra, e uma leitura das 99,000 avaliações em português que
+os clientes escreveram sobre ela. Cada projeto entrega uma análise escrita, um
+memorando de decisão de uma página e uma declaração do que os dados não sustentam.
 
 ## Projetos
 
@@ -17,8 +18,8 @@ uma página e uma descrição honesta do que os dados não sustentam.
 <article class="project">
 <div class="project-seq">01<span class="project-status status-published">Publicado</span></div>
 <div class="project-detail">
-<h3>Quais alavancas realmente movem a satisfação e a recompra?</h3>
-<p>Segmentação RFM, retenção por coorte mensal e uma decomposição do desempenho de entrega, modelados com dbt sobre PostgreSQL — com testes de dados que quebram o build quando os dados deixam de fazer sentido.</p>
+<h3>Quais alavancas realmente movem a satisfação do cliente e a recompra?</h3>
+<p>Segmentação RFM, retenção por coorte mensal e uma decomposição do desempenho de entrega, modelados com dbt sobre PostgreSQL. Os testes de dados quebram o build quando os dados deixam de fazer sentido.</p>
 <p class="project-stack">PostgreSQL, dbt, SQL, Python, Quarto</p>
 <p class="project-links"><a href="reports/01-retail-analytics/01-business-analytics.qmd">Ler a análise</a> <a href="reports/01-retail-analytics/00-executive-memo.qmd">Memorando de decisão</a></p>
 </div>
@@ -28,7 +29,7 @@ uma página e uma descrição honesta do que os dados não sustentam.
 <div class="project-seq">02<span class="project-status status-wip">Em andamento</span></div>
 <div class="project-detail">
 <h3>No momento da compra, dá para saber quais pedidos vão atrasar?</h3>
-<p>Um classificador sensível a custo e honesto quanto a vazamento: só entram atributos disponíveis no momento em que o pedido é feito.</p>
+<p>Um classificador sensível a custo que usa apenas atributos disponíveis quando o pedido é feito, para não aprender em silêncio a resposta que deveria prever.</p>
 <p class="project-stack">Python, pandas, scikit-learn</p>
 </div>
 </article>
@@ -36,8 +37,8 @@ uma página e uma descrição honesta do que os dados não sustentam.
 <article class="project">
 <div class="project-seq">03<span class="project-status status-planned">Planejado</span></div>
 <div class="project-detail">
-<h3>Do que 99.000 avaliações em português realmente reclamam?</h3>
-<p>Análise de sentimento e modelagem de tópicos, para testar pelo lado do cliente a afirmação que o primeiro projeto faz pelo lado da entrega: de que as reclamações são sobre logística, não sobre produtos.</p>
+<h3>Do que 99,000 avaliações em português reclamam?</h3>
+<p>Análise de sentimento e modelagem de tópicos, para conferir pelo lado do cliente o que o projeto 01 encontra pelo lado da entrega: se as reclamações são sobre o pacote ou sobre o produto.</p>
 <p class="project-stack">Python, PLN, modelagem de tópicos</p>
 </div>
 </article>
@@ -54,5 +55,5 @@ uv run python tasks.py pipeline   # carga, build, gráficos, site
 ```
 
 O conjunto de dados vem de um espelho com revisão fixada e é conferido contra os
-tamanhos de arquivo esperados no download, então os números não mudam em silêncio
-debaixo de você.
+tamanhos de arquivo esperados no download, então uma mudança nos dados de origem
+quebra o build em vez de mover um número publicado em silêncio.
