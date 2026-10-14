@@ -88,7 +88,7 @@ que o total, porque dois dos vinte e cinco meses não são o que parecem.
 | 2018-09 | 16 | 14 | 4,439.54 | 277.47 |
 | 2018-10 | 4 | 4 | 589.67 | 147.42 |
 
-![Receita mensal. Os quatro meses de borda quase vazios ficam de fora, em vez de virarem fatias invisíveis.](../../../reports/01-retail-analytics/figures/pt/revenue-monthly.png){#fig-revenue fig-align="center"}
+![Receita mensal. Os quatro meses de borda quase vazios ficam de fora, em vez de virarem fatias invisíveis.](../../../reports/01-retail-analytics/figures/pt/revenue-monthly.png){#fig-revenue fig-alt="Gráfico de colunas da receita mensal de todos os meses em que o marketplace operou, do fim de 2016 até meados de 2018. A receita sobe até um pico em novembro de 2017 e depois se estabiliza em um nível um pouco menor ao longo de 2018." fig-align="center"}
 
 **Dois meses são artefatos, e lê-los como tendência seria um erro.**
 
@@ -128,7 +128,7 @@ sugere.
 | auto | 3,897 | 4,235 | 592,720.11 | 139.96 |
 | garden_tools | 3,518 | 4,347 | 485,256.46 | 111.63 |
 
-![As 12 principais categorias por receita de itens.](../../../reports/01-retail-analytics/figures/pt/top-categories.png){#fig-categories fig-align="center"}
+![As 12 principais categorias por receita de itens.](../../../reports/01-retail-analytics/figures/pt/top-categories.png){#fig-categories fig-alt="Gráfico de barras horizontais das doze categorias com mais receita de itens, da maior para a menor, cada barra rotulada com seu preço médio de item. Saúde e beleza lidera, seguida por relógios e presentes e por cama, banho e mesa." fig-align="center"}
 
 São 74 categorias, e as dez principais respondem por **62.4%** da receita de
 itens.
@@ -152,7 +152,7 @@ Pagamentos não são o mesmo que vendas concluídas. Um pagamento é registrado 
 pedidos que depois foram cancelados ou marcados como indisponíveis, então esses
 pedidos estão dentro dos R$ 16.0M acima.
 
-![Receita por status do pedido. As duas barras âmbar são pedidos cancelados e indisponíveis.](../../../reports/01-retail-analytics/figures/pt/order-status.png){#fig-status fig-align="center"}
+![Receita por status do pedido. As duas barras âmbar são pedidos cancelados e indisponíveis.](../../../reports/01-retail-analytics/figures/pt/order-status.png){#fig-status fig-alt="Gráfico de barras horizontais da receita por status do pedido em escala logarítmica. Pedidos entregues respondem por quase tudo; as barras de cancelado e indisponível aparecem em âmbar." fig-align="center"}
 
 Juntos, eles somam R$ 269,735.11, cerca de 1.7% do total, e são contados de
 propósito: o pagamento foi recebido. Excluí-los seria uma definição diferente e
@@ -174,7 +174,7 @@ leitor que discorda pode discordar conscientemente, e não em silêncio.
 | 5–9 | 18 | 0.02% |
 | 17 | 1 | 0.001% |
 
-![Com que frequência um cliente volta. A escala logarítmica é o que torna a cauda visível.](../../../reports/01-retail-analytics/figures/pt/repeat-purchase.png){#fig-repeat fig-align="center"}
+![Com que frequência um cliente volta. A escala logarítmica é o que torna a cauda visível.](../../../reports/01-retail-analytics/figures/pt/repeat-purchase.png){#fig-repeat fig-alt="Gráfico de barras em escala logarítmica de quantos pedidos cada cliente fez. Quase todo cliente fez exatamente um pedido, e essa barra ofusca todas as outras." fig-align="center"}
 
 ```{=html}
 <!-- Source: mart_rfm -->
@@ -227,7 +227,7 @@ pedidos, ou **6.4%**.
 | 12 | 22,317 | 40 | 0.18% |
 | 18 | 5,473 | 12 | 0.22% |
 
-![Retenção por coorte. O mês zero é omitido porque é 100% por construção.](../../../reports/01-retail-analytics/figures/pt/cohort-retention.png){#fig-cohort fig-align="center"}
+![Retenção por coorte. O mês zero é omitido porque é 100% por construção.](../../../reports/01-retail-analytics/figures/pt/cohort-retention.png){#fig-cohort fig-alt="Gráfico de colunas da parcela de cada coorte mensal que voltou a pedir, por meses desde o primeiro pedido. Todas as colunas ficam abaixo de meio por cento, então a série é plana em vez de cair." fig-align="center"}
 
 O mês zero é 100% por construção, porque é o mês em que o cliente foi adquirido.
 Um teste garante isso: um offset zero que *não* seja 100% significa que a lógica de
@@ -270,7 +270,7 @@ Esta é a relação mais forte do conjunto de dados.
 | Atrasado: mais de 14 dias | 1,384 | 1.39% | 1.723 | 78.35% | 54.62 |
 | Nunca entregue | 2,965 | 2.98% | 1.747 | 78.05% | — |
 
-![Nota média de avaliação por resultado da entrega, com a parcela que atribui 1 ou 2.](../../../reports/01-retail-analytics/figures/pt/delivery-review.png){#fig-delivery fig-align="center"}
+![Nota média de avaliação por resultado da entrega, com a parcela que atribui 1 ou 2.](../../../reports/01-retail-analytics/figures/pt/delivery-review.png){#fig-delivery fig-alt="Gráfico de barras da nota média de avaliação por desfecho de entrega, do grupo no prazo até os pedidos que chegaram mais de duas semanas atrasados e os que nunca chegaram. A parcela que deu nota um ou dois está impressa dentro de cada barra e é várias vezes maior em todo grupo atrasado." fig-align="center"}
 
 Agregando, um pedido atrasado tem média de **2.27** contra **4.29** de um pedido
 no prazo. Essa diferença é a distância entre um cliente amplamente satisfeito e um
@@ -304,7 +304,7 @@ então o relato como observação, e não como conclusão.
 | BA | 3,256 | 396 | **12.16%** | 19.34 | 3.861 |
 | CE | 1,279 | 176 | **13.76%** | 21.27 | 3.857 |
 
-![Entregas atrasadas por estado. Cada barra está rotulada com seu número de entregas, porque uma taxa sem denominador é manchete, não conclusão.](../../../reports/01-retail-analytics/figures/pt/late-by-state.png){#fig-late fig-align="center"}
+![Entregas atrasadas por estado. Cada barra está rotulada com seu número de entregas, porque uma taxa sem denominador é manchete, não conclusão.](../../../reports/01-retail-analytics/figures/pt/late-by-state.png){#fig-late fig-alt="Gráfico de barras horizontais do percentual de atraso por estado do cliente, do pior para o melhor, para os estados com ao menos mil entregas. Ceará, Bahia e Rio de Janeiro são os piores; São Paulo está destacado e perto do fim. Cada barra traz seu número de entregas." fig-align="center"}
 
 O atraso não é aleatório pelo país. São Paulo, que representa 42% de todas as
 entregas, atrasa 4.49% das vezes e entrega em 8.76 dias. O Ceará atrasa 13.76% das
@@ -348,7 +348,7 @@ O teste inverso resolve o destino. Um vendedor do Rio entregando no Rio atrasa
 Paulo (**4.63%**). O Rio não é um lugar difícil para entregar. Um vendedor de São
 Paulo enviando o mesmo tipo de pacote para o Rio atrasa **14.07%** das vezes.
 
-![Atraso de entrega por corredor. As barras azuis são corredores em que o vendedor e o cliente estão no mesmo estado.](../../../reports/01-retail-analytics/figures/pt/lane-late.png){#fig-lane fig-align="center"}
+![Atraso de entrega por corredor. As barras azuis são corredores em que o vendedor e o cliente estão no mesmo estado.](../../../reports/01-retail-analytics/figures/pt/lane-late.png){#fig-lane fig-alt="Gráfico de barras horizontais do percentual de atraso nas rotas mais movimentadas entre o estado do vendedor e o do cliente, da pior para a melhor. São Paulo para o Rio de Janeiro é a pior com folga, e as três rotas em que vendedor e cliente estão no mesmo estado aparecem destacadas e no fim." fig-align="center"}
 
 Dois terços das entregas do Rio, 8,129 de 12,353, saem de vendedores de São Paulo,
 e esse corredor é o pior da tabela, com **14.17%**. Todo corredor que fica dentro
