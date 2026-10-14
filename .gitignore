@@ -57,3 +57,6 @@ _site/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+/.quarto/
+**/*.quarto_ipynb

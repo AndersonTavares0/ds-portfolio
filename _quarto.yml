@@ -29,6 +29,8 @@ website:
         menu:
           - href: projects/01-retail-analytics/reports/01-business-analytics.qmd
             text: "01 · Retail Analytics"
+          - href: projects/01-retail-analytics/reports/00-executive-memo.qmd
+            text: "01 · Decision memo"
       - href: about.qmd
         text: About
   page-footer:
