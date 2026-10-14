@@ -1,145 +1,127 @@
-# Retail Analytics Portfolio — Olist Brazilian E-Commerce
+# Retail Analytics Portfolio
 
 [![CI](https://github.com/AndersonTavares0/ds-portfolio/actions/workflows/ci.yml/badge.svg)](https://github.com/AndersonTavares0/ds-portfolio/actions/workflows/ci.yml)
-[![Live report](https://img.shields.io/badge/report-live-1f6feb)](https://AndersonTavares0.github.io/ds-portfolio/)
+[![Live report](https://img.shields.io/badge/live-report-1f6feb)](https://AndersonTavares0.github.io/ds-portfolio/)
 
-An end-to-end data science portfolio built on the **[Olist Brazilian E-Commerce
-dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)** — ~100,000
-orders placed on a real Brazilian marketplace between 2016 and 2018, spread across
-nine related tables.
+Analytics on the Olist Brazilian e-commerce dataset: 99,441 orders placed between September 2016 and October 2018, across nine related tables. Three projects on one dataset, each shipping a written analysis, a one-page decision memo, and a statement of what the data cannot support.
 
-Everything here reproduces from a clean clone. Every project ships a narrative
-report, a one-page decision memo, and a "Limitations" section that says what the
-data cannot support.
+The thread through all three is one finding: **late delivery is the strongest signal of customer dissatisfaction in this marketplace.** An order that arrives late averages 2.27 stars out of 5. One that arrives on time averages 4.29. Project 01 measures that. Project 02 predicts it from what is known at the moment of purchase. Project 03 reads the 99,000 Portuguese reviews customers wrote about the rest of the experience.
 
----
+## Start here
 
-## The narrative
-
-> In this marketplace, **delivery performance drives customer satisfaction and
-> retention**. I *measured* it, I *predicted* it, and I *explained the voice of
-> the customer*.
-
-Three projects, one argument — not three disconnected notebooks.
-
----
+- [The report](https://AndersonTavares0.github.io/ds-portfolio/reports/01-retail-analytics/01-business-analytics.html) is the full analysis, with figures.
+- [The decision memo](https://AndersonTavares0.github.io/ds-portfolio/reports/01-retail-analytics/00-executive-memo.html) is the same argument on one page.
+- [Em português](https://AndersonTavares0.github.io/ds-portfolio/pt/) has both pages translated.
 
 ## Projects
 
-| # | Project | The question | Stack | Status |
-|---|---------|--------------|-------|--------|
-| **01** | [**Retail Analytics**](./projects/01-retail-analytics) | Which levers actually move customer satisfaction and repeat purchase? | PostgreSQL · dbt · SQL · Python · Quarto | ✅ published |
-| 02 | Late-Delivery Prediction | At purchase time, can we tell which orders will arrive late? | scikit-learn · pandas | 🚧 in progress |
-| 03 | Voice of the Customer | What do 99k Portuguese reviews actually complain about? | NLP · topic modelling | 🚧 planned |
+| # | Project | Question it answers | Status |
+|---|---|---|---|
+| 01 | Retail analytics | Which levers actually move satisfaction and repeat purchase? | Published |
+| 02 | Late-delivery prediction | At purchase time, can we tell which orders will arrive late? | In progress |
+| 03 | Voice of the customer | What do 99,000 Portuguese reviews complain about? | Planned |
 
-### Project 01 at a glance
+## What Project 01 found
 
-- **Data layer:** nine raw CSVs loaded verbatim into PostgreSQL, then modelled with
-  dbt into a tested star schema (`staging` → `marts`).
-- **Analysis:** RFM segmentation, monthly cohort retention, delivery-performance
-  decomposition, payment behaviour.
-- **Deliverables:** a long-form report, a one-page decision memo, and data tests
-  that fail the build when the data stops making sense.
+- **Revenue.** 99,441 orders worth R$ 16.0M, an average order of R$ 160.99. November 2017 is the largest month at R$ 1.19M, on Black Friday. 2016 holds 329 orders across three months, a launch period rather than a quiet year.
+- **Repeat purchase is 3.12%.** 2,997 of 96,096 customers ever placed a second order, and 96.88% placed exactly one. Month-one cohort retention is 0.48%, flat near 0.2% afterwards. There is almost no repeat-purchase habit to lose, so the usual retention playbook does not apply. This is an acquisition business.
+- **Late delivery is 6.77%.** 6,535 of 96,476 deliveries arrived after the promised date. Those orders average 2.27 stars against 4.29 for on-time orders, and past a week late about 80% of reviewers give one or two stars.
+- **The promised date is conservative.** The average order arrives 11.18 days early and only 6.77% miss. Expectation management may matter as much as speed.
 
----
+The report recommends investigating Rio de Janeiro, where 12.10% of 12,353 deliveries are late against São Paulo's 4.49%. At São Paulo's rate, roughly 940 Rio orders a year would not be late, and the observed review behaviour implies about 370 fewer one- and two-star reviews. It labels that an association rather than a forecast, because the data holds states and not distances, and no cost or margin figures.
+
+## How it is built
+
+Raw CSVs from a revision-pinned mirror, loaded into PostgreSQL with every column kept as text, modelled with dbt, tested at every layer, and written up in Quarto.
+
+```
+Hugging Face mirror, revision pinned
+  -> download_data.py       9 CSVs, ~126 MB, verified by exact byte size
+  -> load_raw.py            every column TEXT, chunked
+  -> PostgreSQL             schema: raw
+  -> dbt staging            analytics_staging, views: cast and rename
+  -> dbt marts              analytics_marts, tables: 70 data tests
+  -> make_charts.py         figures, committed so publishing needs no database
+  -> Quarto                 site/
+```
+
+Three decisions are worth knowing before reading the code. Each one is recorded with its evidence in [`docs/decisions/`](docs/decisions/).
+
+- **Raw columns stay text.** Letting pandas infer types turns a zip-code prefix of `01001` into the integer `1001`, quietly. Every cast goes through three macros that treat an empty string as NULL, because empty CSV cells arrive as empty strings and `cast('' as timestamp)` raises.
+- **Aggregate to the order before joining.** Order items, payments and reviews are each finer-grained than an order. Joining them directly multiplies rows, so an order with four items and three payments would count twelve times in every total. The SQL would compile and nothing would fail.
+- **Lateness is measured in whole days.** The promised date carries no time of day: all 99,441 of them are midnight. The actual delivery time does, across 96,476 distinct values. Comparing the two to the second misclassified 1,292 orders.
+
+## Reproducing it
+
+You need [uv](https://docs.astral.sh/uv/), Docker and [Quarto](https://quarto.org/) on the PATH. Python and dbt come from `uv`.
+
+```bash
+git clone https://github.com/AndersonTavares0/ds-portfolio.git
+cd ds-portfolio
+cp .env.example .env
+uv run python tasks.py doctor      # check the toolchain
+uv run python tasks.py setup       # dependencies, database, dataset
+uv run python tasks.py pipeline    # load, build, charts, tests, render
+```
+
+The website is then in `site/_site/`. Every command goes through [`tasks.py`](tasks.py), which is plain Python rather than a `Makefile` because `make` is not on Windows and this repository is written on Windows and run on Linux.
+
+The dataset is 126 MB and is not committed. It comes from a Hugging Face mirror of the original Kaggle release, pinned to one revision so the numbers cannot move underneath you, and validated by exact byte size plus a minimum row count. CI needs neither the dataset nor a database: it runs ruff and the Python tests, and the site is published from committed figures.
+
+## Repository map
+
+```
+projects/01-retail-analytics/   the analysis
+  dbt_project/                  staging models, mart models, 70 data tests, 6 singular tests
+  src/retail/                   the data layer: config, dataset manifest, download and load
+  scripts/                      download_data.py, load_raw.py, make_charts.py
+  tests/                        Python tests, no network and no database
+site/                           what gets published, as its own Quarto project
+  index.qmd, about.qmd          the landing pages
+  reports/01-retail-analytics/  the report and the decision memo
+  pt/                           the same pages in Portuguese
+  theme/                        a light and a dark palette over one set of rules
+docs/                           how and why
+  metrics.md                    the definition of every number in the report
+  decisions/                    why the obvious approach was wrong, five times
+  data-dictionary.md            every column, in every layer
+  architecture.md               the map, and where the boundaries are enforced
+data/                           the input, downloaded and never committed
+tasks.py                        every command
+AGENTS.md                       the rules this repository works to
+```
+
+One folder is one purpose. `site/` is what gets published, `projects/` is the analysis that produces it, `docs/` is how and why, and `data/` is the input.
 
 ## What this repository demonstrates
 
 | Skill | Where to look |
 |---|---|
-| **SQL / analytical modelling** | `projects/01-retail-analytics/dbt_project/models/` |
-| **Data quality as code** | `.../dbt_project/models/**/schema.yml`, `.../dbt_project/tests/` |
-| **Python engineering** | `projects/01-retail-analytics/src/retail/`, `tasks.py` |
-| **Automated testing** | `projects/01-retail-analytics/tests/`, `pytest` |
-| **CI/CD** | `.github/workflows/` |
-| **Reproducibility** | pinned dataset revision, `uv.lock`, `tasks.py pipeline` |
-| **Communication** | `site/reports/01-retail-analytics/` (report + decision memo) |
-
----
+| SQL and dimensional modelling | `projects/01-retail-analytics/dbt_project/models/` |
+| Data quality as code | `projects/01-retail-analytics/dbt_project/models/**/schema.yml`, `.../dbt_project/tests/` |
+| Python data engineering | `projects/01-retail-analytics/src/retail/` |
+| Reproducible pipelines | `tasks.py`, `.github/workflows/` |
+| Testing without a database | `projects/01-retail-analytics/tests/` |
+| Communicating a result | `site/reports/01-retail-analytics/` |
 
 ## Documentation
 
-The reasoning lives in [`docs/`](./docs/) rather than buried in code comments:
-
 | | |
 |---|---|
-| [Architecture](./docs/architecture.md) | How the pieces fit, and why they are separated this way |
-| [Metrics](./docs/metrics.md) | What every number means — and, more usefully, what it does not mean |
-| [Data dictionary](./docs/data-dictionary.md) | Every table and column, with its grain and its caveats |
-| [Decisions](./docs/decisions/README.md) | Why the code looks the way it does, including the times the data changed the design |
-| [Contributing](./docs/CONTRIBUTING.md) | The workflow - every change arrives by pull request |
+| [Architecture](docs/architecture.md) | the map, and why it is separated this way |
+| [Metrics](docs/metrics.md) | what every number in the report means |
+| [Data dictionary](docs/data-dictionary.md) | every column, in every layer |
+| [Decisions](docs/decisions/) | five decisions, and the evidence that forced each |
+| [Contributing](docs/CONTRIBUTING.md) | the workflow this repository follows |
 
-The decision log is the one worth reading first. It records what was measured, what
-the obvious approach was, and why the obvious approach was wrong. The clearest
-example: lateness was being measured to the second against a deadline that only
-ever had a date, which misclassified 1,292 orders — and `dbt run` would have
-shipped it silently.
+The decision log is the one to read first. It records what was measured, what the obvious approach was, and why the obvious approach was wrong.
 
----
+## Licence
 
-## Reproducing it
-
-**Prerequisites:** [uv](https://docs.astral.sh/uv/getting-started/installation/),
-[Docker](https://docs.docker.com/get-docker/), and
-[Quarto](https://quarto.org/docs/get-started/) on your `PATH`.
-
-```bash
-git clone https://github.com/AndersonTavares0/ds-portfolio.git
-cd ds-portfolio
-cp .env.example .env                  # defaults work out of the box
-
-uv run python tasks.py doctor         # confirm the required tools are present
-uv run python tasks.py setup          # deps + database + dataset download
-uv run python tasks.py pipeline       # load -> dbt build -> tests -> render
-```
-
-The website is then in `_site/`; open `_site/index.html`.
-
-Run `uv run python tasks.py` with no arguments to list every task.
-
-> The dataset is **never committed**. It is downloaded from a revision-pinned,
-> anonymous mirror and validated against expected file sizes. See
-> `data/README.md`.
-
----
-
-## Repository layout
-
-```
-ds-portfolio/
-├── tasks.py                  # portable task runner (works without `make`)
-├── docker-compose.yml        # the PostgreSQL service — the only container
-├── pyproject.toml            # deps + ruff/pytest configuration
-├── site/                     # the published website — its own Quarto project
-│   ├── _quarto.yml           # site configuration
-│   ├── index.qmd / about.qmd # site pages
-│   └── reports/              # narrative report + decision memo
-├── projects/
-│   └── 01-retail-analytics/
-│       ├── dbt_project/      # staging -> marts, with tests
-│       ├── scripts/          # download_data.py, load_raw.py, make_charts.py
-│       ├── src/retail/       # reusable Python
-│       └── tests/            # pytest
-├── docs/                     # architecture, metrics, dictionary, decisions
-├── data/                     # git-ignored dataset
-├── .github/                  # workflows + issue and pull-request templates
-└── AGENTS.md                 # the rules this repository is worked to
-```
-
-Each top-level folder is one purpose: `site/` is what gets published,
-`projects/` is the analysis that produces it, `docs/` is how and why,
-`data/` is the input, and `.github`/`.agents` are configuration.
-
----
-
-## License
-
-Code: [MIT](./LICENSE).
-Data: © Olist, used under its own (non-commercial) license — see
-[docs/acknowledgements.md](./docs/acknowledgements.md).
+Code is MIT. The Olist dataset is not: it is CC BY-NC-SA 4.0, non-commercial, and is not redistributed here. See [acknowledgements](docs/acknowledgements.md).
 
 ## Contact
 
 - GitHub: [AndersonTavares0](https://github.com/AndersonTavares0)
 - LinkedIn: [andersonlimatavares](https://www.linkedin.com/in/andersonlimatavares)
-- Email: `anderson.g.tavares@gmail.com`
+- Email: anderson.g.tavares@gmail.com
