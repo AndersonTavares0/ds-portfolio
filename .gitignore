@@ -48,6 +48,7 @@ package-lock.yml
 # build output lands in `site/_site/` and the cache in `site/.quarto/`.
 # ---------------------------------------------------------------------------
 _site/
+.build-pt/
 .quarto/
 **/*.quarto_ipynb
 

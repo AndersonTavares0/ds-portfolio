@@ -18,8 +18,13 @@ ds-portfolio/
 │       ├── src/retail/           the data layer as importable modules
 │       └── tests/                Python tests, no network and no database required
 ├── site/                         the published narrative — its own Quarto project
-│   ├── reports/01-retail-analytics/  the report and the one-page decision memo
-│   └── _quarto.yml, index.qmd, about.qmd, styles.css
+│   ├── reports/01-retail-analytics/  the report, the memo, and their figures
+│   ├── pt/                       the same pages in Portuguese
+│   ├── _quarto.yml               shared configuration
+│   ├── _quarto-en.yml            the English profile: language, navigation, render list
+│   ├── _quarto-pt.yml            the Portuguese profile
+│   ├── theme.scss, theme-dark.scss, _theme-rules.scss
+│   └── index.qmd, about.qmd
 ├── AGENTS.md                     the rules an agent (or a person) works to here
 ├── README.md                     portfolio landing page
 ├── docker-compose.yml            PostgreSQL, and nothing else
@@ -30,13 +35,26 @@ ds-portfolio/
 
 The website is its own Quarto project, rooted at `site/`. Two things follow.
 The repository root stays a short list of entry points and one folder per
-purpose, and the governance files — `docs/`, `AGENTS.md`, `CONTRIBUTING.md` —
-are out of the website's reach **by construction**, so they cannot be published
-by accident. An earlier layout kept the Quarto project at the repository root
-and depended on an explicit `render:` list to keep those pages off the site;
-that was a guarantee held up by a config list, and this is a guarantee held up
-by the filesystem. The publish workflow only needs to be told where the project
-root now is: `path: site` in the publish action.
+purpose, and the governance files — `docs/`, `AGENTS.md` — are out of the
+website's reach **by construction**, so they cannot be published by accident. An
+earlier layout kept the Quarto project at the repository root and depended on an
+explicit `render:` list to keep those pages off the site; that was a guarantee
+held up by a config list, and this is a guarantee held up by the filesystem. The
+publish workflow only needs to be told where the project root now is: `path: site`
+in the publish action.
+
+The site is built twice and shipped once. Each language is a Quarto **profile**
+(`_quarto-en.yml`, `_quarto-pt.yml`): a profile carries its own language, its own
+navigation, and its own render list. Profiles are the documented way to publish
+several versions of one website, and they are used here because Quarto allows
+exactly one navbar per build — a `_metadata.yml` in a subdirectory cannot
+override it, which was tried and does not work. The two builds cannot share an
+output directory either, since a render empties the directory it writes to, so
+the Portuguese profile writes to `site/.build-pt/` and `tasks.py render` copies
+its `pt/` subtree into `site/_site/pt/`. The light and dark appearances are a
+separate axis again: two compiled theme bundles selected by the reader's
+`prefers-color-scheme`, both pulling their rules from `_theme-rules.scss` so a
+rule is written once.
 
 ## How data moves
 

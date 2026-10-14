@@ -1,71 +1,56 @@
 ---
-title: "Retail Analytics Portfolio"
-subtitle: "End-to-end data science on a real Brazilian marketplace"
 toc: false
-page-layout: full
 ---
 
-## The narrative
+# Delivery performance decides whether customers come back — and what they say when they do. {.hero}
 
-::: {.callout-note appearance="simple"}
-In this marketplace, **delivery performance drives customer satisfaction and
-retention**. I *measured* it, I *predicted* it, and I *explained the voice of the
-customer*.
-:::
-
-Three projects built on the same
-[Olist Brazilian E-Commerce dataset](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-— ~100,000 orders across nine related tables. Each project ships a report, a
-one-page decision memo, and an honest statement of what the data *cannot* support.
+I measured it, I predicted it, and I read what customers actually wrote. All three
+projects run on the same Olist dataset — around 100,000 orders across nine related
+tables — and each one ships a written analysis, a one-page decision memo, and an
+honest account of what the data cannot support.
 
 ## Projects
 
-::: {.project-card}
-### 01 · Retail Analytics <span class="status-published">· published</span>
+<div class="projects">
 
-**Question.** Which levers actually move customer satisfaction and repeat purchase?
+<article class="project">
+<div class="project-seq">01<span class="project-status status-published">Published</span></div>
+<div class="project-detail">
+<h3>Which levers actually move customer satisfaction and repeat purchase?</h3>
+<p>RFM segmentation, monthly cohort retention, and a decomposition of delivery performance, modelled with dbt on top of PostgreSQL — with data tests that fail the build when the data stops making sense.</p>
+<p class="project-stack">PostgreSQL, dbt, SQL, Python, Quarto</p>
+<p class="project-links"><a href="reports/01-retail-analytics/01-business-analytics.qmd">Read the analysis</a> <a href="reports/01-retail-analytics/00-executive-memo.qmd">One-page decision memo</a></p>
+</div>
+</article>
 
-RFM segmentation, monthly cohort retention, and a decomposition of delivery
-performance — modelled with dbt on top of PostgreSQL, with data tests that fail
-the build when the data stops making sense.
+<article class="project">
+<div class="project-seq">02<span class="project-status status-wip">In progress</span></div>
+<div class="project-detail">
+<h3>At the moment of purchase, can we tell which orders will arrive late?</h3>
+<p>A cost-sensitive classifier that is honest about leakage: only features available when the order is placed are allowed in.</p>
+<p class="project-stack">Python, pandas, scikit-learn</p>
+</div>
+</article>
 
-<p class="stack">PostgreSQL · dbt · SQL · Python · Quarto</p>
+<article class="project">
+<div class="project-seq">03<span class="project-status status-planned">Planned</span></div>
+<div class="project-detail">
+<h3>What do 99,000 Portuguese-language reviews actually complain about?</h3>
+<p>Sentiment and topic modelling, to test from the customer's side the claim the first project makes from the delivery side: that the complaints are about logistics, not products.</p>
+<p class="project-stack">Python, NLP, topic modelling</p>
+</div>
+</article>
 
-[Read the report](reports/01-retail-analytics/01-business-analytics.qmd){.btn .btn-primary .btn-sm}
-[Decision memo](reports/01-retail-analytics/00-executive-memo.qmd){.btn .btn-secondary .btn-sm}
-:::
-
-::: {.project-card}
-### 02 · Late-Delivery Prediction <span class="status-wip">· in progress</span>
-
-**Question.** At purchase time, can we tell which orders will arrive late?
-
-A cost-sensitive classifier that is honest about leakage: only features available
-*at the moment of purchase* are allowed in.
-
-<p class="stack">Python · pandas · scikit-learn</p>
-:::
-
-::: {.project-card}
-### 03 · Voice of the Customer <span class="status-wip">· planned</span>
-
-**Question.** What do ~99,000 Portuguese-language reviews actually complain about?
-
-Sentiment and topic modelling — with the finding that the complaints are about
-*logistics*, not products, which closes the argument opened in Project 01.
-
-<p class="stack">Python · NLP · topic modelling</p>
-:::
+</div>
 
 ## How this is built
 
-Every project in this repository is reproducible from a clean clone:
+Every project here runs from a clean clone.
 
 ```bash
 uv run python tasks.py setup      # dependencies + database + dataset
-uv run python tasks.py pipeline   # load -> dbt build -> tests -> render
+uv run python tasks.py pipeline   # load, build, charts, tests, render
 ```
 
-The dataset is downloaded from a **revision-pinned** mirror and validated against
-expected file sizes, so the numbers in these reports do not quietly change
-underneath you.
+The dataset comes from a revision-pinned mirror and is checked against expected
+file sizes on download, so the numbers cannot change quietly underneath you.

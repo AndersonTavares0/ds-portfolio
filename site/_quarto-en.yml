@@ -1,0 +1,35 @@
+# English profile — the site as it is served at the root.
+#
+# One Quarto project, two builds. Quarto allows exactly one navbar per website
+# and a `_metadata.yml` in a subdirectory cannot override it (both a nested
+# `website.navbar` and a top-level `navbar` key were tried in `pt/`, and both
+# were ignored). The documented way to publish several versions of one website
+# is project profiles, so each language is a profile with its own `lang`, its
+# own navigation and its own render list, and `tasks.py render` runs both into
+# the same output directory.
+lang: en
+
+project:
+  render:
+    - index.qmd
+    - about.qmd
+    - reports/01-retail-analytics/*.qmd
+
+website:
+  navbar:
+    background: light
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Projects
+        menu:
+          - href: reports/01-retail-analytics/01-business-analytics.qmd
+            text: "01 · Retail analytics"
+          - href: reports/01-retail-analytics/00-executive-memo.qmd
+            text: "01 · Decision memo"
+      - href: about.qmd
+        text: About
+    right:
+      - href: pt/index.qmd
+        text: "Português"

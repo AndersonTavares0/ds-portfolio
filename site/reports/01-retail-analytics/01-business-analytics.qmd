@@ -82,7 +82,7 @@ total, because two of the twenty-five months are not what they look like.
 | 2018-09 | 16 | 14 | 4,439.54 | 277.47 |
 | 2018-10 | 4 | 4 | 589.67 | 147.42 |
 
-![Monthly revenue. The two grey bars are incomplete months.](figures/revenue-monthly.png){#fig-revenue fig-align="center"}
+![Monthly revenue. The four near-empty edge months are left out rather than drawn as invisible slivers.](figures/revenue-monthly.png){#fig-revenue fig-align="center"}
 
 **Two months are artefacts, and reading them as a trend would be a mistake.**
 
@@ -393,7 +393,6 @@ order-level table is assembled by **aggregating three finer-grained tables befor
 joining them**, instead of joining them directly.
 
 ```{mermaid}
-%%{init: {"themeVariables": {"clusterBkg": "#eef3f8", "clusterBorder": "#c3ced9"}}}%%
 flowchart TB
   O["orders<br/>99,441 rows"]
   subgraph fine["finer-grained tables"]

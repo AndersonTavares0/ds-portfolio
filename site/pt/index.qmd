@@ -1,77 +1,58 @@
 ---
-title: "Portfólio de Análise de Varejo"
-subtitle: "Ciência de dados de ponta a ponta em um marketplace brasileiro real"
 toc: false
-page-layout: full
+pagetitle: "Portfólio de Análise de Varejo"
 ---
 
-> Este documento também está disponível em [inglês](../index.qmd).
+# O desempenho da entrega decide se o cliente volta — e o que ele diz quando volta. {.hero}
 
-## A narrativa
-
-::: {.callout-note appearance="simple"}
-Neste marketplace, **o desempenho das entregas determina a satisfação e a
-retenção dos clientes**. Eu *medi* isso, eu *previ* isso e eu *expliquei a voz do
-cliente*.
-:::
-
-Três projetos construídos sobre o mesmo
-[conjunto de dados de e-commerce brasileiro da Olist](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce)
-— ~100,000 pedidos distribuídos em nove tabelas relacionadas. Cada projeto entrega
-um relatório, um memorando de decisão de uma página e uma declaração honesta do
-que os dados *não* sustentam.
+Eu medi, eu previ e eu li o que os clientes realmente escreveram. Os três projetos
+usam o mesmo conjunto de dados da Olist — cerca de 100.000 pedidos em nove tabelas
+relacionadas — e cada um entrega uma análise escrita, um memorando de decisão de
+uma página e uma descrição honesta do que os dados não sustentam.
 
 ## Projetos
 
-::: {.project-card}
-### 01 · Análise de Varejo <span class="status-published">· publicado</span>
+<div class="projects">
 
-**Pergunta.** Quais alavancas realmente movem a satisfação do cliente e a
-recompra?
+<article class="project">
+<div class="project-seq">01<span class="project-status status-published">Publicado</span></div>
+<div class="project-detail">
+<h3>Quais alavancas realmente movem a satisfação e a recompra?</h3>
+<p>Segmentação RFM, retenção por coorte mensal e uma decomposição do desempenho de entrega, modelados com dbt sobre PostgreSQL — com testes de dados que quebram o build quando os dados deixam de fazer sentido.</p>
+<p class="project-stack">PostgreSQL, dbt, SQL, Python, Quarto</p>
+<p class="project-links"><a href="reports/01-retail-analytics/01-business-analytics.qmd">Ler a análise</a> <a href="reports/01-retail-analytics/00-executive-memo.qmd">Memorando de decisão</a></p>
+</div>
+</article>
 
-Segmentação RFM, retenção por coorte mensal e uma decomposição do desempenho das
-entregas — modelados com dbt sobre PostgreSQL, com testes de dados que fazem o
-build falhar quando os dados deixam de fazer sentido.
+<article class="project">
+<div class="project-seq">02<span class="project-status status-wip">Em andamento</span></div>
+<div class="project-detail">
+<h3>No momento da compra, dá para saber quais pedidos vão atrasar?</h3>
+<p>Um classificador sensível a custo e honesto quanto a vazamento: só entram atributos disponíveis no momento em que o pedido é feito.</p>
+<p class="project-stack">Python, pandas, scikit-learn</p>
+</div>
+</article>
 
-<p class="stack">PostgreSQL · dbt · SQL · Python · Quarto</p>
+<article class="project">
+<div class="project-seq">03<span class="project-status status-planned">Planejado</span></div>
+<div class="project-detail">
+<h3>Do que 99.000 avaliações em português realmente reclamam?</h3>
+<p>Análise de sentimento e modelagem de tópicos, para testar pelo lado do cliente a afirmação que o primeiro projeto faz pelo lado da entrega: de que as reclamações são sobre logística, não sobre produtos.</p>
+<p class="project-stack">Python, PLN, modelagem de tópicos</p>
+</div>
+</article>
 
-[Leia o relatório](reports/01-retail-analytics/01-business-analytics.qmd){.btn .btn-primary .btn-sm}
-[Memorando de decisão](reports/01-retail-analytics/00-executive-memo.qmd){.btn .btn-secondary .btn-sm}
-:::
-
-::: {.project-card}
-### 02 · Previsão de Entregas Atrasadas <span class="status-wip">· em andamento</span>
-
-**Pergunta.** No momento da compra, conseguimos dizer quais pedidos chegarão
-atrasados?
-
-Um classificador sensível a custo e honesto quanto a vazamento de dados: só
-entram variáveis disponíveis *no momento da compra*.
-
-<p class="stack">Python · pandas · scikit-learn</p>
-:::
-
-::: {.project-card}
-### 03 · Voz do Cliente <span class="status-wip">· planejado</span>
-
-**Pergunta.** Do que ~99,000 avaliações em português realmente reclamam?
-
-Análise de sentimento e modelagem de tópicos — com a descoberta de que as
-reclamações são sobre *logística*, e não sobre produtos, o que fecha o argumento
-aberto no Projeto 01.
-
-<p class="stack">Python · NLP · modelagem de tópicos</p>
-:::
+</div>
 
 ## Como isto é construído
 
-Todo projeto neste repositório é reprodutível a partir de um clone limpo:
+Todo projeto aqui roda a partir de um clone limpo.
 
 ```bash
-uv run python tasks.py setup      # dependencies + database + dataset
-uv run python tasks.py pipeline   # load -> dbt build -> tests -> render
+uv run python tasks.py setup      # dependências + banco + dados
+uv run python tasks.py pipeline   # carga, build, gráficos, site
 ```
 
-O conjunto de dados é baixado de um espelho com **revisão fixada** e validado
-contra os tamanhos de arquivo esperados, para que os números destes relatórios
-não mudem silenciosamente sob você.
+O conjunto de dados vem de um espelho com revisão fixada e é conferido contra os
+tamanhos de arquivo esperados no download, então os números não mudam em silêncio
+debaixo de você.

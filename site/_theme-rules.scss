@@ -1,0 +1,363 @@
+/*-- Navbar ------------------------------------------------------------ */
+// Quiet, on paper, separated by a rule. The page's identity comes from the
+// type, not from a coloured bar.
+.navbar {
+  background-color: $paper;
+  border-bottom: 1px solid $rule;
+  font-family: $font-family-sans-serif;
+  padding-block: 0.7rem;
+}
+.navbar .navbar-title,
+.navbar .navbar-brand {
+  font-family: $font-family-sans-serif;
+  font-weight: 600;
+  color: $ink;
+}
+.navbar .nav-link {
+  color: $muted;
+  font-weight: 600;
+}
+.navbar .nav-link:hover,
+.navbar .nav-link:focus,
+.navbar .nav-link.active,
+.navbar .dropdown-item:hover {
+  color: $brand-deep;
+}
+.navbar .dropdown-menu {
+  border-color: $rule;
+  font-size: 0.92rem;
+}
+.navbar .dropdown-item.active,
+.navbar .dropdown-item:active {
+  background-color: $surface;
+  color: $brand-deep;
+}
+
+/*-- Title block and the lead paragraph -------------------------------- */
+#title-block-header {
+  margin-block: 0.5rem 2.25rem;
+}
+#title-block-header .title {
+  font-size: 1.55rem;
+  letter-spacing: -0.01em;
+}
+#title-block-header .subtitle {
+  font-family: $font-family-sans-serif;
+  font-size: 0.98rem;
+  color: $muted;
+  margin-top: 0.4rem;
+}
+.quarto-title-meta {
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+  color: $muted;
+}
+
+// Quarto's own "Published" label above the date. Sentence case and quiet: the
+// ALL CAPS is a template default rather than a decision.
+// Quarto's own title-block rule is `#title-block-header.quarto-title-block.default
+// .quarto-title-meta-heading` — one id and three classes. A shorter selector loses
+// on specificity no matter where it sits in the file, so this one carries the same
+// id and three classes plus an element, which wins regardless of source order.
+body #title-block-header.quarto-title-block .quarto-title-meta .quarto-title-meta-heading {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.78rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+
+// The page's argument, set as the h1. The site name already lives in the
+// navbar, so the largest text on the page can be the claim rather than the
+// label. Named `.hero` and not `.lead` because Quarto puts Bootstrap's `.lead`
+// on the subtitle, which would drag the subtitle into these rules. Written as
+// `h1.hero` and not `.hero` because Pandoc copies the heading's classes onto the
+// `<section>` that wraps it, so a bare `.hero` also matched that section and its
+// 2rem cascaded onto every paragraph inside it.
+h1.hero {
+  font-size: 2rem;
+  line-height: 1.25;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0.4rem 0 1.5rem;
+  max-width: 34rem;
+  border-bottom: none;
+  text-wrap: balance;
+}
+
+/*-- Project index ----------------------------------------------------- */
+// A sequence, so it is numbered. The number lives in a narrow gutter and the
+// status sits under it — state is structure here, not decoration.
+.projects {
+  margin-top: 0.5rem;
+}
+.project {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  column-gap: 1.75rem;
+  padding-block: 1.9rem;
+}
+// A rule between entries only. A top rule on the first entry sat directly under
+// the section heading and read as an underline on the heading; a bottom rule on
+// the last read as decoration around a list that is already bounded by the page.
+.project + .project {
+  border-top: 1px solid $rule;
+}
+.project-seq {
+  font-family: $font-family-sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: $brand;
+  line-height: 1.1;
+}
+.project-status {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.015em;
+}
+.status-published { color: $brand; }
+.status-wip       { color: $alert-text; }
+.status-planned   { color: $muted; }
+.project h3 {
+  font-size: 1.32rem;
+  line-height: 1.3;
+  margin: 0 0 0.7rem;
+  max-width: 32rem;
+}
+.project-detail > p {
+  max-width: 38rem;
+}
+.project-stack {
+  font-family: $font-family-sans-serif;
+  font-size: 0.82rem;
+  color: $muted;
+  margin-bottom: 0.7rem;
+}
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.75rem;
+  font-family: $font-family-sans-serif;
+  font-size: 0.92rem;
+  margin-bottom: 0;
+}
+// A link that reads as a link: underlined, and it keeps the underline on hover
+// rather than swapping in a colour change alone.
+.project-links a,
+.lang-note a {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: rgba($brand-deep, 0.4);
+}
+.project-links a:hover,
+.lang-note a:hover {
+  text-decoration-color: $brand-deep;
+}
+
+.lang-note {
+  font-family: $font-family-sans-serif;
+  font-size: 0.85rem;
+  color: $muted;
+  margin-bottom: 1.5rem;
+}
+
+/*-- Document content -------------------------------------------------- */
+// cosmo draws a full-width rule under every h2. With the project index already
+// using hairlines as separators, that reads as rule-heavy, so hierarchy is
+// carried by size, weight and space instead of a line.
+#quarto-document-content h2 {
+  margin-top: 3.1rem;
+  font-size: 1.48rem;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+#quarto-document-content h3 {
+  margin-top: 2.1rem;
+  font-size: 1.14rem;
+}
+#quarto-document-content h4 {
+  font-family: $font-family-sans-serif;
+  font-size: 0.95rem;
+  margin-top: 1.7rem;
+}
+
+blockquote {
+  border-left: 3px solid $rule;
+  padding-left: 1.1rem;
+  margin-left: 0;
+}
+
+/* Callouts stay, but flat: a tinted panel with a rule, no drop shadow and no
+   oversized icon. */
+.callout {
+  border-radius: 4px;
+  font-family: $font-family-base;
+}
+.callout.callout-style-default,
+.callout.callout-style-simple {
+  box-shadow: none;
+}
+.callout.callout-style-simple {
+  border: 0;
+  border-left: 3px solid $brand;
+  background-color: $surface;
+  padding: 0.85rem 1.1rem;
+}
+.callout.callout-style-simple.callout-warning {
+  border-left-color: $alert;
+}
+.callout.callout-style-simple .callout-title-container,
+.callout .callout-title-container {
+  font-family: $font-family-sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+/*-- Tables ------------------------------------------------------------ */
+// Tables carry most of the numbers in the reports, so they get the sans and
+// aligned digits.
+.table,
+table.dataframe {
+  font-family: $font-family-sans-serif;
+  font-size: 0.88rem;
+  font-variant-numeric: tabular-nums;
+  --bs-table-border-color: #{$rule};
+}
+.table > :not(caption) > * > * {
+  padding: 0.5rem 0.7rem;
+}
+.table thead th {
+  font-weight: 600;
+  color: $ink;
+  border-bottom: 2px solid $rule;
+  white-space: nowrap;
+}
+.table tbody tr:hover > * {
+  background-color: rgba($surface, 0.7);
+}
+
+/*-- Figures ----------------------------------------------------------- */
+figure.quarto-figure {
+  margin-block: 1.75rem;
+}
+.quarto-figure figcaption,
+figure figcaption {
+  font-family: $font-family-sans-serif;
+  font-size: 0.81rem;
+  line-height: 1.5;
+  color: $muted;
+  text-align: left;
+  margin-top: 0.6rem;
+  max-width: 38rem;
+}
+
+/*-- Code -------------------------------------------------------------- */
+code {
+  font-family: $font-family-monospace;
+  font-size: 0.86em;
+  color: $ink;
+  background-color: $surface;
+  padding: 0.1em 0.35em;
+  border-radius: 3px;
+}
+div.sourceCode,
+pre.sourceCode {
+  font-family: $font-family-monospace;
+  font-size: 0.85rem;
+  background-color: $surface;
+  border: 1px solid $rule;
+  border-radius: 4px;
+}
+pre.sourceCode > code {
+  background-color: transparent;
+  padding: 0;
+}
+
+/*-- Table of contents ------------------------------------------------- */
+#TOC,
+.sidebar-navigation {
+  font-family: $font-family-sans-serif;
+  font-size: 0.84rem;
+}
+#TOC a {
+  color: $muted;
+  text-decoration: none;
+}
+#TOC a:hover,
+#TOC a.active {
+  color: $brand-deep;
+}
+#TOC .active {
+  border-left-color: $brand;
+}
+.sidebar-title,
+#TOC .toc-title {
+  font-family: $font-family-sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: $muted;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+/*-- Footer ------------------------------------------------------------ */
+.nav-footer {
+  font-family: $font-family-sans-serif;
+  font-size: 0.82rem;
+  color: $muted;
+  border-top: 1px solid $rule;
+  margin-top: 3.5rem;
+  padding-block: 1.25rem;
+}
+.nav-footer a {
+  color: $muted;
+  text-decoration: none;
+}
+.nav-footer a:hover {
+  color: $brand-deep;
+}
+
+/*-- Quality floor ----------------------------------------------------- */
+// Keyboard focus is always visible, and nothing animates for people who have
+// asked for less motion.
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible,
+input:focus-visible {
+  outline: 2px solid $brand;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .project {
+    grid-template-columns: 1fr;
+    row-gap: 0.6rem;
+  }
+  .project-seq {
+    display: flex;
+    align-items: baseline;
+    gap: 0.7rem;
+  }
+  .project-status {
+    margin-top: 0;
+  }
+  h1.hero {
+    font-size: 1.5rem;
+  }
+}
