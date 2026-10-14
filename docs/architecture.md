@@ -10,29 +10,33 @@ ds-portfolio/
 │   ├── PULL_REQUEST_TEMPLATE.md
 │   └── workflows/                CI and publishing
 ├── data/                         raw CSVs — git-ignored, with a README explaining the source
-├── docs/                         governance: this document, metrics, dictionary, decisions
+├── docs/                         governance, metrics, dictionary, decisions, contributing
 ├── projects/
 │   └── 01-retail-analytics/
 │       ├── dbt_project/          staging views and mart tables
-│       ├── reports/              the report and the one-page decision memo
-│       ├── scripts/              thin entry points (download, load)
+│       ├── scripts/              thin entry points (download, load, charts)
 │       ├── src/retail/           the data layer as importable modules
 │       └── tests/                Python tests, no network and no database required
+├── site/                         the published narrative — its own Quarto project
+│   ├── reports/01-retail-analytics/  the report and the one-page decision memo
+│   └── _quarto.yml, index.qmd, about.qmd, styles.css
 ├── AGENTS.md                     the rules an agent (or a person) works to here
-├── CONTRIBUTING.md               how to make a change
 ├── README.md                     portfolio landing page
 ├── docker-compose.yml            PostgreSQL, and nothing else
 ├── pyproject.toml                dependencies and tool configuration
 ├── tasks.py                      the task runner — works the same on Windows and Linux
-├── uv.lock                       pinned dependency versions
-└── _quarto.yml, *.qmd, styles.css   the published site
+└── uv.lock                       pinned dependency versions
 ```
 
-The Quarto files sit at the repository root because that is what makes
-`quarto publish gh-pages` work without extra configuration, and the site needs to
-reach `projects/*/reports/*.qmd`. Fighting the tool's convention to make the root
-listing shorter would be a cosmetic win paid for with a build that is harder to
-reason about.
+The website is its own Quarto project, rooted at `site/`. Two things follow.
+The repository root stays a short list of entry points and one folder per
+purpose, and the governance files — `docs/`, `AGENTS.md`, `CONTRIBUTING.md` —
+are out of the website's reach **by construction**, so they cannot be published
+by accident. An earlier layout kept the Quarto project at the repository root
+and depended on an explicit `render:` list to keep those pages off the site;
+that was a guarantee held up by a config list, and this is a guarantee held up
+by the filesystem. The publish workflow only needs to be told where the project
+root now is: `path: site` in the publish action.
 
 ## How data moves
 

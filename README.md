@@ -53,7 +53,7 @@ Three projects, one argument — not three disconnected notebooks.
 | **Automated testing** | `projects/01-retail-analytics/tests/`, `pytest` |
 | **CI/CD** | `.github/workflows/` |
 | **Reproducibility** | pinned dataset revision, `uv.lock`, `tasks.py pipeline` |
-| **Communication** | `projects/01-retail-analytics/reports/` (report + decision memo) |
+| **Communication** | `site/reports/01-retail-analytics/` (report + decision memo) |
 
 ---
 
@@ -67,7 +67,7 @@ The reasoning lives in [`docs/`](./docs/) rather than buried in code comments:
 | [Metrics](./docs/metrics.md) | What every number means — and, more usefully, what it does not mean |
 | [Data dictionary](./docs/data-dictionary.md) | Every table and column, with its grain and its caveats |
 | [Decisions](./docs/decisions/README.md) | Why the code looks the way it does, including the times the data changed the design |
-| [Contributing](./CONTRIBUTING.md) | The workflow — every change arrives by pull request |
+| [Contributing](./docs/CONTRIBUTING.md) | The workflow - every change arrives by pull request |
 
 The decision log is the one worth reading first. It records what was measured, what
 the obvious approach was, and why the obvious approach was wrong. The clearest
@@ -110,21 +110,25 @@ ds-portfolio/
 ├── tasks.py                  # portable task runner (works without `make`)
 ├── docker-compose.yml        # the PostgreSQL service — the only container
 ├── pyproject.toml            # deps + ruff/pytest configuration
-├── _quarto.yml               # the report website
-├── index.qmd / about.qmd     # site pages
+├── site/                     # the published website — its own Quarto project
+│   ├── _quarto.yml           # site configuration
+│   ├── index.qmd / about.qmd # site pages
+│   └── reports/              # narrative report + decision memo
 ├── projects/
 │   └── 01-retail-analytics/
 │       ├── dbt_project/      # staging -> marts, with tests
-│       ├── scripts/          # download_data.py, load_raw.py
+│       ├── scripts/          # download_data.py, load_raw.py, make_charts.py
 │       ├── src/retail/       # reusable Python
-│       ├── tests/            # pytest
-│       └── reports/          # narrative report + decision memo
-├── docs/                     # architecture, metrics, dictionary, decision log
+│       └── tests/            # pytest
+├── docs/                     # architecture, metrics, dictionary, decisions
 ├── data/                     # git-ignored dataset
 ├── .github/                  # workflows + issue and pull-request templates
-├── AGENTS.md                 # the rules this repository is worked to
-└── CONTRIBUTING.md           # how to make a change
+└── AGENTS.md                 # the rules this repository is worked to
 ```
+
+Each top-level folder is one purpose: `site/` is what gets published,
+`projects/` is the analysis that produces it, `docs/` is how and why,
+`data/` is the input, and `.github`/`.agents` are configuration.
 
 ---
 
@@ -132,7 +136,7 @@ ds-portfolio/
 
 Code: [MIT](./LICENSE).
 Data: © Olist, used under its own (non-commercial) license — see
-[ACKNOWLEDGEMENTS.md](./ACKNOWLEDGEMENTS.md).
+[docs/acknowledgements.md](./docs/acknowledgements.md).
 
 ## Contact
 

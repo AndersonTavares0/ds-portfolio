@@ -26,9 +26,10 @@ credibility, not for volume of code.
 | `projects/01-retail-analytics/src/retail/` | Config, dataset manifest, download / validate / load |
 | `projects/01-retail-analytics/scripts/` | Thin CLIs over `retail.*` |
 | `projects/01-retail-analytics/dbt_project/` | Staging models, marts, macros, tests |
-| `projects/01-retail-analytics/reports/` | Quarto reports and the decision memo |
+| `site/` | The published website — its own Quarto project, rooted here |
+| `site/reports/01-retail-analytics/` | The report and the one-page decision memo |
 | `docs/` | Architecture, metric definitions, data dictionary, decision log |
-| `CONTRIBUTING.md` | The workflow, and what a complete change looks like |
+| `docs/CONTRIBUTING.md` | The workflow, and what a complete change looks like |
 | `data/` | Downloaded CSVs. Git-ignored. Never committed |
 
 The reasoning behind the code lives in `docs/`. Read the decision log before
@@ -74,7 +75,7 @@ uv run python tasks.py pipeline     # load -> dbt-build -> test -> render
    because it makes a result look worse.
 9. **Never commit to `main` directly.** Every change arrives by pull request;
    `main` moves only by merging one. A branch is where CI runs before a change
-   becomes permanent. The workflow is in `CONTRIBUTING.md`.
+   becomes permanent. That is why every change arrives by pull request. The workflow is in `docs/CONTRIBUTING.md`.
 10. **A metric definition lives in `docs/metrics.md`, not in your head.** If a
     change alters what a number means, that document is part of the change.
 

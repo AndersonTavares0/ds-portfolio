@@ -42,11 +42,14 @@ package-lock.yml
 
 # ---------------------------------------------------------------------------
 # Quarto
-# NOTE: `_freeze/` is deliberately NOT ignored — with `freeze: true` it holds
+# NOTE: `_freeze/` is deliberately NOT ignored - with `freeze: true` it holds
 # the cached execution results that make CI fast and stable.
+# Both patterns are path-agnostic: the Quarto project root is `site/`, so the
+# build output lands in `site/_site/` and the cache in `site/.quarto/`.
 # ---------------------------------------------------------------------------
 _site/
 .quarto/
+**/*.quarto_ipynb
 
 # ---------------------------------------------------------------------------
 # Editors / OS
@@ -57,6 +60,3 @@ _site/
 .DS_Store
 Thumbs.db
 desktop.ini
-
-/.quarto/
-**/*.quarto_ipynb

@@ -13,7 +13,7 @@ ways and both be confident about.
 
 ## Where to start
 
-- **Reviewing the analysis?** Read the [report](../projects/01-retail-analytics/reports/01-business-analytics.qmd), then [Metrics](metrics.md) when a number needs pinning down.
+- **Reviewing the analysis?** Read the [report](../site/reports/01-retail-analytics/01-business-analytics.qmd), then [Metrics](metrics.md) when a number needs pinning down.
 - **Reviewing the engineering?** Read [Architecture](architecture.md), then [Decisions](decisions/README.md).
 - **Trying to reproduce a figure?** [Running it](../README.md#running-it) has the commands; the [data dictionary](data-dictionary.md) says which table the figure came from.
 - **Wondering why something is done a strange way?** It is probably in [Decisions](decisions/README.md), including the cases where the strange way is the right one.

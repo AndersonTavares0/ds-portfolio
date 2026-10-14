@@ -4,15 +4,15 @@ project:
 
   # Only these files become pages on the published site.
   #
-  # Without an explicit list, Quarto renders every .md and .qmd it can reach —
-  # which would turn AGENTS.md, CONTRIBUTING.md, the whole docs/ folder and every
-  # README into unstyled pages with no place in the navigation. Governance
-  # documentation is for people reading the repository; the website is for people
-  # reading the analysis.
+  # The Quarto project root is now this `site/` directory rather than the
+  # repository root, so governance documentation (`../docs/`, `../AGENTS.md`,
+  # `../README.md`) is out of reach by construction and cannot leak onto the
+  # website as unstyled pages. The explicit list is kept as a second guard: it
+  # says, in one place, exactly what the site is.
   render:
     - index.qmd
     - about.qmd
-    - projects/01-retail-analytics/reports/*.qmd
+    - reports/01-retail-analytics/*.qmd
 
 website:
   title: "Retail Analytics Portfolio"
@@ -27,9 +27,9 @@ website:
         text: Home
       - text: Projects
         menu:
-          - href: projects/01-retail-analytics/reports/01-business-analytics.qmd
+          - href: reports/01-retail-analytics/01-business-analytics.qmd
             text: "01 · Retail Analytics"
-          - href: projects/01-retail-analytics/reports/00-executive-memo.qmd
+          - href: reports/01-retail-analytics/00-executive-memo.qmd
             text: "01 · Decision memo"
       - href: about.qmd
         text: About
@@ -53,7 +53,9 @@ format:
       body-width: 860px
       margin-width: 260px
 
-# Reports are pre-executed and committed. `freeze` makes CI fast and stable by
-# reusing the cached results instead of re-running dbt on every render.
-# NOTE: `_freeze/` must be committed to git — it is not in .gitignore.
+# Reports are pre-executed and committed, and the figures are pre-rendered PNGs.
+# `freeze` makes CI fast and stable. Because nothing on this site executes code,
+# the publish workflow needs neither the database nor the 126 MB dataset.
+# NOTE: `_freeze/` must be committed to git if execution is ever introduced —
+# it is deliberately not in .gitignore.
 freeze: true

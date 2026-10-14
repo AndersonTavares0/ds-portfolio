@@ -36,6 +36,6 @@ data/
 ## Licensing
 
 The data is © Olist and is published for **non-commercial / academic use**. It is
-**not** covered by this repository's MIT license. See `../ACKNOWLEDGEMENTS.md`
+**not** covered by this repository's MIT license. See `../docs/acknowledgements.md`
 before reusing it, and check the license currently stated on the
 [Kaggle listing](https://www.kaggle.com/datasets/olistbr/brazilian-ecommerce).
