@@ -1,0 +1,74 @@
+[project]
+name = "ds-portfolio"
+version = "0.1.0"
+description = "Data Science portfolio: end-to-end retail analytics on the Olist Brazilian e-commerce dataset."
+readme = "README.md"
+
+# Pinned below 3.13 on purpose: dbt-postgres is the most version-sensitive
+# dependency here, and 3.11/3.12 is the range with the smoothest wheels.
+# `uv sync` will fetch a managed 3.12 automatically if your system Python is
+# newer. Do not bump this without checking dbt's supported Python versions.
+requires-python = ">=3.11,<3.13"
+
+license = { text = "MIT" }
+authors = [{ name = "Anderson Tavares" }]
+
+dependencies = [
+  # Data wrangling + the Postgres connection used by the raw loader.
+  "pandas>=2.2",
+  "pyarrow>=17.0",
+  "sqlalchemy>=2.0",
+  "psycopg[binary]>=3.2",
+  "python-dotenv>=1.0",
+  "requests>=2.32",
+  # Makes Python trust the OPERATING SYSTEM certificate store. Required behind
+  # TLS-inspecting proxies/antivirus (which `certifi` alone does not know about)
+  # and it is the correct behaviour on Fedora too.
+  "truststore>=0.9",
+  # Analysis + charts for the reports.
+  "matplotlib>=3.9",
+  "seaborn>=0.13",
+  # Exploration.
+  "jupyterlab>=4.2",
+  "ipykernel>=6.29",
+]
+
+[dependency-groups]
+dev = [
+  "ruff>=0.6",
+  "pytest>=7.4",
+  "pytest-cov>=5.0",
+  "dbt-postgres>=1.8,<2",
+]
+
+# ---------------------------------------------------------------------------
+# Tooling configuration
+# ---------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+# `extend-exclude` ADDS to ruff's defaults (which already skip .git/.venv).
+# Plain `exclude` would REPLACE them, and ruff would then lint .venv itself.
+extend-exclude = [
+  "projects/01-retail-analytics/dbt_project/target",
+  "projects/01-retail-analytics/dbt_project/dbt_packages",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "UP", "B", "SIM"]
+
+[tool.uv]
+# Project 01 is a plain source tree, NOT a distributable package — packaging
+# arrives in Project 02. This stops uv from trying to build/install the project
+# itself (which would fail, since `retail` does not live at the repo root).
+# The package is imported via PYTHONPATH: `pytest`'s `pythonpath` option below,
+# and `tasks.py` for scripts.
+package = false
+
+[tool.pytest.ini_options]
+# `retail` is a plain source tree during Project 01 (packaging arrives with
+# Project 02). This makes it importable in tests without installing anything.
+pythonpath = ["projects/01-retail-analytics/src"]
+testpaths = ["projects/01-retail-analytics/tests"]
+addopts = "-q"

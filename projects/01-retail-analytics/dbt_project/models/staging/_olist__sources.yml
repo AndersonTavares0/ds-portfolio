@@ -1,0 +1,28 @@
+version: 2
+
+sources:
+  - name: olist_raw
+    description: >
+      The nine published Olist CSVs, loaded verbatim into PostgreSQL by
+      `projects/01-retail-analytics/scripts/load_raw.py`. Every column is TEXT
+      in this schema — casting and renaming happens in `models/staging`.
+    schema: raw
+    tables:
+      - name: orders
+        description: "Order lifecycle timestamps and status. The spine of the model."
+      - name: order_items
+        description: "One row per item within an order (order x product x seller)."
+      - name: order_payments
+        description: "One row per payment method used on an order."
+      - name: order_reviews
+        description: "Review score and free-text comment, in Portuguese."
+      - name: customers
+        description: "Customer identity and location. One row per order."
+      - name: products
+        description: "Product attributes, including physical dimensions."
+      - name: sellers
+        description: "Seller identity and location."
+      - name: geolocation
+        description: "Zip-code-prefix to latitude/longitude. Many duplicates per prefix."
+      - name: product_category_name_translation
+        description: "Portuguese to English product category names."

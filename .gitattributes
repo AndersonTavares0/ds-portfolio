@@ -1,0 +1,16 @@
+# Normalise line endings to LF in the repository, whatever the developer OS.
+# This project is written on Windows and developed on Fedora, so it matters.
+* text=auto eol=lf
+
+# Binary files are never touched.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.pdf binary
+*.xlsx binary
+*.parquet binary
+
+# Data fixtures and notebooks are text.
+*.csv text eol=lf
+*.ipynb text eol=lf

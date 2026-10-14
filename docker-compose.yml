@@ -1,0 +1,44 @@
+# Docker is used ONLY for the database service.
+# Python, dbt and Quarto run natively (see tasks.py) so the edit/run loop for
+# notebooks stays fast.
+#
+# Start:  docker compose up -d --wait db
+# Stop:   docker compose down
+# Wipe:   docker compose down -v      # deletes the volume and all loaded data
+#
+# Values come from `.env` (copy `.env.example` -> `.env`).
+
+services:
+  db:
+    image: postgres:16
+    container_name: ds-portfolio-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-portfolio}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-portfolio}
+      POSTGRES_DB: ${POSTGRES_DB:-olist}
+    ports:
+      # NOTE: the host port defaults to 5433, not 5432, on purpose.
+      # A PostgreSQL installed natively on the host (Fedora ships one, and many
+      # Windows machines have one) binds 5432 and SILENTLY WINS over this
+      # mapping — connections then reach the wrong server and fail with
+      # "password authentication failed for user portfolio".
+      # Inside the container PostgreSQL still listens on 5432; only the host
+      # side is moved, so this container never collides with a system database.
+      - "${POSTGRES_PORT:-5433}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U ${POSTGRES_USER:-portfolio} -d ${POSTGRES_DB:-olist}",
+        ]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+volumes:
+  pgdata:
+    name: ds-portfolio-pgdata

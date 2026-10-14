@@ -1,0 +1,59 @@
+# ---------------------------------------------------------------------------
+# Data — NEVER commit the dataset. It is ~126 MB and reproducible via
+# `python tasks.py data`. Keep the placeholders so the folder exists.
+# ---------------------------------------------------------------------------
+data/*
+!data/.gitkeep
+!data/README.md
+
+# ---------------------------------------------------------------------------
+# Secrets
+# ---------------------------------------------------------------------------
+.env
+kaggle.json
+*.pem
+
+# ---------------------------------------------------------------------------
+# Python
+# ---------------------------------------------------------------------------
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# ---------------------------------------------------------------------------
+# dbt
+# ---------------------------------------------------------------------------
+dbt_packages/
+logs/
+target/
+package-lock.yml
+# Created automatically by dbt on first run; contains a machine-local UUID.
+.user.yml
+
+# ---------------------------------------------------------------------------
+# Quarto
+# NOTE: `_freeze/` is deliberately NOT ignored — with `freeze: true` it holds
+# the cached execution results that make CI fast and stable.
+# ---------------------------------------------------------------------------
+_site/
+.quarto/
+
+# ---------------------------------------------------------------------------
+# Editors / OS
+# ---------------------------------------------------------------------------
+.idea/
+.vscode/*
+!.vscode/extensions.json
+.DS_Store
+Thumbs.db
+desktop.ini

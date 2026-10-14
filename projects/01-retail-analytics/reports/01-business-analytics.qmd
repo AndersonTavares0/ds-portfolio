@@ -1,0 +1,47 @@
+---
+title: "01 · Retail Analytics"
+subtitle: "Which levers move customer satisfaction and repeat purchase?"
+date: today
+date-format: "MMMM YYYY"
+format:
+  html:
+    toc: true
+---
+
+::: {.callout-warning}
+**Work in progress.** The data layer (download → PostgreSQL → dbt staging with
+tests) is complete and reproducible. The analysis below is being filled in; the
+structure is fixed so the argument is visible as it is built.
+:::
+
+## Executive summary
+
+> **TODO** — five bullets, each a number a decision-maker can act on.
+
+## 1. Where the revenue comes from
+
+> **TODO** — order volume and value over time, seasonality, the November spike.
+
+## 2. Who the customers are
+
+> **TODO** — RFM segmentation. Note *early on* that `customer_unique_id` is used,
+> and why `customer_id` would be wrong.
+
+## 3. Do they come back?
+
+> **TODO** — monthly cohort retention. The headline is expected to be that repeat
+> purchase is very rare; that finding needs to be stated clearly, not buried.
+
+## 4. Does delivery performance explain satisfaction?
+
+> **TODO** — delivery-time distribution, late rate, review score vs lateness,
+> and the quantified cost of a late delivery in review points.
+
+## What I would do next
+
+> **TODO** — the recommendations, ordered by expected impact.
+
+## Limitations
+
+See the [project README](../README.md) — the limits are listed there before the
+numbers, on purpose.

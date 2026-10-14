@@ -1,0 +1,45 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "Retail Analytics Portfolio"
+  description: "End-to-end data science on the Olist Brazilian e-commerce dataset: measurement, prediction, and the voice of the customer."
+  site-url: https://AndersonTavares0.github.io/ds-portfolio/
+  repo-url: https://github.com/AndersonTavares0/ds-portfolio
+  navbar:
+    background: primary
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Projects
+        menu:
+          - href: projects/01-retail-analytics/reports/01-business-analytics.qmd
+            text: "01 · Retail Analytics"
+      - href: about.qmd
+        text: About
+  page-footer:
+    left: "Built with Quarto · Data © Olist"
+    right:
+      - href: https://github.com/AndersonTavares0/ds-portfolio
+        text: GitHub
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    code-fold: true
+    code-summary: "Show the code"
+    fig-align: center
+    grid:
+      sidebar-width: 260px
+      body-width: 860px
+      margin-width: 260px
+
+# Reports are pre-executed and committed. `freeze` makes CI fast and stable by
+# reusing the cached results instead of re-running dbt on every render.
+# NOTE: `_freeze/` must be committed to git — it is not in .gitignore.
+freeze: true

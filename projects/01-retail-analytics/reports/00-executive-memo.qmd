@@ -1,0 +1,38 @@
+---
+title: "Decision memo — Delivery performance"
+subtitle: "One page. What the data says, what it costs, what to do."
+date: today
+date-format: "MMMM YYYY"
+format:
+  html:
+    toc: false
+---
+
+::: {.callout-warning}
+**Work in progress.** This memo is written last, in one page, with numbers — not
+prose. It is the artefact a hiring manager is most likely to actually read.
+:::
+
+**Prepared for:** Head of Operations
+**Prepared by:** `Anderson Tavares`
+**Date:** `<DATE>`
+
+## Bottom line
+
+> **TODO** — one sentence: the decision this supports, and the expected effect.
+
+## The finding
+
+> **TODO** — numbers, not adjectives.
+
+## What it costs
+
+> **TODO** — expressed in R$ and in review points per late order.
+
+## Recommendation
+
+> **TODO** — a specific, sized action.
+
+## What would change my mind
+
+> **TODO** — the evidence that would invalidate this recommendation.

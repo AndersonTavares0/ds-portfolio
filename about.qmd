@@ -1,0 +1,35 @@
+---
+title: "About"
+toc: false
+---
+
+## Anderson Tavares
+
+Data analyst focused on turning messy, real-world data into decisions someone can
+actually act on. I work in SQL as a first language, model data with dbt, and write
+the analysis up so a non-technical reader can follow it.
+
+> **Looking for:** data analyst / data scientist roles.
+
+## What I work with
+
+| Area | Tools |
+|---|---|
+| Querying & modelling | PostgreSQL, dbt, advanced SQL (window functions, CTEs) |
+| Analysis | Python (pandas, matplotlib, seaborn), statistical reasoning |
+| Engineering | Git, Docker, pytest, GitHub Actions, `uv` |
+| Communication | Quarto, technical writing, decision memos |
+
+## How I work
+
+- **Start from a decision.** Every analysis exists to answer a question someone
+  would pay to have answered.
+- **Test the data, not just the code.** If an assumption breaks, the build should
+  fail loudly.
+- **Write the limitations down.** A finding without its caveats is a liability.
+
+## Contact
+
+- GitHub: [AndersonTavares0](https://github.com/AndersonTavares0)
+- LinkedIn: [<your-linkedin>](https://linkedin.com/in/<your-linkedin>)
+- Email: `<your-email>`

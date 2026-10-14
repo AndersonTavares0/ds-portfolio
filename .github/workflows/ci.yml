@@ -1,0 +1,75 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+# Cancel superseded runs on the same ref instead of queueing them.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: lint + tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Lint
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+
+      - name: Tests
+        run: uv run pytest
+
+  # ---------------------------------------------------------------------------
+  # Data pipeline job.
+  #
+  # Intentionally NOT enabled yet. It will be switched on together with the
+  # committed sample fixture (a ~1,000-row-per-table slice) so that CI never
+  # depends on downloading 126 MB or on an external mirror being up.
+  #
+  # When the fixture lands, uncomment this job. The service container below is
+  # the pattern that will be used.
+  # ---------------------------------------------------------------------------
+  # pipeline:
+  #   name: dbt build + render
+  #   runs-on: ubuntu-latest
+  #   services:
+  #     db:
+  #       image: postgres:16
+  #       env:
+  #         POSTGRES_USER: portfolio
+  #         POSTGRES_PASSWORD: portfolio
+  #         POSTGRES_DB: olist
+  #       ports: ["5432:5432"]
+  #       options: >-
+  #         --health-cmd "pg_isready -U portfolio -d olist"
+  #         --health-interval 5s --health-timeout 5s --health-retries 20
+  #   env:
+  #     POSTGRES_HOST: localhost
+  #     POSTGRES_PORT: "5432"
+  #     POSTGRES_USER: portfolio
+  #     POSTGRES_PASSWORD: portfolio
+  #     POSTGRES_DB: olist
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - uses: astral-sh/setup-uv@v5
+  #     - run: uv sync --locked
+  #     - run: uv run python projects/01-retail-analytics/scripts/load_raw.py --source tests/fixtures/sample
+  #     - run: uv run python tasks.py dbt-build

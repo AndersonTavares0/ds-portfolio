@@ -1,0 +1,22 @@
+# dbt connection profile.
+#
+# This file is committed on purpose: the credentials are local development
+# defaults that also live in `.env.example`, and they match the throwaway
+# PostgreSQL container in docker-compose.yml. There is no secret here.
+#
+# dbt does not read `.env` by itself, so every command goes through
+# `tasks.py`, which loads `.env` into the environment before calling dbt.
+
+ds_portfolio:
+  target: dev
+  outputs:
+    dev:
+      type: postgres
+      host: "{{ env_var('POSTGRES_HOST', 'localhost') }}"
+      port: "{{ env_var('POSTGRES_PORT', '5433') | int }}"
+      user: "{{ env_var('POSTGRES_USER', 'portfolio') }}"
+      password: "{{ env_var('POSTGRES_PASSWORD', 'portfolio') }}"
+      dbname: "{{ env_var('POSTGRES_DB', 'olist') }}"
+      schema: analytics
+      threads: 4
+      connect_timeout: 10

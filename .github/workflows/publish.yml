@@ -1,0 +1,53 @@
+name: Publish website
+
+# Publishes the Quarto site to the `gh-pages` branch, which GitHub Pages serves.
+#
+# ONE-TIME SETUP (do this locally, once):
+#     uv run python tasks.py render
+#     uv run python tasks.py publish
+# That creates `_publish.yml`, which this workflow requires.
+#
+# Then: repository Settings -> Pages -> Source: "Deploy from a branch",
+# Branch: `gh-pages` / `(root)`.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-deploy:
+    name: render + publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Set up Python
+        run: uv python install
+
+      - name: Install dependencies
+        run: uv sync --locked
+
+      - name: Set up Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+
+      # Reports are pre-executed and `freeze: true` is set, so rendering does
+      # not need the database or the dataset.
+      - name: Render and publish
+        uses: quarto-dev/quarto-actions/publish@v2
+        with:
+          target: gh-pages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
