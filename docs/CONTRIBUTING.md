@@ -31,6 +31,11 @@ Load the file, then fill it in.
 Branch and commit types: `feat`, `fix`, `docs`, `refactor`, `test`, `chore`,
 `perf`. A commit that fixes a bug says which bug, and what the symptom was.
 
+**Dependency updates arrive this way too.** `.github/dependabot.yml` opens the
+weekly update as a pull request, and it goes through the same gates as anything
+else — which for this repository means `dbt-build`, not just `lint`. An upgrade
+that compiles can still move a number.
+
 ## Before opening a pull request
 
 ```bash
