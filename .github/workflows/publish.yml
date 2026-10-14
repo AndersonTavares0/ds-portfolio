@@ -2,13 +2,23 @@ name: Publish website
 
 # Publishes the Quarto site to the `gh-pages` branch, which GitHub Pages serves.
 #
-# ONE-TIME SETUP (do this locally, once):
-#     uv run python tasks.py render
-#     uv run python tasks.py publish
-# That creates `_publish.yml`, which this workflow requires.
+# The website is a Quarto project rooted at `site/`, so the publish action is
+# given `path: site` rather than being run from the repository root.
 #
-# Then: repository Settings -> Pages -> Source: "Deploy from a branch",
-# Branch: `gh-pages` / `(root)`.
+# ONE-TIME SETUP — already done for this repository; recorded for anyone forking it:
+#
+#   1. The `gh-pages` branch must exist before this workflow can publish. The
+#      Quarto documentation tells you to run `quarto publish gh-pages` locally
+#      once and claims that this creates a `_publish.yml` file "required by the
+#      GitHub Action". The second half of that is wrong: this repository contains
+#      no `_publish.yml` and publishes successfully. The branch was the only real
+#      requirement — every failure before it existed was
+#      "the remote origin does not have a branch named gh-pages", and nothing
+#      else changed when it went green.
+#
+#   2. GitHub Pages then deploys from `gh-pages` / `/` automatically. No
+#      Settings -> Pages change is required for a project site; confirm with
+#      `gh api repos/<owner>/<repo>/pages`.
 
 on:
   push:
@@ -49,5 +59,6 @@ jobs:
         uses: quarto-dev/quarto-actions/publish@v2
         with:
           target: gh-pages
+          path: site
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

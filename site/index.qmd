@@ -31,8 +31,8 @@ the build when the data stops making sense.
 
 <p class="stack">PostgreSQL · dbt · SQL · Python · Quarto</p>
 
-[Read the report](projects/01-retail-analytics/reports/01-business-analytics.qmd){.btn .btn-primary .btn-sm}
-[Decision memo](projects/01-retail-analytics/reports/00-executive-memo.qmd){.btn .btn-secondary .btn-sm}
+[Read the report](reports/01-retail-analytics/01-business-analytics.qmd){.btn .btn-primary .btn-sm}
+[Decision memo](reports/01-retail-analytics/00-executive-memo.qmd){.btn .btn-secondary .btn-sm}
 :::
 
 ::: {.project-card}

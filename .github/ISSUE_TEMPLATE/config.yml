@@ -5,5 +5,5 @@ contact_links:
     url: https://github.com/AndersonTavares0/ds-portfolio/blob/main/docs/README.md
     about: Architecture, metric definitions, the data dictionary and the decision log.
   - name: How to contribute
-    url: https://github.com/AndersonTavares0/ds-portfolio/blob/main/CONTRIBUTING.md
+    url: https://github.com/AndersonTavares0/ds-portfolio/blob/main/docs/CONTRIBUTING.md
     about: The workflow, what CI checks, and what a complete change looks like.

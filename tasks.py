@@ -33,6 +33,11 @@ SRC = PROJECT / "src"
 SCRIPTS = PROJECT / "scripts"
 DBT_DIR = PROJECT / "dbt_project"
 
+# The website is its own Quarto project with its own root, so it can be rendered
+# and published without the rest of the repository in reach. Every Quarto
+# command therefore runs with `cwd=SITE`.
+SITE = ROOT / "site"
+
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -59,10 +64,10 @@ def child_env() -> dict[str, str]:
     return env
 
 
-def run(cmd: list[str], *, check: bool = True) -> int:
+def run(cmd: list[str], *, check: bool = True, cwd: Path | None = None) -> int:
     printable = " ".join(str(part) for part in cmd)
     print(f"\n$ {printable}", flush=True)
-    result = subprocess.run(cmd, cwd=ROOT, env=child_env())
+    result = subprocess.run(cmd, cwd=cwd or ROOT, env=child_env())
     if check and result.returncode != 0:
         raise SystemExit(f"\n[FAILED] exit code {result.returncode}: {printable}")
     return result.returncode
@@ -176,21 +181,21 @@ def task_fmt() -> None:
 
 
 def task_render() -> None:
-    """Render the Quarto website into `_site/`."""
+    """Render the Quarto website into `site/_site/`."""
     require("quarto", "install Quarto: https://quarto.org/docs/get-started/")
-    run(["quarto", "render"])
+    run(["quarto", "render"], cwd=SITE)
 
 
 def task_preview() -> None:
     """Live-preview the Quarto website."""
     require("quarto", "install Quarto: https://quarto.org/docs/get-started/")
-    run(["quarto", "preview"])
+    run(["quarto", "preview"], cwd=SITE)
 
 
 def task_publish() -> None:
     """Publish the rendered site to the `gh-pages` branch."""
     require("quarto", "install Quarto: https://quarto.org/docs/get-started/")
-    run(["quarto", "publish", "gh-pages"])
+    run(["quarto", "publish", "gh-pages"], cwd=SITE)
 
 
 def task_pipeline() -> None:
@@ -206,7 +211,8 @@ def task_clean() -> None:
     targets = [
         ROOT / ".pytest_cache",
         ROOT / ".ruff_cache",
-        ROOT / "_site",
+        SITE / "_site",
+        SITE / ".quarto",
         DBT_DIR / "target",
         DBT_DIR / "dbt_packages",
         DBT_DIR / "logs",

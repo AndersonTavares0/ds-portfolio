@@ -27,8 +27,8 @@ Four questions, each answered with SQL against a tested model:
    distributions, late-delivery rate, and the relationship between
    `review_score` and lateness.
 
-Deliverables: the [report](./reports/01-business-analytics.qmd) and a
-[one-page decision memo](./reports/00-executive-memo.qmd).
+Deliverables: the [report](../../site/reports/01-retail-analytics/01-business-analytics.qmd)
+and a [one-page decision memo](../../site/reports/01-retail-analytics/00-executive-memo.qmd).
 
 ---
 
@@ -66,7 +66,7 @@ tested place. It also prevents the classic silent bug where the zip-code prefix
 | `dbt_project/models/marts/` | The star schema |
 | `dbt_project/tests/` | Singular tests for business rules SQL cannot express declaratively |
 | `tests/` | Python tests for the data layer |
-| `reports/` | The narrative report and the decision memo |
+| `site/` | The published report and decision memo (Quarto project at the repository root of the site) |
 
 ---
 

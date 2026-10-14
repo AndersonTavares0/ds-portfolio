@@ -32,7 +32,7 @@ staging goes through the `safe_*` macros.
 | `product_category_name_translation` | 71 | one category |
 
 Source, licence and the pinned revision are in
-[ACKNOWLEDGEMENTS.md](../ACKNOWLEDGEMENTS.md). The data is not version-controlled.
+[acknowledgements.md](acknowledgements.md). The data is not version-controlled.
 
 ---
 
