@@ -1,0 +1,55 @@
+# Dependabot opens the dependency updates as pull requests, which then go through
+# the same gates as any other change (see docs/CONTRIBUTING.md).
+#
+# Two details worth knowing, because getting either wrong fails quietly:
+#
+#   * The ecosystem for a uv project is "uv", not "pip". It is matched against
+#     `uv.lock`, so the lock file is the thing being kept current.
+#   * `groups` collects the week's updates into one pull request per ecosystem
+#     instead of one per dependency. Without it a single week can bury the
+#     repository in a dozen two-line diffs that nobody reads.
+#
+# The schedule is weekly and grouped, so an update arrives as a reviewable change
+# rather than as a continuous trickle. Security updates are not affected by any of
+# this: they are opened as soon as an advisory lands, whatever the schedule says.
+
+version: 2
+updates:
+  - package-ecosystem: "uv"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    groups:
+      python:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    groups:
+      actions:
+        patterns: ["*"]
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+
+  # docker-compose.yml pins the PostgreSQL image, which is a dependency like any
+  # other: a new minor release carries fixes, and the database is the one service
+  # this repository cannot build without.
+  - package-ecosystem: "docker-compose"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 3
+    commit-message:
+      prefix: "chore"
+      include: "scope"
