@@ -31,5 +31,5 @@ website:
       - href: about.qmd
         text: About
     right:
-      - href: pt/index.qmd
+      - href: pt/index.html
         text: "Português"
